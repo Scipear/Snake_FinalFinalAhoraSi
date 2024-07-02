@@ -3,7 +3,6 @@ package controladores;
 import Gui.Panta_Login;
 import javax.swing.JTextField;
 import snake2.Front.Pantalla;
-import snake2.Jugador;
 
 public class Login_Controlador extends Pantalla{
 

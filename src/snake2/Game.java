@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import snake2.Front.PantallaJuego;
-import snake2.Jugador;
-import snake2.Tablero;
 
 public class Game implements Runnable, ActionListener {
 
@@ -19,7 +17,7 @@ public class Game implements Runnable, ActionListener {
     protected Tablero tablero;
     private String usuario;
     private int skin;
-    private int mapa;
+    private int mapa; // Guarda el mapa seleccionado por el usuario
     protected static boolean gameOver;
     private boolean partidaIniciada;
     private ReproductorSonidos reproductorSonidos = new ReproductorSonidos();
@@ -28,13 +26,17 @@ public class Game implements Runnable, ActionListener {
         
         gameOver = false;
         usuario = Login_Controlador.getNombreUsuario();
-        int skinOpcion = Controlador_MenuPrinc.getModoJuego();
-        switch (skinOpcion) {
+        int modoOpcion = Controlador_MenuPrinc.getModoJuego();
+        switch (modoOpcion) {
             case 1 -> skin = Lobbie_Controlador.getSkinSeleccionada();
             case 2 -> skin = HostLobbie_Controlador.getSkinSeleccionada();
             case 3 -> skin = ClienteLobbie_Controlador.getSkinSeleccionada();
         }
         iniciarPartida();
+        /*mapa = Lobbie_Controlador.getMapaSeleccionado(); Se haria algo de esta manera, creo
+        que podria ser dentro del switch para el caso que se eliga el modo de juego en solitario
+        o sea host del lobby (o sea, que modoOpcion sea 1 o 2)
+        */
     }
 
     public synchronized void iniciarJuego() {
