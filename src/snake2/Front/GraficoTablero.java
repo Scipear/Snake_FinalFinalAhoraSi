@@ -34,8 +34,8 @@ public class GraficoTablero extends Grafico{
         this.tablero = tablero;
         graficoPersonaje = new GraficoPersonaje(tablero.getPersonaje());
         graficoComida = new GraficoComida();
-        pared = ajustarImagen(new ImageIcon("newPared.png").getImage());
-        piso = ajustarImagen(new ImageIcon("newPiso.png").getImage());
+        pared = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/newPared.png")).getImage());
+        piso = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/newPiso.png")).getImage());
         setBounds(35, 25, 616, 616);
         setLayout(null);
     }

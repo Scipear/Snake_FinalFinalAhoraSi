@@ -38,9 +38,9 @@ public class PantallaJuego extends Pantalla {
         multiPanel = new JLayeredPane();
         fondo = new JPanel();
         recuadro = new JPanel();
-        fondoImagen = new JLabel(new ImageIcon("FondoTablero.png"));
-        recuadroImagen = new JLabel(new ImageIcon("Boton.png"));
-        pausa = new JLabel(new ImageIcon("Pausa8.png"));
+        fondoImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/FondoTablero.png")));
+        recuadroImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png")));
+        pausa = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Pausa8.png")));
         estaEnJuego = true;
         inicializar(jugador);
         add(multiPanel);

@@ -14,7 +14,6 @@ public class Game_Controlador extends Game {
     //Metodos
     public static void nuevoJuego() {
         Game game = new Game();
-        game.iniciarPartida();
         fondoOst.musicaDeFondo(gameOstRuta);
     }
 

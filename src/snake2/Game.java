@@ -34,6 +34,7 @@ public class Game implements Runnable, ActionListener {
             case 2 -> skin = HostLobbie_Controlador.getSkinSeleccionada();
             case 3 -> skin = ClienteLobbie_Controlador.getSkinSeleccionada();
         }
+        iniciarPartida();
     }
 
     public synchronized void iniciarJuego() {
@@ -53,11 +54,12 @@ public class Game implements Runnable, ActionListener {
 
     public void iniciarPartida(){
         jugador = new Jugador(usuario, 5, 1, "Derecha", skin);
-        tablero = new Tablero(jugador.getPersonaje(), 0);
+        tablero = new Tablero(jugador.getPersonaje(), 1);
         pantalla = new PantallaJuego(tablero, jugador);
         partidaIniciada = true;
         timer = new Timer(175, this);
         timer.start();
+        iniciarJuego();
     }
 
     public static void setDelay(int delay){

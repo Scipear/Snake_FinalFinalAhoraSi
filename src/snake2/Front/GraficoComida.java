@@ -2,8 +2,6 @@ package snake2.Front;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
-
-import snake2.ComidaRocosa;
 /**
  * Clase parte del front. Se encarga de almacenar todas las imagenes relacionadas a la comida del juego
  * 

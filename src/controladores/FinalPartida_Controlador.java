@@ -20,7 +20,6 @@ public class FinalPartida_Controlador extends Pantalla{
         
         // Instancia del juego
         Game game = new Game(); 
-        game.iniciarJuego();
         ocultar(ventanaPrin);
     }
 
