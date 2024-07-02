@@ -1,6 +1,7 @@
 package controladores;
 
 import Gui.Panta_Online_HostLobbie;
+import snake2.Game;
 import snake2.Front.GraficoPersonaje;
 import snake2.Front.Pantalla;
 
@@ -23,7 +24,7 @@ public class HostLobbie_Controlador extends Pantalla{
     //Metodo encargado de iniciar la pantalla de juego
     public static void eventIniciar() {
         Controlador_MenuPrinc.pararMusica();
-        Game_Controlador.nuevoJuego();
+        Game game = new Game();
         ocultar(ventanaPrin);
     }
 

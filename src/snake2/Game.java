@@ -19,6 +19,7 @@ public class Game implements Runnable, ActionListener {
     protected Tablero tablero;
     private String usuario;
     private int skin;
+    private int mapa;
     protected static boolean gameOver;
     private boolean partidaIniciada;
     private ReproductorSonidos reproductorSonidos = new ReproductorSonidos();
@@ -27,7 +28,6 @@ public class Game implements Runnable, ActionListener {
         
         gameOver = false;
         usuario = Login_Controlador.getNombreUsuario();
-        skin = 0;
         int skinOpcion = Controlador_MenuPrinc.getModoJuego();
         switch (skinOpcion) {
             case 1 -> skin = Lobbie_Controlador.getSkinSeleccionada();
@@ -95,6 +95,7 @@ public class Game implements Runnable, ActionListener {
                 timer.stop();
                 gameOver = true;
                 pantalla.setVisible(false);
+                pantalla.detenerMusica();
                 FinalPartida_Controlador.mostrar();
             }
 

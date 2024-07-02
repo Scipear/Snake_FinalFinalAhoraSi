@@ -5,6 +5,7 @@ desplazarce entre las distintas pantallas etc. Aqui se almacena la del Lobbie
 package controladores;
 
 import Gui.Panta_Lobbie;
+import snake2.Game;
 import snake2.Front.GraficoPersonaje;
 import snake2.Front.Pantalla;
 
@@ -23,7 +24,7 @@ public class Lobbie_Controlador extends Pantalla{
     //Metodo encargado de iniciar la pantalla de juego
     public static void eventIniciar() {
         Controlador_MenuPrinc.pararMusica();
-        Game_Controlador.nuevoJuego();
+        Game game = new Game();
         ocultar(ventanaPrin);
     }
 

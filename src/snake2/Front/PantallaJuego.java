@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import snake2.Controles;
 import snake2.Jugador;
 import snake2.Tablero;
+import ost.ReproductorSonidos;
 
 /**
 * Clase parte del GUI. Hereda de la clase Pantalla y 
@@ -23,6 +24,8 @@ public class PantallaJuego extends Pantalla {
     private JLabel fondoImagen, recuadroImagen, pausa;
     private boolean estaEnPausa = false;
     private boolean estaEnJuego;
+    private static ReproductorSonidos fondoOst;
+    private static final String gameOstRuta = "C:\\Users\\PC1\\Desktop\\UNIVERSIDAD\\IV Semestre\\Programación III\\Mine\\SnakeFinalDefinitivo 1.1.4\\src\\ost\\ARRR.wav";
 
     /**
     *
@@ -41,11 +44,13 @@ public class PantallaJuego extends Pantalla {
         fondoImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/FondoTablero.png")));
         recuadroImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png")));
         pausa = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Pausa8.png")));
+        fondoOst = new ReproductorSonidos();
         estaEnJuego = true;
         inicializar(jugador);
         add(multiPanel);
         addKeyListener(controles);
         setFocusable(true);
+        fondoOst.musicaDeFondo(gameOstRuta);
     }
 
     /**
@@ -120,5 +125,9 @@ public class PantallaJuego extends Pantalla {
 
     public GraficoTablero getMapa(){
         return mapa;
+    }
+
+    public void detenerMusica(){
+        fondoOst.detener();
     }
 }

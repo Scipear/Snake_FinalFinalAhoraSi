@@ -74,7 +74,7 @@ public class Tablero {
                 break;
             }
         }
-
+        //Sonido cuando genera comida especial
     }
     /**
      * Genera una posicion libre y aleatoria en el tablero
@@ -142,6 +142,7 @@ public class Tablero {
             comidaRegular = null;
             generarComida();
             return true;
+            //Podria ponerse aqui el sonido cuando come
 
         }else if(hayComidaEspecial() && personaje.getCuerpo(0).getPosX() == comidaEspecial.getPosX() && personaje.getCuerpo(0).getPosY() == comidaEspecial.getPosY()){
             comidaEspecial.hacerEfecto(personaje);
@@ -150,6 +151,7 @@ public class Tablero {
             return true;
         }
         return false;
+        
     }
 
     /**
