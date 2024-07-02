@@ -1,8 +1,6 @@
 package controladores;
 
 import Gui.Panta_Online_ClienteLobbie;
-import Gui.Panta_Online_HostLobbie;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import snake2.Front.GraficoPersonaje;
 import snake2.Front.Pantalla;
 

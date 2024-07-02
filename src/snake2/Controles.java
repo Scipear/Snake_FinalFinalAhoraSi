@@ -2,6 +2,7 @@ package snake2;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 /**
  * Clase parte del back. Configura los controles para cuando se esta dentro de una partida
  * 
@@ -9,9 +10,11 @@ import java.awt.event.KeyListener;
  */
 public class Controles implements KeyListener{
     private Personaje personaje;
+    private Tablero tablero;
 
-    public Controles(Personaje personaje){
+    public Controles(Tablero tablero, Personaje personaje){
         this.personaje = personaje;
+        this.tablero = tablero;
     }
 
     @Override
@@ -69,6 +72,14 @@ public class Controles implements KeyListener{
         }else if(tecla == KeyEvent.VK_UP){
             if(personaje.getCuerpo(0).getDireccion() == "Derecha" || personaje.getCuerpo(0).getDireccion() == "Izquierda"){
                 personaje.getCuerpo(0).setDireccion("Arriba");
+            }
+        }else if(tecla == KeyEvent.VK_SPACE){
+            if(tablero.getPausa()){
+                tablero.setPausa(false);
+
+            }else{
+                tablero.setPausa(true);
+
             }
         }
     }

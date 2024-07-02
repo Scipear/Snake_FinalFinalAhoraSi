@@ -4,6 +4,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
+import snake2.ComidaCongelada;
+import snake2.ComidaDoble;
+import snake2.ComidaPicante;
+import snake2.ComidaRocosa;
 import snake2.Cuerpo;
 import snake2.Tablero;
 
@@ -28,10 +32,10 @@ public class GraficoTablero extends Grafico{
      */
     public GraficoTablero(Tablero tablero){
         this.tablero = tablero;
-        graficoPersonaje = new GraficoPersonaje(tablero.getJugador().getPersonaje());
+        graficoPersonaje = new GraficoPersonaje(tablero.getPersonaje());
         graficoComida = new GraficoComida();
-        pared = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/newPared.png")).getImage());
-        piso = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/newPiso.png")).getImage());
+        pared = ajustarImagen(new ImageIcon("newPared.png").getImage());
+        piso = ajustarImagen(new ImageIcon("newPiso.png").getImage());
         setBounds(35, 25, 616, 616);
         setLayout(null);
     }
@@ -67,9 +71,9 @@ public class GraficoTablero extends Grafico{
      * @version 1.0.2
      */
     public void pintarPersonaje(Graphics2D g){
-        for(int i = 0; i < tablero.getJugador().getPersonaje().getLongitud(); i++){ /*Como el cuerpo del personaje
+        for(int i = 0; i < tablero.getPersonaje().getLongitud(); i++){ /*Como el cuerpo del personaje
             se trata de una lista, la recorre*/
-            Cuerpo body = tablero.getJugador().getPersonaje().getCuerpo(i); //Toma el valor de cada nodo de la lista
+            Cuerpo body = tablero.getPersonaje().getCuerpo(i); //Toma el valor de cada nodo de la lista
 
             switch(body.getTipo()){
                 case "Cabeza":{
@@ -136,6 +140,21 @@ public class GraficoTablero extends Grafico{
     void pintarComida(Graphics g){
         if(tablero.hayComida()){
             g.drawImage(graficoComida.getComidaRegular(), tablero.getComida().getPosX() * celdaSize, tablero.getComida().getPosY() * celdaSize, this);
+        }
+
+        if(tablero.hayComidaEspecial()){
+            if(tablero.getComidaEspecial() instanceof ComidaDoble){
+                g.drawImage(graficoComida.getComidaDoble(), tablero.getComidaEspecial().getPosX() * celdaSize, tablero.getComidaEspecial().getPosY() * celdaSize, this);
+            
+            }else if(tablero.getComidaEspecial() instanceof ComidaPicante){
+                g.drawImage(graficoComida.getComidaPicante(), tablero.getComidaEspecial().getPosX() * celdaSize, tablero.getComidaEspecial().getPosY() * celdaSize, this);
+            
+            }else if(tablero.getComidaEspecial() instanceof ComidaCongelada){
+                g.drawImage(graficoComida.getComidaCongelada(), tablero.getComidaEspecial().getPosX() * celdaSize, tablero.getComidaEspecial().getPosY() * celdaSize, this);
+            
+            }else if(tablero.getComidaEspecial() instanceof ComidaRocosa){
+                g.drawImage(graficoComida.getComidaRocosa(), tablero.getComidaEspecial().getPosX() * celdaSize, tablero.getComidaEspecial().getPosY() * celdaSize, this);
+            }
         }
     }
 

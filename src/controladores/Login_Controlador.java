@@ -1,10 +1,7 @@
 package controladores;
 
 import Gui.Panta_Login;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-import snake2.Front.GraficoPersonaje;
 import snake2.Front.Pantalla;
 import snake2.Jugador;
 
@@ -24,7 +21,7 @@ public class Login_Controlador extends Pantalla{
 
         nombreUsuario = usuario.getText();
 
-        Jugador jugador = new Jugador(nombreUsuario);
+        //Jugador jugador = new Jugador(nombreUsuario);
         System.out.println("Usuario creado");
         ocultar(ventanaPrin);
         Controlador_MenuPrinc.mostrar(); // En esta linea se abre la pantalla del menu principal

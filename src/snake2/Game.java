@@ -1,10 +1,6 @@
 package snake2;
 
 import controladores.*;
-import controladores.FinalPartida_Controlador;
-import controladores.HostLobbie_Controlador;
-import controladores.Lobbie_Controlador;
-import controladores.Login_Controlador;
 import ost.ReproductorSonidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,29 +12,28 @@ import snake2.Tablero;
 public class Game implements Runnable, ActionListener {
 
     private volatile boolean iniciado = true;
-    protected Timer timer;
+    protected static Timer timer;
     private PantallaJuego pantalla;
     private Thread thread;
     protected Jugador jugador;
     protected Tablero tablero;
+    private String usuario;
+    private int skin;
     protected static boolean gameOver;
+    private boolean partidaIniciada;
     private ReproductorSonidos reproductorSonidos = new ReproductorSonidos();
 
     public Game() {
         
         gameOver = false;
-        String usuario = Login_Controlador.getNombreUsuario();
-        int skin = 0;
+        usuario = Login_Controlador.getNombreUsuario();
+        skin = 0;
         int skinOpcion = Controlador_MenuPrinc.getModoJuego();
         switch (skinOpcion) {
             case 1 -> skin = Lobbie_Controlador.getSkinSeleccionada();
             case 2 -> skin = HostLobbie_Controlador.getSkinSeleccionada();
             case 3 -> skin = ClienteLobbie_Controlador.getSkinSeleccionada();
         }
-   
-        jugador = new Jugador(usuario, 5, 1, "Derecha", skin); //El jugador debe iniciar en el login
-        tablero = new Tablero(jugador);
-        pantalla = new PantallaJuego(tablero, jugador);
     }
 
     public synchronized void iniciarJuego() {
@@ -56,12 +51,22 @@ public class Game implements Runnable, ActionListener {
         }
     }
 
-    @Override
-    public void run() {
+    public void iniciarPartida(){
+        jugador = new Jugador(usuario, 5, 1, "Derecha", skin);
+        tablero = new Tablero(jugador.getPersonaje(), 0);
+        pantalla = new PantallaJuego(tablero, jugador);
+        partidaIniciada = true;
         timer = new Timer(175, this);
         timer.start();
-        while (iniciado) {
+    }
 
+    public static void setDelay(int delay){
+        timer.setDelay(delay);
+    }
+
+    @Override
+    public void run() {
+        while (iniciado) {
             if (gameOver == true) {
                 FinalPartida_Controlador.mostrar();
             }
@@ -70,20 +75,44 @@ public class Game implements Runnable, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        jugador.getPersonaje().movimiento();
-        if (tablero.personajeSobreComida()) {
-            pantalla.actualizaPuntaje(jugador);
+        if(!tablero.getPausa()){
+            jugador.getPersonaje().movimiento();
+
+            if(tablero.personajeSobreComida()){
+                jugador.aumentaPuntaje();
+                pantalla.actualizaPuntaje(jugador);
+            }
+
+            tablero.chocaConPared();
+            jugador.getPersonaje().chocaConCuerpo();
+            pantalla.actualizaMapa();
+            
+            if(!jugador.getPersonaje().getEstado()){
+                detenerJuego();
+                reproductorSonidos.detener();
+                timer.stop();
+                gameOver = true;
+                pantalla.setVisible(false);
+                FinalPartida_Controlador.mostrar();
+            }
+
+            if(tablero.getTiempo() != 0){
+                tablero.disminuyeTiempoEspecial();
+
+            }else{
+                if(!tablero.hayComidaEspecial()){
+                    tablero.generarComidaEspecial();
+                    tablero.desactivaRapidez();
+                    jugador.getPersonaje().descongelar();
+                }
+                
+                tablero.getComidaEspecial().actualizaTiempo();
+                
+                if(tablero.getComidaEspecial().getTiempoVisible() == 0){
+                    tablero.borraComidaEspecial();
+                }
+            }
         }
-        tablero.chocaConPared();
-        jugador.getPersonaje().chocaConCuerpo();
-        pantalla.actualizaMapa();
-        if (!jugador.getPersonaje().getEstado()) {
-            detenerJuego();
-            reproductorSonidos.detener();
-            timer.stop();
-            gameOver = true;
-            pantalla.setVisible(false);
-            FinalPartida_Controlador.mostrar();
-        }
+        pantalla.muestraPausa(tablero);
     }
 }

@@ -4,9 +4,7 @@ desplazarce entre las distintas pantallas etc. Aqui se almacena la del Lobbie
  */
 package controladores;
 
-import snake2.Game;
 import Gui.Panta_Lobbie;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import snake2.Front.GraficoPersonaje;
 import snake2.Front.Pantalla;
 

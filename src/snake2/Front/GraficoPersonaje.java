@@ -142,6 +142,46 @@ public class GraficoPersonaje extends Grafico{
                 curva[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/BlueCurvaRIGHT-UP.png")).getImage());
                 break;
             }
+
+            case 5:{
+                cabeza[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthHeadUP.png")).getImage());
+                cabeza[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthHeadRIGHT.png")).getImage());
+                cabeza[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthHeadDOWN.png")).getImage());
+                cabeza[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthHeadLEFT.png")).getImage());
+                cuerpo[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthBodyUP.png")).getImage());
+                cuerpo[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthBodyRIGHT.png")).getImage());
+                cuerpo[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthBodyDOWN.png")).getImage());
+                cuerpo[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthBodyLEFT.png")).getImage());
+                cola[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthTailUP.png")).getImage());
+                cola[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthTailRIGHT.png")).getImage());
+                cola[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthTailDOWN.png")).getImage());
+                cola[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthTailLEFT.png")).getImage());
+                curva[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthCurvaLEFT-DOWN.png")).getImage());
+                curva[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthCurvaLEFT-UP.png")).getImage());
+                curva[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthCurvaRIGHT-DOWN.png")).getImage());
+                curva[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthCurvaRIGHT-UP.png")).getImage());
+                break;
+            }
+
+            case 6:{
+                cabeza[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedHeadUP.png")).getImage());
+                cabeza[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedHeadRIGHT.png")).getImage());
+                cabeza[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedHeadDOWN.png")).getImage());
+                cabeza[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedHeadLEFT.png")).getImage());
+                cuerpo[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedBodyUP.png")).getImage());
+                cuerpo[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedBodyRIGHT.png")).getImage());
+                cuerpo[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedBodyDOWN.png")).getImage());
+                cuerpo[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedBodyLEFT.png")).getImage());
+                cola[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedTailUP.png")).getImage());
+                cola[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedTailRIGHT.png")).getImage());
+                cola[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedTailDOWN.png")).getImage());
+                cola[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedTailLEFT.png")).getImage());
+                curva[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedCurvaLEFT-DOWN.png")).getImage());
+                curva[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedCurvaLEFT-UP.png")).getImage());
+                curva[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedCurvaRIGHT-DOWN.png")).getImage());
+                curva[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedCurvaRIGHT-UP.png")).getImage());
+                break;
+            }
         }
     }
 }

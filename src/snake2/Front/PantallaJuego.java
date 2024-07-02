@@ -20,7 +20,9 @@ public class PantallaJuego extends Pantalla {
     private Controles controles; //Configuracion del teclado (En esta ventana) para la manipulacion del personaje
     private JLayeredPane multiPanel;
     private JPanel fondo, recuadro;
-    private JLabel fondoImagen, recuadroImagen;
+    private JLabel fondoImagen, recuadroImagen, pausa;
+    private boolean estaEnPausa = false;
+    private boolean estaEnJuego;
 
     /**
     *
@@ -30,13 +32,16 @@ public class PantallaJuego extends Pantalla {
     */
     public PantallaJuego(Tablero tablero, Jugador jugador){
         super();
-        controles = new Controles(tablero.getJugador().getPersonaje());
+        setVisible(true);
+        controles = new Controles(tablero, tablero.getPersonaje());
         mapa = new GraficoTablero(tablero);
         multiPanel = new JLayeredPane();
         fondo = new JPanel();
-        fondoImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/FondoTablero.png")));
         recuadro = new JPanel();
-        recuadroImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png")));
+        fondoImagen = new JLabel(new ImageIcon("FondoTablero.png"));
+        recuadroImagen = new JLabel(new ImageIcon("Boton.png"));
+        pausa = new JLabel(new ImageIcon("Pausa8.png"));
+        estaEnJuego = true;
         inicializar(jugador);
         add(multiPanel);
         addKeyListener(controles);
@@ -51,18 +56,18 @@ public class PantallaJuego extends Pantalla {
      */
     public void inicializar(Jugador jugador){
         fondoImagen.setBounds(0, 0, 685, 662);        
-        fondo.add(fondoImagen);        
         fondo.setBounds(0, 0, ancho, alto);
-        recuadroImagen.setBounds(0, 0, 100, 15);   //0, 0, 100, 15
+        fondo.add(fondoImagen);        
+        recuadroImagen.setBounds(0, 0, 100, 15);
         recuadroImagen.setText(jugador.getUsuario() + ": " + Integer.toString(jugador.getPuntaje()));
         recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
-        recuadro.setBounds(15, 10, 50, 15);     //15, 5, 100, 15
-        recuadro.add(recuadroImagen);   
+        recuadro.setBounds(15, 5, 100, 15);
+        recuadro.add(recuadroImagen); 
+        pausa.setBounds(80, 260, 600, 150);
         multiPanel.setBounds(0, 0, ancho, alto);
         multiPanel.add(fondo, Integer.valueOf(0));
         multiPanel.add(mapa, Integer.valueOf(1));
         multiPanel.add(recuadro, Integer.valueOf(2));
-        
     }
 
     /**
@@ -84,6 +89,33 @@ public class PantallaJuego extends Pantalla {
         recuadro.remove(recuadroImagen);
         recuadroImagen.setText(jugador.getUsuario() + ": " + Integer.toString(jugador.getPuntaje()));
         recuadro.add(recuadroImagen);
+    }
+    
+    /**
+     * Muestra un mensaje de pausa en la ventana
+     * 
+     * @param tablero Tablero con el cual se verifica si el juego se encuentra o no en pausa
+     * @version 1.1.3
+     */
+    public void muestraPausa(Tablero tablero){
+        if(tablero.getPausa() && !estaEnPausa){
+            multiPanel.add(pausa, Integer.valueOf(3));
+
+        }else{
+            multiPanel.remove(pausa);
+        }
+    }
+
+    public boolean getEnJuego(){
+        return estaEnJuego;
+    }
+
+    public void setEnJuego(boolean estaEnJuego){
+        this.estaEnJuego = estaEnJuego;
+    }
+
+    public Controles getControles(){
+        return controles;
     }
 
     public GraficoTablero getMapa(){

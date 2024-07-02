@@ -3,7 +3,6 @@
 package controladores;
 
 import Gui.Panta_Creditos;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import snake2.Front.Pantalla;
 
 

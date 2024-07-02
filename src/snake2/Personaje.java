@@ -13,6 +13,7 @@ public class Personaje{
     private int longitud;
     private int skin;
     private boolean estado;
+    private boolean estaCongelado;
 
     /**
      * Constructor de la clase
@@ -68,25 +69,27 @@ public class Personaje{
      * 
      * @version 1.0.4
      */
-    public void movimiento(){
-        for(int i = longitud-1; i >= 0; i--){
-            if(serpiente.get(i).esCurva()){
-                serpiente.get(i).cambioACuerpo(serpiente.get(i-1));
-            }
-
-            avanzar(i);
-            
-            if(i != 0 && serpiente.get(i-1).esCabeza()){
-                serpiente.get(i).cambioACurva(serpiente.get(i-1).getDireccion());
-            }
-            
-            if(i != 0 && !serpiente.get(i).esCola() && !serpiente.get(i-1).esCabeza()){
-                serpiente.get(i).setTipo(serpiente.get(i-1).getTipo());
-                serpiente.get(i).setDireccion(serpiente.get(i-1).getDireccion());
-            }
-
-            if(serpiente.get(i).esCola() && !serpiente.get(i).mismaDireccion(serpiente.get(i-1).getDireccion())){
-                serpiente.get(i).cambioCola(serpiente.get(i-1).getDireccion());
+    void movimiento(){
+        if(!estaCongelado){
+            for(int i = longitud-1; i >= 0; i--){
+                if(serpiente.get(i).esCurva()){
+                    serpiente.get(i).cambioACuerpo(serpiente.get(i-1));
+                }
+    
+                avanzar(i);
+                
+                if(i != 0 && serpiente.get(i-1).esCabeza()){
+                    serpiente.get(i).cambioACurva(serpiente.get(i-1).getDireccion());
+                }
+                
+                if(i != 0 && !serpiente.get(i).esCola() && !serpiente.get(i-1).esCabeza()){
+                    serpiente.get(i).setTipo(serpiente.get(i-1).getTipo());
+                    serpiente.get(i).setDireccion(serpiente.get(i-1).getDireccion());
+                }
+    
+                if(serpiente.get(i).esCola() && !serpiente.get(i).mismaDireccion(serpiente.get(i-1).getDireccion())){
+                    serpiente.get(i).cambioCola(serpiente.get(i-1).getDireccion());
+                }
             }
         }
     }
@@ -97,22 +100,40 @@ public class Personaje{
      * @version 1.1.1
      */
     public void creceCuerpo(){
-        Cuerpo aux = serpiente.get(longitud-1);
-        serpiente.get(longitud-1).setTipo("Cuerpo");
-        
-        if(aux.getDireccion() == "Arriba"){
-            serpiente.add(new Cuerpo(aux.getPosX(), aux.getPosY()+velocidad, "Cola", "Arriba"));
-            //PONER SONDIDO DE COMER 
-        }else if(aux.getDireccion() == "Derecha"){
-            serpiente.add(new Cuerpo(aux.getPosX()-velocidad, aux.getPosY(), "Cola", "Derecha"));
-            //PONER SONDIDO DE COMER 
-        }else if(aux.getDireccion() == "Abajo"){
-            serpiente.add(new Cuerpo(aux.getPosX(), aux.getPosY()-velocidad, "Cola", "Abajo"));
-            //PONER SONDIDO DE COMER 
-        }else if(aux.getDireccion() == "Izquierda"){
-            serpiente.add(new Cuerpo(aux.getPosX()+velocidad, aux.getPosY(), "Cola", "Izquierda"));
-            //PONER SONDIDO DE COMER 
-        }     
+        int diferencia = (longitud - serpiente.size()) + 1;
+
+        while(diferencia > 1){
+            Cuerpo aux = serpiente.get(longitud-diferencia);
+            serpiente.get(longitud-diferencia).setTipo("Cuerpo");
+
+            if(aux.getDireccion() == "Arriba"){
+                serpiente.add(new Cuerpo(aux.getPosX(), aux.getPosY()+velocidad, "Cola", "Arriba"));
+            }else if(aux.getDireccion() == "Derecha"){
+                serpiente.add(new Cuerpo(aux.getPosX()-velocidad, aux.getPosY(), "Cola", "Derecha"));
+            }else if(aux.getDireccion() == "Abajo"){
+                serpiente.add(new Cuerpo(aux.getPosX(), aux.getPosY()-velocidad, "Cola", "Abajo"));
+            }else if(aux.getDireccion() == "Izquierda"){
+                serpiente.add(new Cuerpo(aux.getPosX()+velocidad, aux.getPosY(), "Cola", "Izquierda"));
+            }
+            diferencia--;    
+        }    
+    }
+
+    /**
+     * Hace que la serpiente reduzca su tamanio
+     * 
+     * @version 1.1.4
+     */
+    public void disminuyeCuerpo(){
+        if(longitud > 3){
+            if(serpiente.get(longitud-2).esCurva()){
+                serpiente.get(longitud-1).cambioCola(serpiente.get(longitud-2).getDireccion());
+            }
+            serpiente.get(longitud-2).setTipo(serpiente.get(longitud-1).getTipo());
+            serpiente.get(longitud-2).setDireccion(serpiente.get(longitud-1).getDireccion());
+            serpiente.remove(longitud-1);
+            longitud--;
+        }
     }
 
     /**
@@ -124,18 +145,36 @@ public class Personaje{
         for(int i = 1; i < longitud-1; i++){
             if(serpiente.get(0).getPosX() == serpiente.get(i).getPosX() && serpiente.get(0).getPosY() == serpiente.get(i).getPosY()){
                 estado = false;
-                
-                //PONERLE SONIDO DE MUERTE
             }
         }
     }
 
+    /**
+     * En caso de que la serpiente tenga el estado de congelar, hace que esta se descongele
+     * 
+     * @version 1.1.4
+     */
+    public void descongelar(){
+        if(estaCongelado){
+            estaCongelado = false;
+        }
+    }
+
+    /**
+     * Aumenta la longitud de la serpiente
+     * 
+     * @version 1.1.4
+     */
+    public void aumentaLongitud(){
+        longitud++;;
+    }
+    
     public void setEstado(boolean estado){
         this.estado = estado;
     }
 
-    public void setLongitud(int longitud){
-        this.longitud = longitud;
+    public void setCongelado(boolean estaCongelado){
+        this.estaCongelado = estaCongelado;
     }
 
     public boolean getEstado(){
@@ -152,9 +191,5 @@ public class Personaje{
 
     public int getSkin(){
         return skin;
-    }
-
-    public void setSkin(int skin) {
-        this.skin = skin;
     }
 }

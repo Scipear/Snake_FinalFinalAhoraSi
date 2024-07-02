@@ -1,6 +1,5 @@
 package controladores;
 
-import Gui.Panta_FinalPartida;
 import ost.ReproductorSonidos;
 import snake2.*;
 
@@ -15,7 +14,7 @@ public class Game_Controlador extends Game {
     //Metodos
     public static void nuevoJuego() {
         Game game = new Game();
-        game.iniciarJuego();
+        game.iniciarPartida();
         fondoOst.musicaDeFondo(gameOstRuta);
     }
 

@@ -5,7 +5,6 @@ desplazarce entre las distintas pantallas etc. Aqui se almacena la del menu prin
 package controladores;
 
 import Gui.*;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import ost.ReproductorSonidos;
 import snake2.Front.Pantalla;
 
