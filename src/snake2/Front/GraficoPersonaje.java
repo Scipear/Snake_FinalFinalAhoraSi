@@ -63,7 +63,7 @@ public class GraficoPersonaje extends Grafico{
      */
     public void asignarSkin(int choise){
         switch(choise){
-            case 1:{
+            case 1 -> {
                 cabeza[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GreenHeadUP.png")).getImage());
                 cabeza[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GreenHeadRIGHT.png")).getImage());
                 cabeza[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GreenHeadDOWN.png")).getImage());
@@ -80,10 +80,9 @@ public class GraficoPersonaje extends Grafico{
                 curva[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GreenCurvaLEFT-UP.png")).getImage());
                 curva[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GreenCurvaRIGHT-DOWN.png")).getImage());
                 curva[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GreenCurvaRIGHT-UP.png")).getImage());
-                break;
             }
 
-            case 2:{
+            case 2 -> {
                 cabeza[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/PinkHeadUP.png")).getImage());
                 cabeza[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/PinkHeadRIGHT.png")).getImage());
                 cabeza[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/PinkHeadDOWN.png")).getImage());
@@ -100,10 +99,9 @@ public class GraficoPersonaje extends Grafico{
                 curva[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/PinkCurvaLEFT-UP.png")).getImage());
                 curva[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/PinkCurvaRIGHT-DOWN.png")).getImage());
                 curva[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/PinkCurvaRIGHT-UP.png")).getImage());
-                break;
             }
 
-            case 3:{
+            case 3 -> {
                 cabeza[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/YellowHeadUP.png")).getImage());
                 cabeza[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/YellowHeadRIGHT.png")).getImage());
                 cabeza[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/YellowHeadDOWN.png")).getImage());
@@ -120,10 +118,9 @@ public class GraficoPersonaje extends Grafico{
                 curva[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/YellowCurvaLEFT-UP.png")).getImage());
                 curva[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/YellowCurvaRIGHT-DOWN.png")).getImage());
                 curva[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/YellowCurvaRIGHT-UP.png")).getImage());
-                break;
             }
 
-            case 4:{
+            case 4 -> {
                 cabeza[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/BlueHeadUP.png")).getImage());
                 cabeza[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/BlueHeadRIGHT.png")).getImage());
                 cabeza[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/BlueHeadDOWN.png")).getImage());
@@ -140,10 +137,9 @@ public class GraficoPersonaje extends Grafico{
                 curva[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/BlueCurvaLEFT-UP.png")).getImage());
                 curva[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/BlueCurvaRIGHT-DOWN.png")).getImage());
                 curva[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/BlueCurvaRIGHT-UP.png")).getImage());
-                break;
             }
 
-            case 5:{
+            case 5 -> {
                 cabeza[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthHeadUP.png")).getImage());
                 cabeza[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthHeadRIGHT.png")).getImage());
                 cabeza[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthHeadDOWN.png")).getImage());
@@ -160,10 +156,9 @@ public class GraficoPersonaje extends Grafico{
                 curva[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthCurvaLEFT-UP.png")).getImage());
                 curva[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthCurvaRIGHT-DOWN.png")).getImage());
                 curva[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/EarthCurvaRIGHT-UP.png")).getImage());
-                break;
             }
 
-            case 6:{
+            case 6 -> {
                 cabeza[0] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedHeadUP.png")).getImage());
                 cabeza[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedHeadRIGHT.png")).getImage());
                 cabeza[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedHeadDOWN.png")).getImage());
@@ -180,7 +175,6 @@ public class GraficoPersonaje extends Grafico{
                 curva[1] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedCurvaLEFT-UP.png")).getImage());
                 curva[2] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedCurvaRIGHT-DOWN.png")).getImage());
                 curva[3] = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/GraduatedCurvaRIGHT-UP.png")).getImage());
-                break;
             }
         }
     }

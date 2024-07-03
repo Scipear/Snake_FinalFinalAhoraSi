@@ -19,8 +19,6 @@ public class HostLobbie_Controlador extends Pantalla{
         System.out.println("Pantalla del lobbie del host");
     }
 
-
-
     //Metodo encargado de iniciar la pantalla de juego
     public static void eventIniciar() {
         Controlador_MenuPrinc.pararMusica();
@@ -55,30 +53,35 @@ public class HostLobbie_Controlador extends Pantalla{
 
     public static void selec_Skin5() {
         skinSeleccionada = 5;
+        System.out.println("Selecciono skin ");
     }
 
     public static void selec_Skin6() {
         skinSeleccionada = 6;
+        System.out.println("Selecciono skin ");
     }
 
     public static int getSkinSeleccionada() {
         return skinSeleccionada;
     }
-    /*
+    
     public static void selec_Mapa1() {
-
+        mapaSeleccionado = 1;
+        System.out.println("Selecciono mapa 1");
     }
 
     public static void selec_Mapa2() {
-
+        mapaSeleccionado = 2;
+        System.out.println("Selecciono mapa 2");
     }
 
     public static void selec_Mapa3() {
-
+        mapaSeleccionado = 2;
+        System.out.println("Selecciono mapa 3");
     }
     
-    public static int getSkinSeleccionada() {
+    public static int getMapaSeleccionada() {
         return mapaSeleccionado;
     }
-     */
+     
 }

@@ -15,6 +15,7 @@ public class Tablero {
     private Personaje personaje;
     private int tiempoComidaEspecial;
     private boolean pausa;
+    private int mapa;
     
     /**
      * Constructor de la clase
@@ -27,7 +28,8 @@ public class Tablero {
         cantidadComidasEspeciales = 4;
         celdas = new Celda[alto][ancho];
         this.personaje = personaje;
-        pausa = false;
+        this.mapa = tipo;
+        pausa = false;  
         rapidezActivada = false;
         tiempoComidaEspecial = 85;
         inicializarTablero(tipo);
@@ -54,24 +56,20 @@ public class Tablero {
         int indice = comidaAleatoria();
 
         switch(indice){
-            case 0:{
+            case 0 -> {
                 comidaEspecial = new ComidaDoble(posiciones[0], posiciones[1]);
-                break;
             }
 
-            case 1:{
+            case 1 -> {
                 comidaEspecial = new ComidaPicante(posiciones[0], posiciones[1]);
-                break;
             }
 
-            case 2:{
+            case 2 -> {
                 comidaEspecial = new ComidaCongelada(posiciones[0], posiciones[1]);
-                break;
             }
 
-            case 3:{
+            case 3 -> {
                 comidaEspecial = new ComidaRocosa(posiciones[0], posiciones[1]);
-                break;
             }
         }
         //Sonido cuando genera comida especial
@@ -124,7 +122,7 @@ public class Tablero {
             return false;
         }
 
-        if(celdas[y][x].getTipo() == "Pared"){
+        if("Pared".equals(celdas[y][x].getTipo())){
             return false;
         }
 
@@ -171,11 +169,10 @@ public class Tablero {
                     
                 }
             }
-        
         }
 
         switch(tipo){
-            case 1:{
+            case 1 -> {
                 for(int i = 1; i < alto-1; i++){
                     for(int j = 1; j < ancho-1; j++){
                         if(((i == (alto / 2) - 1 || i == alto / 2) && (j > 3 && j < 18)) || ((j == (ancho / 2) - 1 || j == ancho / 2) && (i > 3 && i < 18))){
@@ -183,10 +180,9 @@ public class Tablero {
                         }
                     }               
                 }
-                break;
             }
 
-            case 2:{
+            case 2 -> {
                 for(int i = 1; i < alto-1; i++){
                     for(int j = 1; j < ancho-1; j++){
                         if((i % 3 == 0 && j % 3 == 0)){
@@ -194,10 +190,9 @@ public class Tablero {
                         }
                     }
                 }
-                break;
             }
 
-            case 3:{
+            case 3 -> {
                 for(int i = 1; i < alto-1; i++){
                     for(int j = 1; j < ancho-1; j++){
                         if(i % 3 == 0 && (j > 3 && j < 18)){
@@ -205,7 +200,6 @@ public class Tablero {
                         }
                     }
                 }
-                break;
             }
         }
     }
@@ -216,7 +210,7 @@ public class Tablero {
      * @version 1.1.2
      */
     public void chocaConPared(){
-        if(celdas[personaje.getCuerpo(0).getPosY()][personaje.getCuerpo(0).getPosX()].getTipo() == "Pared"){
+        if("Pared".equals(celdas[personaje.getCuerpo(0).getPosY()][personaje.getCuerpo(0).getPosX()].getTipo())){
             personaje.setEstado(false);
         }
     }
@@ -306,4 +300,9 @@ public class Tablero {
     public int getTiempo(){
         return tiempoComidaEspecial;
     }
+
+    public int getMapa() {
+        return mapa;
+    }
+    
 }
