@@ -4,6 +4,7 @@ desplazarce entre las distintas pantallas etc. Aqui se almacena la del Lobbie
  */
 package controladores;
 
+import javax.swing.JOptionPane;
 import Gui.Panta_Lobbie;
 import snake2.Game;
 import snake2.Front.GraficoPersonaje;
@@ -14,8 +15,8 @@ public class Lobbie_Controlador extends Pantalla {
 //Para poder usarlo en cualquier parte del codigo
     public static Panta_Lobbie ventanaPrin = new Panta_Lobbie();
     public static GraficoPersonaje seleccion;
-    public static int skinSeleccionada;
-    public static int mapaSeleccionado;
+    public static int skinSeleccionada = -1;
+    public static int mapaSeleccionado = -1;
 
     //Metodos
     public static void mostrar() {
@@ -23,10 +24,14 @@ public class Lobbie_Controlador extends Pantalla {
     }
 
     //Metodo encargado de iniciar la pantalla de juego
-    public static void eventIniciar() {
-        Controlador_MenuPrinc.pararMusica();
-        Game game = new Game();
-        ocultar(ventanaPrin);
+    public static void eventIniciar(){
+        if(skinSeleccionada == -1 || mapaSeleccionado == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, elige una skin y un mapa para poder jugar");        
+        }else{
+            Controlador_MenuPrinc.pararMusica();
+            Game game = new Game();
+            ocultar(ventanaPrin);
+        }
     }
 
     public static void eventVolverAlMenu() {

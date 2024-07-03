@@ -307,7 +307,7 @@ public class Panta_Lobbie extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSkinAzulActionPerformed
 
     private void btnSkinCascoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinCascoActionPerformed
-        controladores.Lobbie_Controlador.selec_Skin6();
+        controladores.Lobbie_Controlador.selec_Skin5();
     }//GEN-LAST:event_btnSkinCascoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -327,7 +327,7 @@ public class Panta_Lobbie extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void btnSkinGorritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinGorritoActionPerformed
-        controladores.Lobbie_Controlador.selec_Skin5();
+        controladores.Lobbie_Controlador.selec_Skin6();
     }//GEN-LAST:event_btnSkinGorritoActionPerformed
 
     private void btnSkinNaranja1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinNaranja1ActionPerformed

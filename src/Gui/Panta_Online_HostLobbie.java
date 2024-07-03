@@ -22,10 +22,10 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        btnSkinNaranja = new javax.swing.JButton();
+        btnSkinCasco = new javax.swing.JButton();
         btnSkinAzul = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        btnSkinVerde = new javax.swing.JButton();
+        btnSkinGorrito = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -33,8 +33,8 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        btnSkinVerde1 = new javax.swing.JButton();
-        btnSkinNaranja1 = new javax.swing.JButton();
+        btnSkinVerde = new javax.swing.JButton();
+        btnSkinNaranja = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -61,15 +61,15 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
             }
         });
 
-        btnSkinNaranja.setBackground(new java.awt.Color(13, 13, 60));
-        btnSkinNaranja.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        btnSkinNaranja.setForeground(new java.awt.Color(16, 16, 32));
-        btnSkinNaranja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/EarthHeadLEFT.png"))); // NOI18N
-        btnSkinNaranja.setBorder(null);
-        btnSkinNaranja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSkinNaranja.addActionListener(new java.awt.event.ActionListener() {
+        btnSkinCasco.setBackground(new java.awt.Color(13, 13, 60));
+        btnSkinCasco.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        btnSkinCasco.setForeground(new java.awt.Color(16, 16, 32));
+        btnSkinCasco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/EarthHeadLEFT.png"))); // NOI18N
+        btnSkinCasco.setBorder(null);
+        btnSkinCasco.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSkinCasco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSkinNaranjaActionPerformed(evt);
+                btnSkinCascoActionPerformed(evt);
             }
         });
 
@@ -89,15 +89,15 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(230, 255, 79));
         jLabel2.setText("BIENVENIDO AL LOBBY");
 
-        btnSkinVerde.setBackground(new java.awt.Color(13, 13, 60));
-        btnSkinVerde.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        btnSkinVerde.setForeground(new java.awt.Color(16, 16, 32));
-        btnSkinVerde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/GraduatedHeadRIGHT.png"))); // NOI18N
-        btnSkinVerde.setBorder(null);
-        btnSkinVerde.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSkinVerde.addActionListener(new java.awt.event.ActionListener() {
+        btnSkinGorrito.setBackground(new java.awt.Color(13, 13, 60));
+        btnSkinGorrito.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        btnSkinGorrito.setForeground(new java.awt.Color(16, 16, 32));
+        btnSkinGorrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/GraduatedHeadRIGHT.png"))); // NOI18N
+        btnSkinGorrito.setBorder(null);
+        btnSkinGorrito.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSkinGorrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSkinVerdeActionPerformed(evt);
+                btnSkinGorritoActionPerformed(evt);
             }
         });
 
@@ -172,27 +172,27 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
             }
         });
 
-        btnSkinVerde1.setBackground(new java.awt.Color(13, 13, 60));
-        btnSkinVerde1.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        btnSkinVerde1.setForeground(new java.awt.Color(16, 16, 32));
-        btnSkinVerde1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/GreenHeadRIGHT.png"))); // NOI18N
-        btnSkinVerde1.setBorder(null);
-        btnSkinVerde1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSkinVerde1.addActionListener(new java.awt.event.ActionListener() {
+        btnSkinVerde.setBackground(new java.awt.Color(13, 13, 60));
+        btnSkinVerde.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        btnSkinVerde.setForeground(new java.awt.Color(16, 16, 32));
+        btnSkinVerde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/GreenHeadRIGHT.png"))); // NOI18N
+        btnSkinVerde.setBorder(null);
+        btnSkinVerde.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSkinVerde.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSkinVerde1ActionPerformed(evt);
+                btnSkinVerdeActionPerformed(evt);
             }
         });
 
-        btnSkinNaranja1.setBackground(new java.awt.Color(13, 13, 60));
-        btnSkinNaranja1.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        btnSkinNaranja1.setForeground(new java.awt.Color(16, 16, 32));
-        btnSkinNaranja1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/YellowHeadLEFT.png"))); // NOI18N
-        btnSkinNaranja1.setBorder(null);
-        btnSkinNaranja1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSkinNaranja1.addActionListener(new java.awt.event.ActionListener() {
+        btnSkinNaranja.setBackground(new java.awt.Color(13, 13, 60));
+        btnSkinNaranja.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        btnSkinNaranja.setForeground(new java.awt.Color(16, 16, 32));
+        btnSkinNaranja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/YellowHeadLEFT.png"))); // NOI18N
+        btnSkinNaranja.setBorder(null);
+        btnSkinNaranja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSkinNaranja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSkinNaranja1ActionPerformed(evt);
+                btnSkinNaranjaActionPerformed(evt);
             }
         });
 
@@ -230,13 +230,13 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnSkinRosa, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSkinVerde1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSkinVerde, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnSkinVerde, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSkinGorrito, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSkinNaranja1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSkinNaranja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSkinAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSkinNaranja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnSkinCasco, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addComponent(jLabel4)))
@@ -284,8 +284,8 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                                     .addComponent(btnSkinRosa, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSkinVerde1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, Short.MAX_VALUE)
-                                    .addComponent(btnSkinNaranja1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                                    .addComponent(btnSkinVerde, javax.swing.GroupLayout.PREFERRED_SIZE, 123, Short.MAX_VALUE)
+                                    .addComponent(btnSkinNaranja, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -301,8 +301,8 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSkinVerde, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSkinNaranja, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnSkinGorrito, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSkinCasco, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23)
                         .addComponent(jButton2)
                         .addContainerGap(74, Short.MAX_VALUE))
@@ -342,7 +342,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
         controladores.HostLobbie_Controlador.eventVolverAlMenu();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void btnSkinVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinVerdeActionPerformed
+    private void btnSkinGorritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinVerdeActionPerformed
         controladores.HostLobbie_Controlador.selec_Skin5();
     }//GEN-LAST:event_btnSkinVerdeActionPerformed
 
@@ -350,7 +350,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
         controladores.HostLobbie_Controlador.selec_Skin4();
     }//GEN-LAST:event_btnSkinAzulActionPerformed
 
-    private void btnSkinNaranjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinNaranjaActionPerformed
+    private void btnSkinCascoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinNaranjaActionPerformed
         controladores.HostLobbie_Controlador.selec_Skin5();
     }//GEN-LAST:event_btnSkinNaranjaActionPerformed
 
@@ -370,21 +370,21 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
         controladores.HostLobbie_Controlador.selec_Mapa4();
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void btnSkinVerde1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinVerde1ActionPerformed
+    private void btnSkinVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinVerde1ActionPerformed
         controladores.HostLobbie_Controlador.selec_Skin1();
     }//GEN-LAST:event_btnSkinVerde1ActionPerformed
 
-    private void btnSkinNaranja1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinNaranja1ActionPerformed
+    private void btnSkinNaranjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinNaranja1ActionPerformed
         controladores.HostLobbie_Controlador.selec_Skin3();
     }//GEN-LAST:event_btnSkinNaranja1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSkinAzul;
+    private javax.swing.JButton btnSkinCasco;
     private javax.swing.JButton btnSkinNaranja;
-    private javax.swing.JButton btnSkinNaranja1;
     private javax.swing.JButton btnSkinRosa;
+    private javax.swing.JButton btnSkinGorrito;
     private javax.swing.JButton btnSkinVerde;
-    private javax.swing.JButton btnSkinVerde1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;

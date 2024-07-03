@@ -18,12 +18,11 @@ public class Game implements Runnable, ActionListener {
     private String usuario;
     private int skin;
     private int mapa; // Guarda el mapa seleccionado por el usuario
-    protected static boolean gameOver;
+    private static boolean gameOver;
     private boolean partidaIniciada;
     private ReproductorSonidos reproductorSonidos = new ReproductorSonidos();
 
     public Game() {
-
         gameOver = false;
         usuario = Login_Controlador.getNombreUsuario();
         int modoOpcion = Controlador_MenuPrinc.getModoJuego();

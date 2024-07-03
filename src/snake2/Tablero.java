@@ -31,7 +31,7 @@ public class Tablero {
         mapa = tipo;
         pausa = false;  
         rapidezActivada = false;
-        tiempoComidaEspecial = 85;
+        tiempoComidaEspecial = 60;
         inicializarTablero(tipo);
         generarComida();
     }
@@ -145,7 +145,7 @@ public class Tablero {
         }else if(hayComidaEspecial() && personaje.getCuerpo(0).getPosX() == comidaEspecial.getPosX() && personaje.getCuerpo(0).getPosY() == comidaEspecial.getPosY()){
             comidaEspecial.hacerEfecto(personaje);
             comidaEspecial = null;
-            tiempoComidaEspecial = 85;
+            tiempoComidaEspecial = 60;
             return true;
         }
         return false;
@@ -222,7 +222,7 @@ public class Tablero {
      */
     public void borraComidaEspecial(){
         comidaEspecial = null;
-        tiempoComidaEspecial = 85;
+        tiempoComidaEspecial = 60;
     }
 
     /**
