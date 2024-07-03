@@ -14,7 +14,6 @@ public class PreConeccion_Controlador extends Pantalla{
 
     }
 
-
     public static void eventOnlineHost() {
 
         Controlador_MenuPrinc.setModoJuego(2);

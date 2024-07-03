@@ -25,7 +25,7 @@ public class PantallaJuego extends Pantalla {
     private boolean estaEnPausa = false;
     private boolean estaEnJuego;
     private static ReproductorSonidos fondoOst;
-    private static final String gameOstRuta = "C:\\Users\\PC1\\Desktop\\UNIVERSIDAD\\IV Semestre\\Programación III\\Mine\\SnakeFinalDefinitivo 1.1.4\\src\\ost\\ARRR.wav";
+    private static final String gameOstRuta = "\\src\\ost\\ARRR.wav";
 
     /**
     *
