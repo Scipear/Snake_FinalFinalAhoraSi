@@ -34,8 +34,7 @@ public class PantallaJuego extends Pantalla {
     * @param jugador Jugador que esta jugando en el tablero
     */
     public PantallaJuego(Tablero tablero, Jugador jugador){
-        super();
-        setVisible(true);
+        inicializar(this);
         controles = new Controles(tablero, tablero.getPersonaje());
         mapa = new GraficoTablero(tablero);
         multiPanel = new JLayeredPane();
@@ -46,7 +45,7 @@ public class PantallaJuego extends Pantalla {
         pausa = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Pausa8.png")));
         fondoOst = new ReproductorSonidos();
         estaEnJuego = true;
-        inicializar(jugador);
+        iniciarPaneles(jugador);
         add(multiPanel);
         addKeyListener(controles);
         setFocusable(true);
@@ -59,14 +58,16 @@ public class PantallaJuego extends Pantalla {
      * @param jugador Jugador que esta jugando en el tablero
      * @version 1.1.3
      */
-    public void inicializar(Jugador jugador){
+    public void iniciarPaneles(Jugador jugador){
         fondoImagen.setBounds(0, 0, 685, 662);        
         fondo.setBounds(0, 0, ancho, alto);
+        fondo.setLayout(null);
         fondo.add(fondoImagen);        
         recuadroImagen.setBounds(0, 0, 100, 15);
         recuadroImagen.setText(jugador.getUsuario() + ": " + Integer.toString(jugador.getPuntaje()));
         recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
         recuadro.setBounds(15, 5, 100, 15);
+        recuadro.setLayout(null);
         recuadro.add(recuadroImagen); 
         pausa.setBounds(80, 260, 600, 150);
         multiPanel.setBounds(0, 0, ancho, alto);

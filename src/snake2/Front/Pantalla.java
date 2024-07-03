@@ -14,24 +14,10 @@ import javax.swing.JFrame;
 public class Pantalla extends JFrame {
 
     protected static final int ancho = 700;
-    protected static final int alto = 700;
-
-    /* Tamanio fijo que tendra cada ventana, esto podria ajustarse
+    protected static final int alto = 700;/* Tamanio fijo que tendra cada ventana, esto podria ajustarse
     en un futuro, en caso que en la resolucion de las pantallas del laboratorio o alguna computadora no
     entre completa o se vea muy pequeña, hay que ir haciendo pruebas*/
-    /**
-     * Constructor de la clase
-     *
-     */
-    public Pantalla() {
-        setSize(ancho, alto);
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setLayout(null);
-    }
-
+    
     public static void inicializar(JFrame ventana) {
         ventana.setSize(ancho, alto);
         ventana.setDefaultCloseOperation(EXIT_ON_CLOSE);
