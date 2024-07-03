@@ -17,7 +17,7 @@ public class Game implements Runnable, ActionListener {
     protected Tablero tablero;
     private String usuario;
     private int skin;
-    private int mapa = 0 ; // Guarda el mapa seleccionado por el usuario
+    private int mapa; // Guarda el mapa seleccionado por el usuario
     protected static boolean gameOver;
     private boolean partidaIniciada;
     private ReproductorSonidos reproductorSonidos = new ReproductorSonidos();
@@ -30,7 +30,7 @@ public class Game implements Runnable, ActionListener {
         switch (modoOpcion) {
             case 1 -> {
                 skin = Lobbie_Controlador.getSkinSeleccionada();
-                mapa = HostLobbie_Controlador.getMapaSeleccionada();
+                mapa = Lobbie_Controlador.getMapaSeleccionada();
             }
             case 2 -> {
                 skin = HostLobbie_Controlador.getSkinSeleccionada();

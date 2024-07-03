@@ -5,7 +5,7 @@ import snake2.Game;
 import snake2.Front.GraficoPersonaje;
 import snake2.Front.Pantalla;
 
-public class HostLobbie_Controlador extends Pantalla{
+public class HostLobbie_Controlador extends Pantalla {
 
 //Para poder usarlo en cualquier parte del codigo
     public static Panta_Online_HostLobbie ventanaPrin = new Panta_Online_HostLobbie();
@@ -64,14 +64,14 @@ public class HostLobbie_Controlador extends Pantalla{
     public static int getSkinSeleccionada() {
         return skinSeleccionada;
     }
-    
+
     public static void selec_Mapa1() {
-        mapaSeleccionado = 1;
+        mapaSeleccionado = 0;
         System.out.println("Selecciono mapa 1");
     }
 
     public static void selec_Mapa2() {
-        mapaSeleccionado = 2;
+        mapaSeleccionado = 1;
         System.out.println("Selecciono mapa 2");
     }
 
@@ -79,9 +79,14 @@ public class HostLobbie_Controlador extends Pantalla{
         mapaSeleccionado = 2;
         System.out.println("Selecciono mapa 3");
     }
-    
+
+    public static void selec_Mapa4() {
+        mapaSeleccionado = 3;
+        System.out.println("Selecciono mapa 3");
+    }
+
     public static int getMapaSeleccionada() {
         return mapaSeleccionado;
     }
-     
+
 }

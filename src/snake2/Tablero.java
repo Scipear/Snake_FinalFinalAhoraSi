@@ -28,7 +28,7 @@ public class Tablero {
         cantidadComidasEspeciales = 4;
         celdas = new Celda[alto][ancho];
         this.personaje = personaje;
-        this.mapa = tipo;
+        mapa = tipo;
         pausa = false;  
         rapidezActivada = false;
         tiempoComidaEspecial = 85;

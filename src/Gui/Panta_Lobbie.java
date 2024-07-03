@@ -21,7 +21,7 @@ public class Panta_Lobbie extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        btnSkinNaranja = new javax.swing.JButton();
+        btnSkinCasco = new javax.swing.JButton();
         btnSkinAzul = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnSkinVerde = new javax.swing.JButton();
@@ -31,6 +31,9 @@ public class Panta_Lobbie extends javax.swing.JFrame {
         btnSkinRosa = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        btnSkinGorrito = new javax.swing.JButton();
+        btnSkinNaranja1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -46,21 +49,22 @@ public class Panta_Lobbie extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(16, 16, 32));
         jButton1.setText("Mapa1");
+        jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        btnSkinNaranja.setBackground(new java.awt.Color(13, 13, 60));
-        btnSkinNaranja.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        btnSkinNaranja.setForeground(new java.awt.Color(16, 16, 32));
-        btnSkinNaranja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/YellowHeadLEFT.png"))); // NOI18N
-        btnSkinNaranja.setBorder(null);
-        btnSkinNaranja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSkinNaranja.addActionListener(new java.awt.event.ActionListener() {
+        btnSkinCasco.setBackground(new java.awt.Color(13, 13, 60));
+        btnSkinCasco.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        btnSkinCasco.setForeground(new java.awt.Color(16, 16, 32));
+        btnSkinCasco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/EarthHeadLEFT.png"))); // NOI18N
+        btnSkinCasco.setBorder(null);
+        btnSkinCasco.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSkinCasco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSkinNaranjaActionPerformed(evt);
+                btnSkinCascoActionPerformed(evt);
             }
         });
 
@@ -78,7 +82,7 @@ public class Panta_Lobbie extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(230, 255, 79));
-        jLabel2.setText("Seleccion de personaje");
+        jLabel2.setText("BIENVENIDO AL LOBBY");
 
         btnSkinVerde.setBackground(new java.awt.Color(13, 13, 60));
         btnSkinVerde.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -96,6 +100,7 @@ public class Panta_Lobbie extends javax.swing.JFrame {
         jButton9.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
         jButton9.setForeground(new java.awt.Color(16, 16, 32));
         jButton9.setText("Mapa2");
+        jButton9.setBorder(null);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -144,9 +149,45 @@ public class Panta_Lobbie extends javax.swing.JFrame {
         jButton11.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
         jButton11.setForeground(new java.awt.Color(16, 16, 32));
         jButton11.setText("Mapa3");
+        jButton11.setBorder(null);
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setBackground(new java.awt.Color(237, 17, 101));
+        jButton12.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        jButton12.setForeground(new java.awt.Color(16, 16, 32));
+        jButton12.setText("Mapa4");
+        jButton12.setBorder(null);
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        btnSkinGorrito.setBackground(new java.awt.Color(13, 13, 60));
+        btnSkinGorrito.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        btnSkinGorrito.setForeground(new java.awt.Color(16, 16, 32));
+        btnSkinGorrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/GraduatedHeadRIGHT.png"))); // NOI18N
+        btnSkinGorrito.setBorder(null);
+        btnSkinGorrito.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSkinGorrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkinGorritoActionPerformed(evt);
+            }
+        });
+
+        btnSkinNaranja1.setBackground(new java.awt.Color(13, 13, 60));
+        btnSkinNaranja1.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        btnSkinNaranja1.setForeground(new java.awt.Color(16, 16, 32));
+        btnSkinNaranja1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/YellowHeadLEFT.png"))); // NOI18N
+        btnSkinNaranja1.setBorder(null);
+        btnSkinNaranja1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSkinNaranja1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkinNaranja1ActionPerformed(evt);
             }
         });
 
@@ -155,72 +196,80 @@ public class Panta_Lobbie extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jButton6)
+                .addGap(103, 103, 103)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton6)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
-                                .addComponent(jLabel4))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnSkinVerde, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSkinRosa, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSkinNaranja, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSkinAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(64, 64, 64)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(7, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnSkinVerde, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSkinRosa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnSkinGorrito, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnSkinNaranja1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnSkinAzul, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSkinCasco, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(52, 52, 52))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jButton6)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton6)
+                    .addComponent(jLabel2))
+                .addGap(83, 83, 83)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4))
+                        .addComponent(jLabel4)
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSkinAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(btnSkinVerde, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSkinNaranja1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnSkinRosa, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnSkinAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 115, Short.MAX_VALUE)
-                                    .addComponent(btnSkinVerde, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSkinRosa, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(btnSkinNaranja, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76))
+                            .addComponent(btnSkinGorrito, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSkinCasco, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,9 +306,9 @@ public class Panta_Lobbie extends javax.swing.JFrame {
         controladores.Lobbie_Controlador.selec_Skin4();
     }//GEN-LAST:event_btnSkinAzulActionPerformed
 
-    private void btnSkinNaranjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinNaranjaActionPerformed
-        controladores.Lobbie_Controlador.selec_Skin3();
-    }//GEN-LAST:event_btnSkinNaranjaActionPerformed
+    private void btnSkinCascoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinCascoActionPerformed
+        controladores.Lobbie_Controlador.selec_Skin6();
+    }//GEN-LAST:event_btnSkinCascoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         controladores.Lobbie_Controlador.selec_Mapa1();
@@ -273,15 +322,30 @@ public class Panta_Lobbie extends javax.swing.JFrame {
         controladores.Lobbie_Controlador.selec_Mapa3();
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        controladores.Lobbie_Controlador.selec_Mapa4();
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void btnSkinGorritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinGorritoActionPerformed
+        controladores.Lobbie_Controlador.selec_Skin5();
+    }//GEN-LAST:event_btnSkinGorritoActionPerformed
+
+    private void btnSkinNaranja1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinNaranja1ActionPerformed
+        controladores.Lobbie_Controlador.selec_Skin3();
+    }//GEN-LAST:event_btnSkinNaranja1ActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSkinAzul;
-    private javax.swing.JButton btnSkinNaranja;
+    private javax.swing.JButton btnSkinCasco;
+    private javax.swing.JButton btnSkinGorrito;
+    private javax.swing.JButton btnSkinNaranja1;
     private javax.swing.JButton btnSkinRosa;
     private javax.swing.JButton btnSkinVerde;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton9;

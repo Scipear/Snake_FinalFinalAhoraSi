@@ -69,16 +69,21 @@ public class Lobbie_Controlador extends Pantalla {
     }
 
     public static void selec_Mapa1() {
+        mapaSeleccionado = 0;
+        System.out.println("Selecciono mapa Base");
+    }
+
+    public static void selec_Mapa2() {
         mapaSeleccionado = 1;
         System.out.println("Selecciono mapa 1");
     }
 
-    public static void selec_Mapa2() {
+    public static void selec_Mapa3() {
         mapaSeleccionado = 2;
         System.out.println("Selecciono mapa 2");
     }
 
-    public static void selec_Mapa3() {
+    public static void selec_Mapa4() {
         mapaSeleccionado = 3;
         System.out.println("Selecciono mapa 3");
     }
