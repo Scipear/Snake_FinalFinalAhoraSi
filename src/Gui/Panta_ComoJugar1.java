@@ -1,12 +1,12 @@
 package Gui;
 
-public class Panta_ComoJugar extends javax.swing.JFrame {
+public class Panta_ComoJugar1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Panta_ComoJugar
      * @param ruta
      */
-    public Panta_ComoJugar() {
+    public Panta_ComoJugar1() {
 
         initComponents();
     }
@@ -27,10 +27,8 @@ public class Panta_ComoJugar extends javax.swing.JFrame {
         lbl_reglas1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 700));
+        setResizable(false);
         setSize(new java.awt.Dimension(700, 700));
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setBackground(new java.awt.Color(60, 137, 81));
         jButton1.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
@@ -42,7 +40,6 @@ public class Panta_ComoJugar extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 110, -1));
 
         btn_regla1.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         btn_regla1.setText("<-ANTERIOR");
@@ -51,7 +48,6 @@ public class Panta_ComoJugar extends javax.swing.JFrame {
                 btn_regla1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_regla1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 140, 30));
 
         btn_regla2.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         btn_regla2.setText("SIGUIENTE->");
@@ -60,16 +56,40 @@ public class Panta_ComoJugar extends javax.swing.JFrame {
                 btn_regla2ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_regla2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 150, 30));
 
-        lbl_reglas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Reglas1.jpg"))); // NOI18N
-        jPanel1.add(lbl_reglas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        lbl_reglas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Reglas2.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(btn_regla1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(280, 280, 280)
+                .addComponent(btn_regla2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lbl_reglas1)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jButton1)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_regla1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_regla2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(lbl_reglas1)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
