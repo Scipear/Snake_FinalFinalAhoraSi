@@ -10,7 +10,7 @@ public class ClienteLobbie_Controlador extends Pantalla{
 //Para poder usarlo en cualquier parte del codigo
     public static Panta_Online_ClienteLobbie ventanaPrin = new Panta_Online_ClienteLobbie();
     public static GraficoPersonaje seleccion;
-    public static int skinSeleccionada;
+    public static int skinSeleccionada = -1;
 
     //Metodos
     public static void mostrar() {
@@ -55,10 +55,12 @@ public class ClienteLobbie_Controlador extends Pantalla{
 
     public static void selec_Skin5() {
         skinSeleccionada = 5;
+        System.out.println("Selecciono skin ");
     }
 
     public static void selec_Skin6() {
         skinSeleccionada = 6;
+        System.out.println("Selecciono skin ");
     }
 
     public static int getSkinSeleccionada() {

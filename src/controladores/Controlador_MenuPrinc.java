@@ -13,7 +13,7 @@ public class Controlador_MenuPrinc extends Pantalla {
 //Para poder usarlo en cualquier parte del codigo
     public static Principal_menu ventanaPrin = new Principal_menu();
     private static final ReproductorSonidos fondoOst = new ReproductorSonidos();
-    private static final String menuOstRuta = "\\src\\ost\\Fantasia-Ritmica.wav";
+    private static final String menuOstRuta = "\\src\\ost\\Fantasia Ritmica.mp3";
     private static int modoJuego;
 
     public static int getModoJuego() {
