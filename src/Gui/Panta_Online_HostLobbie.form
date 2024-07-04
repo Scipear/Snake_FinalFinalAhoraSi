@@ -71,14 +71,14 @@
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="btnSkinRosa" min="-2" pref="164" max="-2" attributes="0"/>
-                              <Component id="btnSkinVerde1" min="-2" pref="164" max="-2" attributes="0"/>
                               <Component id="btnSkinVerde" min="-2" pref="164" max="-2" attributes="0"/>
+                              <Component id="btnSkinGorrito" min="-2" pref="164" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnSkinNaranja1" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Component id="btnSkinNaranja" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
                               <Component id="btnSkinAzul" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                              <Component id="btnSkinNaranja" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Component id="btnSkinCasco" min="-2" pref="170" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -142,8 +142,8 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnSkinVerde1" pref="123" max="32767" attributes="0"/>
-                                      <Component id="btnSkinNaranja1" pref="0" max="32767" attributes="0"/>
+                                      <Component id="btnSkinVerde" pref="123" max="32767" attributes="0"/>
+                                      <Component id="btnSkinNaranja" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
@@ -158,7 +158,6 @@
                                       <Component id="jButton10" alignment="3" min="-2" pref="89" max="-2" attributes="0"/>
                                       <Component id="jButton11" alignment="3" min="-2" pref="89" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -167,8 +166,8 @@
                       <Group type="102" attributes="0">
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnSkinVerde" min="-2" pref="126" max="-2" attributes="0"/>
-                              <Component id="btnSkinNaranja" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                              <Component id="btnSkinGorrito" min="-2" pref="126" max="-2" attributes="0"/>
+                              <Component id="btnSkinCasco" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
@@ -216,7 +215,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSkinNaranja">
+        <Component class="javax.swing.JButton" name="btnSkinCasco">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="d" red="d" type="rgb"/>
@@ -238,7 +237,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkinNaranjaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkinCascoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSkinAzul">
@@ -277,7 +276,7 @@
             <Property name="text" type="java.lang.String" value="BIENVENIDO AL LOBBY"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSkinVerde">
+        <Component class="javax.swing.JButton" name="btnSkinGorrito">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="d" red="d" type="rgb"/>
@@ -299,7 +298,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkinVerdeActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkinGorritoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton9">
@@ -438,7 +437,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton11ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSkinVerde1">
+        <Component class="javax.swing.JButton" name="btnSkinVerde">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="d" red="d" type="rgb"/>
@@ -460,10 +459,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkinVerde1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkinVerdeActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSkinNaranja1">
+        <Component class="javax.swing.JButton" name="btnSkinNaranja">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="d" red="d" type="rgb"/>
@@ -485,7 +484,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkinNaranja1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkinNaranjaActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
