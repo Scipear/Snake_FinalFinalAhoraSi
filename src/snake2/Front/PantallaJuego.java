@@ -81,17 +81,8 @@ public class PantallaJuego extends Pantalla {
     * 
     * @version 1.0.4
     */
-    public void actualizaMapa(){
+    public void actualizaMapa(Jugador jugador){
         repaint();
-    }
-
-    /**
-     * Actualiza en pantalla el puntaje actual del jugador
-     * 
-     * @param jugador Jugador al cual se le va a actualizar el punjate
-     * @version 1.1.3
-     */
-    public void actualizaPuntaje(Jugador jugador){
         recuadro.remove(recuadroImagen);
         recuadroImagen.setText(jugador.getUsuario() + ": " + Integer.toString(jugador.getPuntaje()));
         recuadro.add(recuadroImagen);

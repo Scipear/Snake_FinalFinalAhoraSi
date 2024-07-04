@@ -27,13 +27,15 @@ public class Game implements Runnable, ActionListener {
         usuario = Login_Controlador.getNombreUsuario();
         int modoOpcion = Controlador_MenuPrinc.getModoJuego();
         switch (modoOpcion) {
-            case 1 -> {
+            case 1:{
                 skin = Lobbie_Controlador.getSkinSeleccionada();
                 mapa = Lobbie_Controlador.getMapaSeleccionada();
+                break;
             }
-            case 2 -> {
+            case 2:{
                 skin = HostLobbie_Controlador.getSkinSeleccionada();
                 mapa = HostLobbie_Controlador.getMapaSeleccionada();
+                break;
             }
         }
         iniciarPartida();
@@ -70,28 +72,26 @@ public class Game implements Runnable, ActionListener {
 
     @Override
     public void run() {
-        while (iniciado) {
-            if (gameOver == true) {
+        while(iniciado){
+            if(gameOver == true){
                 FinalPartida_Controlador.mostrar();
             }
         }
-    }
+    } //Realmente no se para que sirve este hilo, practicamente no hace nada
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!tablero.getPausa()) {
-            jugador.getPersonaje().movimiento();
+        if(!tablero.getPausa()){
+            tablero.chequeaPersonajes();
 
-            if (tablero.personajeSobreComida()) {
+            if(tablero.personajeSobreComida()){
                 jugador.aumentaPuntaje();
-                pantalla.actualizaPuntaje(jugador);
             }
 
-            tablero.chocaConPared();
-            jugador.getPersonaje().chocaConCuerpo();
-            pantalla.actualizaMapa();
-
-            if (!jugador.getPersonaje().getEstado()) {
+            tablero.conteoComidaEspecial();
+            pantalla.actualizaMapa(jugador);
+            
+            if(!jugador.getPersonaje().getEstado()){
                 detenerJuego();
                 reproductorSonidos.detener();
                 timer.stop();
@@ -99,23 +99,6 @@ public class Game implements Runnable, ActionListener {
                 pantalla.setVisible(false);
                 pantalla.detenerMusica();
                 FinalPartida_Controlador.mostrar();
-            }
-
-            if (tablero.getTiempo() != 0) {
-                tablero.disminuyeTiempoEspecial();
-
-            } else {
-                if (!tablero.hayComidaEspecial()) {
-                    tablero.generarComidaEspecial();
-                    tablero.desactivaRapidez();
-                    jugador.getPersonaje().descongelar();
-                }
-
-                tablero.getComidaEspecial().actualizaTiempo();
-
-                if (tablero.getComidaEspecial().getTiempoVisible() == 0) {
-                    tablero.borraComidaEspecial();
-                }
             }
         }
         pantalla.muestraPausa(tablero);

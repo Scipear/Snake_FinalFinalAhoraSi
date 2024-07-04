@@ -76,48 +76,56 @@ public class GraficoTablero extends Grafico{
             Cuerpo body = tablero.getPersonaje().getCuerpo(i); //Toma el valor de cada nodo de la lista
 
             switch(body.getTipo()){
-                case "Cabeza" -> {
-                    if(null != body.getDireccion())switch (body.getDireccion()) {
-                    case "Arriba" -> g.drawImage(graficoPersonaje.getCabeza(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "Derecha" -> g.drawImage(graficoPersonaje.getCabeza(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "Abajo" -> g.drawImage(graficoPersonaje.getCabeza(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "Izquierda" -> g.drawImage(graficoPersonaje.getCabeza(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    default -> {
-                        }
-                }
+                case "Cabeza":{
+                    if(body.getDireccion() == "Arriba"){
+                        g.drawImage(graficoPersonaje.getCabeza(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "Derecha"){
+                        g.drawImage(graficoPersonaje.getCabeza(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "Abajo"){
+                        g.drawImage(graficoPersonaje.getCabeza(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "Izquierda"){
+                        g.drawImage(graficoPersonaje.getCabeza(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }
+                    break;
                 }
                 
-                case "Cuerpo" -> {
-                    if(null != body.getDireccion())switch (body.getDireccion()) {
-                    case "Arriba" -> g.drawImage(graficoPersonaje.getCuerpo(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "Derecha" -> g.drawImage(graficoPersonaje.getCuerpo(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "Abajo" -> g.drawImage(graficoPersonaje.getCuerpo(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "Izquierda" -> g.drawImage(graficoPersonaje.getCuerpo(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    default -> {
-                        }
-                }
+                case "Cuerpo":{
+                    if(body.getDireccion() == "Arriba"){
+                        g.drawImage(graficoPersonaje.getCuerpo(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "Derecha"){
+                        g.drawImage(graficoPersonaje.getCuerpo(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "Abajo"){
+                        g.drawImage(graficoPersonaje.getCuerpo(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "Izquierda"){
+                        g.drawImage(graficoPersonaje.getCuerpo(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }
+                    break;
                 }
 
-                case "Curva" -> {
-                    if(null != body.getDireccion())switch (body.getDireccion()) {
-                    case "LtoD" -> g.drawImage(graficoPersonaje.getCurva(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "LtoU" -> g.drawImage(graficoPersonaje.getCurva(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "RtoD" -> g.drawImage(graficoPersonaje.getCurva(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "RtoU" -> g.drawImage(graficoPersonaje.getCurva(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    default -> {
-                        }
-                }
+                case "Curva":{
+                    if(body.getDireccion() == "LtoD"){
+                        g.drawImage(graficoPersonaje.getCurva(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "LtoU"){
+                        g.drawImage(graficoPersonaje.getCurva(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "RtoD"){
+                        g.drawImage(graficoPersonaje.getCurva(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "RtoU"){
+                        g.drawImage(graficoPersonaje.getCurva(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }
+                    break;
                 }
                 
-                case "Cola" -> {
-                    if(null != body.getDireccion())switch (body.getDireccion()) {
-                    case "Arriba" -> g.drawImage(graficoPersonaje.getCola(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "Derecha" -> g.drawImage(graficoPersonaje.getCola(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "Abajo" -> g.drawImage(graficoPersonaje.getCola(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    case "Izquierda" -> g.drawImage(graficoPersonaje.getCola(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    default -> {
-                        }
-                }
+                case "Cola":{
+                    if(body.getDireccion() == "Arriba"){
+                        g.drawImage(graficoPersonaje.getCola(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "Derecha"){
+                        g.drawImage(graficoPersonaje.getCola(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "Abajo"){
+                        g.drawImage(graficoPersonaje.getCola(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }else if(body.getDireccion() == "Izquierda"){
+                        g.drawImage(graficoPersonaje.getCola(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                    }
+                    break;
                 }
             }/*Dependiendo de que parte del cuerpo de la serpiente se trate y la
             direccion a la que este mirando, se dibuja su respectiva imagen en su respectiva posicion */
