@@ -2,6 +2,7 @@ package snake2.Front;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 import snake2.ComidaCongelada;
@@ -19,7 +20,7 @@ import snake2.Tablero;
  */
 public class GraficoTablero extends Grafico{
     private Tablero tablero; //Tablero que sera dibujado
-    private GraficoPersonaje graficoPersonaje; //Grafico que contiene las imagenes del personaje
+    private ArrayList<GraficoPersonaje> graficoPersonaje; //Grafico que contiene las imagenes del personaje
     private GraficoComida graficoComida;
     private Image pared;
     private Image piso;
@@ -32,12 +33,19 @@ public class GraficoTablero extends Grafico{
      */
     public GraficoTablero(Tablero tablero){
         this.tablero = tablero;
-        graficoPersonaje = new GraficoPersonaje(tablero.getPersonaje());
+        graficoPersonaje = new ArrayList<>();
         graficoComida = new GraficoComida();
         pared = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/newPared.png")).getImage());
         piso = ajustarImagen(new ImageIcon(getClass().getResource("/Recursos/newPiso.png")).getImage());
         setBounds(35, 25, 616, 616);
         setLayout(null);
+        asignarGraficos(tablero);
+    }
+
+    public void asignarGraficos(Tablero tablero){
+        for(int i = 0; i < tablero.getCantidadPersonajes(); i++){
+            graficoPersonaje.add(new GraficoPersonaje(tablero.getPersonaje(i)));
+        }
     }
     /**
      * Metodo que viene en la libreria de JComponent, se encarga de pintar los graficos en la pantalla.
@@ -59,7 +67,11 @@ public class GraficoTablero extends Grafico{
                 }
             }
         }
-        pintarPersonaje(g2d);
+
+        for(int i = 0; i < graficoPersonaje.size(); i++){
+            pintarPersonaje(g2d, i);
+        }
+
         pintarComida(g2d);
         
     }
@@ -70,60 +82,60 @@ public class GraficoTablero extends Grafico{
      * @param g Dibuja graficos en la pantalla
      * @version 1.0.2
      */
-    public void pintarPersonaje(Graphics2D g){
-        for(int i = 0; i < tablero.getPersonaje().getLongitud(); i++){ /*Como el cuerpo del personaje
+    public void pintarPersonaje(Graphics2D g, int puesto){
+        for(int i = 0; i < tablero.getPersonaje(puesto).getLongitud(); i++){ /*Como el cuerpo del personaje
             se trata de una lista, la recorre*/
-            Cuerpo body = tablero.getPersonaje().getCuerpo(i); //Toma el valor de cada nodo de la lista
+            Cuerpo body = tablero.getPersonaje(puesto).getCuerpo(i); //Toma el valor de cada nodo de la lista
 
             switch(body.getTipo()){
                 case "Cabeza":{
                     if(body.getDireccion() == "Arriba"){
-                        g.drawImage(graficoPersonaje.getCabeza(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCabeza(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "Derecha"){
-                        g.drawImage(graficoPersonaje.getCabeza(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCabeza(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "Abajo"){
-                        g.drawImage(graficoPersonaje.getCabeza(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCabeza(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "Izquierda"){
-                        g.drawImage(graficoPersonaje.getCabeza(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCabeza(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }
                     break;
                 }
                 
                 case "Cuerpo":{
                     if(body.getDireccion() == "Arriba"){
-                        g.drawImage(graficoPersonaje.getCuerpo(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCuerpo(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "Derecha"){
-                        g.drawImage(graficoPersonaje.getCuerpo(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCuerpo(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "Abajo"){
-                        g.drawImage(graficoPersonaje.getCuerpo(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCuerpo(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "Izquierda"){
-                        g.drawImage(graficoPersonaje.getCuerpo(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCuerpo(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }
                     break;
                 }
 
                 case "Curva":{
                     if(body.getDireccion() == "LtoD"){
-                        g.drawImage(graficoPersonaje.getCurva(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCurva(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "LtoU"){
-                        g.drawImage(graficoPersonaje.getCurva(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCurva(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "RtoD"){
-                        g.drawImage(graficoPersonaje.getCurva(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCurva(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "RtoU"){
-                        g.drawImage(graficoPersonaje.getCurva(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCurva(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }
                     break;
                 }
                 
                 case "Cola":{
                     if(body.getDireccion() == "Arriba"){
-                        g.drawImage(graficoPersonaje.getCola(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCola(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "Derecha"){
-                        g.drawImage(graficoPersonaje.getCola(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCola(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "Abajo"){
-                        g.drawImage(graficoPersonaje.getCola(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCola(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }else if(body.getDireccion() == "Izquierda"){
-                        g.drawImage(graficoPersonaje.getCola(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
+                        g.drawImage(graficoPersonaje.get(puesto).getCola(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }
                     break;
                 }

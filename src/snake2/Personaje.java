@@ -25,13 +25,43 @@ public class Personaje{
      * @param skin Skin elegida por el jugador para su personaje
      */
     public Personaje(int posX, int posY, String direccion, int skin){
-        serpiente.add(new Cuerpo(posX, posY, "Cabeza", direccion));
-        serpiente.add(new Cuerpo(posX - 1, posY, "Cuerpo", direccion));
-        serpiente.add(new Cuerpo(posX - 2, posY, "Cola", direccion));
+        iniciarSerpiente(posX, posY, direccion);
         this.skin = skin;
         velocidad = 1;
         longitud = serpiente.size();
         estado = true;
+    }
+
+    public void iniciarSerpiente(int posX, int posY, String direccion){
+        switch(direccion){
+            case "Derecha":{
+                serpiente.add(new Cuerpo(posX, posY, "Cabeza", direccion));
+                serpiente.add(new Cuerpo(posX - 1, posY, "Cuerpo", direccion));
+                serpiente.add(new Cuerpo(posX - 2, posY, "Cola", direccion));
+                break;
+            }
+
+            case "Izquierda":{
+                serpiente.add(new Cuerpo(posX, posY, "Cabeza", direccion));
+                serpiente.add(new Cuerpo(posX + 1, posY, "Cuerpo", direccion));
+                serpiente.add(new Cuerpo(posX + 2, posY, "Cola", direccion));
+                break;
+            }
+
+            case "Arriba":{
+                serpiente.add(new Cuerpo(posX, posY, "Cabeza", direccion));
+                serpiente.add(new Cuerpo(posX, posY + 1, "Cuerpo", direccion));
+                serpiente.add(new Cuerpo(posX, posY + 2, "Cola", direccion));
+                break;
+            }
+
+            case "Abajo":{
+                serpiente.add(new Cuerpo(posX, posY, "Cabeza", direccion));
+                serpiente.add(new Cuerpo(posX, posY - 1, "Cuerpo", direccion));
+                serpiente.add(new Cuerpo(posX, posY - 2, "Cola", direccion));
+                break;
+            }
+        }
     }
     /**
      * Cambia la posicion de la parte del cuerpo de la serpiente dependiendo de la direccion a la
@@ -70,7 +100,7 @@ public class Personaje{
      * @version 1.0.4
      */
     void movimiento(){
-        if(!estaCongelado){
+        if(!estaCongelado && estado){
             for(int i = longitud-1; i >= 0; i--){
                 if(serpiente.get(i).esCurva()){
                     serpiente.get(i).cambioACuerpo(serpiente.get(i-1));

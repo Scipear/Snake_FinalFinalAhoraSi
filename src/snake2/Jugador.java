@@ -8,10 +8,12 @@ public class Jugador{
     private Personaje personaje;
     private int puntaje;
     private String usuario;
+    private int numero;
     //Este es un modificador
 
-    public Jugador(String usuario, int x, int y, String direccion, int skin){
+    public Jugador(String usuario, int numero, int x, int y, String direccion, int skin){
         this.usuario = usuario;
+        this.numero = numero;
         puntaje = 0;
         personaje = new Personaje(x, y, direccion, skin);
     }
@@ -38,5 +40,9 @@ public class Jugador{
 
     public Personaje getPersonaje(){
         return personaje;
+    }
+
+    public int getNumero(){
+        return numero;
     }
 }

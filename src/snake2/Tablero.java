@@ -1,4 +1,7 @@
 package snake2;
+
+import java.util.ArrayList;
+
 /**
  * Clase parte del back. Donde ocurre toda la partida
  * 
@@ -12,7 +15,7 @@ public class Tablero {
     private Celda celdas[][];
     private Comida comidaRegular;
     private Comida comidaEspecial;
-    private Personaje personaje;
+    private ArrayList<Personaje> personajes;
     private int tiempoComidaEspecial;
     private boolean pausa;
     private int mapa;
@@ -27,11 +30,12 @@ public class Tablero {
         alto = 22;
         cantidadComidasEspeciales = 4;
         celdas = new Celda[alto][ancho];
-        this.personaje = personaje;
         mapa = tipo;
         pausa = false;  
         rapidezActivada = false;
         tiempoComidaEspecial = 60;
+        personajes = new ArrayList<>();
+        setPersonaje(personaje);
         inicializarTablero(tipo);
         generarComida();
     }
@@ -76,8 +80,7 @@ public class Tablero {
                 break;
             }
         }
-        desactivaRapidez();
-        personaje.descongelar();
+        desactivarEfectos();
         //Sonido cuando genera comida especial
     }
     /**
@@ -117,10 +120,12 @@ public class Tablero {
     public boolean casillaLibre(int x, int y){
         Cuerpo cuerpo;
 
-        for(int i = 0; i < personaje.getLongitud(); i++){
-            cuerpo = personaje.getCuerpo(i);
-            if(cuerpo.getPosX() == x && cuerpo.getPosY() == y){
-                return false;
+        for(int i = 0; i < personajes.size(); i++){
+            for(int j = 0; j < personajes.get(i).getLongitud(); j++){
+                cuerpo = personajes.get(i).getCuerpo(j);
+                if(cuerpo.getPosX() == x && cuerpo.getPosY() == y){
+                    return false;
+                }
             }
         }
 
@@ -141,18 +146,20 @@ public class Tablero {
      * @version 1.1.1
      */
     public boolean personajeSobreComida(){
-        if(personaje.getCuerpo(0).getPosX() == comidaRegular.getPosX() && personaje.getCuerpo(0).getPosY() == comidaRegular.getPosY()){
-            comidaRegular.hacerEfecto(personaje);
-            comidaRegular = null;
-            generarComida();
-            return true;
-            //Podria ponerse aqui el sonido cuando come
-
-        }else if(hayComidaEspecial() && personaje.getCuerpo(0).getPosX() == comidaEspecial.getPosX() && personaje.getCuerpo(0).getPosY() == comidaEspecial.getPosY()){
-            comidaEspecial.hacerEfecto(personaje);
-            comidaEspecial = null;
-            tiempoComidaEspecial = 60;
-            return true;
+        for(int i = 0; i < personajes.size(); i++){
+            if(personajes.get(i).getCuerpo(0).getPosX() == comidaRegular.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaRegular.getPosY()){
+                comidaRegular.hacerEfecto(personajes.get(i));
+                comidaRegular = null;
+                generarComida();
+                return true;
+                //Podria ponerse aqui el sonido cuando come
+    
+            }else if(hayComidaEspecial() && personajes.get(i).getCuerpo(0).getPosX() == comidaEspecial.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaEspecial.getPosY()){
+                comidaEspecial.hacerEfecto(personajes.get(i));
+                comidaEspecial = null;
+                tiempoComidaEspecial = 60;
+                return true;
+            }
         }
         return false;
         
@@ -214,9 +221,12 @@ public class Tablero {
     }
 
     public void chequeaPersonajes(){
-        personaje.movimiento();
-        personaje.chocaConCuerpo();
-        chocaConPared();
+        for(int i = 0; i < personajes.size(); i++){
+            personajes.get(i).movimiento();
+            personajes.get(i).chocaConCuerpo();
+            chocaConSerpiente(i);
+            chocaConPared(i);
+        }
     }
 
     public void conteoComidaEspecial(){
@@ -227,12 +237,13 @@ public class Tablero {
             if(!hayComidaEspecial()){
                 generarComidaEspecial();
             }
-            
+                        
+            comidaEspecial.actualizaTiempo();
+
             if(comidaEspecial.getTiempoVisible() == 0){
                 borraComidaEspecial();
             }
 
-            comidaEspecial.actualizaTiempo();
         }
     }
 
@@ -241,9 +252,21 @@ public class Tablero {
      * 
      * @version 1.1.2
      */
-    public void chocaConPared(){
-        if("Pared".equals(celdas[personaje.getCuerpo(0).getPosY()][personaje.getCuerpo(0).getPosX()].getTipo())){
-            personaje.setEstado(false);
+    public void chocaConPared(int puesto){
+        if("Pared".equals(celdas[personajes.get(puesto).getCuerpo(0).getPosY()][personajes.get(puesto).getCuerpo(0).getPosX()].getTipo())){
+            personajes.get(puesto).setEstado(false);
+        }
+    }
+
+    public void chocaConSerpiente(int puesto){
+        for(int i = 0; i < personajes.size(); i++){
+            if(i != puesto){
+                for(int j = 0; j < personajes.get(i).getLongitud(); j++){
+                    if(personajes.get(puesto).getCuerpo(0).getPosX() == personajes.get(i).getCuerpo(j).getPosX() && personajes.get(puesto).getCuerpo(0).getPosY() == personajes.get(i).getCuerpo(j).getPosY()){
+                        personajes.get(puesto).setEstado(false);
+                    }
+                }
+            }
         }
     }
 
@@ -267,6 +290,13 @@ public class Tablero {
             rapidezActivada = false;
             Game.setDelay(175);
         }
+    }
+
+    public void desactivarEfectos(){
+        for(int i = 0; i < personajes.size(); i++){
+            personajes.get(i).descongelar();
+        }
+        desactivaRapidez();
     }
     
     /**
@@ -292,19 +322,23 @@ public class Tablero {
     public void disminuyeTiempoEspecial(){
         tiempoComidaEspecial--;
     }
-
+    
     public void setPausa(boolean pausa){
         this.pausa = pausa;
     }
-        
+    
     public static void setRapidez(boolean rapidez){
         rapidezActivada = rapidez;
     }
-
-    public Personaje getPersonaje(){
-        return personaje;
+    
+    public void setPersonaje(Personaje personaje){
+        personajes.add(personaje);
     }
 
+    public Personaje getPersonaje(int i){
+        return personajes.get(i);
+    }
+    
     public int getAlto(){
         return alto;
     }
@@ -327,6 +361,10 @@ public class Tablero {
 
     public boolean getPausa(){
         return pausa;
+    }
+
+    public int getCantidadPersonajes(){
+        return personajes.size();
     }
 
     public int getMapa() {

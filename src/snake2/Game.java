@@ -38,7 +38,7 @@ public class Game implements Runnable, ActionListener {
                 break;
             }
         }
-        iniciarPartida();
+        iniciarJuego();
     }
 
     public synchronized void iniciarJuego() {
@@ -56,14 +56,16 @@ public class Game implements Runnable, ActionListener {
         }
     }
 
-    public void iniciarPartida() {
-        jugador = new Jugador(usuario, 5, 1, "Derecha", skin);
-        tablero = new Tablero(jugador.getPersonaje(), mapa);    //Problema para seleccionar el mapa
+    public void iniciarPartida(){
+        //Jugador j2 = new Jugador("pacheco", 1, 16, 20, "Izquierda", 3);
+        //Jugador j3= new Jugador("jejex", 2, 1, 16, "Arriba", 5);
+        //Jugador j4= new Jugador("Yippiii", 3, 20, 5, "Abajo", 6);
+        jugador = new Jugador(usuario, 0, 5, 1, "Derecha", skin);
+        tablero = new Tablero(jugador.getPersonaje(), mapa); //Problema para seleccionar el mapa
+        //tablero.setPersonaje(j2.getPersonaje());
+        //tablero.setPersonaje(j3.getPersonaje());
+        //tablero.setPersonaje(j4.getPersonaje());
         pantalla = new PantallaJuego(tablero, jugador);
-        partidaIniciada = true;
-        timer = new Timer(175, this);
-        timer.start();
-        iniciarJuego();
     }
 
     public static void setDelay(int delay) {
@@ -73,8 +75,17 @@ public class Game implements Runnable, ActionListener {
     @Override
     public void run() {
         while(iniciado){
-            if(gameOver == true){
-                FinalPartida_Controlador.mostrar();
+            if(!partidaIniciada){
+                iniciarPartida();
+                pantalla.actualizaMapa(jugador);
+                try {
+                    Thread.sleep(3000);
+                    partidaIniciada = true;
+                    timer = new Timer(175, this);
+                    timer.start();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } 
             }
         }
     } //Realmente no se para que sirve este hilo, practicamente no hace nada

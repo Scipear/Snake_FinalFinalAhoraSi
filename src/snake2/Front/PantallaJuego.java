@@ -35,7 +35,7 @@ public class PantallaJuego extends Pantalla {
     */
     public PantallaJuego(Tablero tablero, Jugador jugador){
         inicializar(this);
-        controles = new Controles(tablero, tablero.getPersonaje());
+        controles = new Controles(tablero, tablero.getPersonaje(jugador.getNumero()));
         mapa = new GraficoTablero(tablero);
         multiPanel = new JLayeredPane();
         fondo = new JPanel();
