@@ -23,75 +23,55 @@ public class Panta_Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        TextUsuario = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        TextUsuario = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(13, 13, 32));
+        setPreferredSize(new java.awt.Dimension(700, 700));
 
-        jPanel1.setBackground(new java.awt.Color(13, 13, 32));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 700));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 24)); // NOI18N
-        jLabel1.setText("Usuario:");
-
-        TextUsuario.setBackground(new java.awt.Color(0, 250, 255));
-        TextUsuario.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        TextUsuario.setForeground(new java.awt.Color(0, 0, 0));
-        TextUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextUsuarioActionPerformed(evt);
-            }
-        });
-
-        jButton1.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 18)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(13, 13, 32));
+        jButton1.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(194, 77, 181));
         jButton1.setText("Ingresar");
+        jButton1.setBorder(null);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 240, 62));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 138, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(62, 62, 62)
-                .addComponent(TextUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(222, 222, 222))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(245, 245, 245)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(272, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TextUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(58, 58, 58)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(275, 275, 275))
-        );
-
+        TextUsuario.setBackground(new java.awt.Color(13, 13, 32));
+        TextUsuario.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        TextUsuario.setForeground(new java.awt.Color(194, 77, 181));
+        TextUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(TextUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 220, -1));
         TextUsuario.getAccessibleContext().setAccessibleDescription("");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Usuario.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
