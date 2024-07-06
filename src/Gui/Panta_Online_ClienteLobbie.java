@@ -43,7 +43,7 @@ public class Panta_Online_ClienteLobbie extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, 190, 40));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 190, 40));
 
         btnSkinRosa.setBackground(new java.awt.Color(13, 13, 60));
         btnSkinRosa.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -56,7 +56,7 @@ public class Panta_Online_ClienteLobbie extends javax.swing.JFrame {
                 btnSkinRosaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSkinRosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 130, 150));
+        getContentPane().add(btnSkinRosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 230, 130, 150));
 
         btnSkinNaranja.setBackground(new java.awt.Color(13, 13, 60));
         btnSkinNaranja.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -69,7 +69,7 @@ public class Panta_Online_ClienteLobbie extends javax.swing.JFrame {
                 btnSkinNaranjaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSkinNaranja, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 276, 140, 120));
+        getContentPane().add(btnSkinNaranja, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 276, 140, 120));
 
         jButton6.setBackground(new java.awt.Color(13, 13, 59));
         jButton6.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
@@ -108,28 +108,36 @@ public class Panta_Online_ClienteLobbie extends javax.swing.JFrame {
                 btnSkinVerdeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSkinVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 490, 120, 130));
+        getContentPane().add(btnSkinVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 470, 120, 130));
 
+        btn_casco.setBackground(new java.awt.Color(13, 13, 60));
+        btn_casco.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        btn_casco.setForeground(new java.awt.Color(16, 16, 32));
         btn_casco.setBorder(null);
+        btn_casco.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_casco.setOpaque(false);
         btn_casco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cascoActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_casco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 140, 150));
+        getContentPane().add(btn_casco, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 395, 140, 150));
 
+        btn_gorrito.setBackground(new java.awt.Color(13, 13, 60));
+        btn_gorrito.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        btn_gorrito.setForeground(new java.awt.Color(16, 16, 32));
         btn_gorrito.setBorder(null);
+        btn_gorrito.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_gorrito.setOpaque(false);
         btn_gorrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_gorritoActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_gorrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 414, 140, 150));
+        getContentPane().add(btn_gorrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 394, 140, 150));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Skin.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 700, 710));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -25, 700, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

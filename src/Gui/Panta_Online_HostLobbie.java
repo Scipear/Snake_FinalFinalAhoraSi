@@ -66,7 +66,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 btnSkinRosaActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSkinRosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 130, 60));
+        jPanel3.add(btnSkinRosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 130, 60));
 
         btnSkinVerde.setBackground(new java.awt.Color(13, 13, 60));
         btnSkinVerde.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -79,7 +79,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 btnSkinVerdeActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSkinVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 195, 140, 130));
+        jPanel3.add(btnSkinVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 175, 140, 130));
 
         btnSkinAzul.setBackground(new java.awt.Color(13, 13, 60));
         btnSkinAzul.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -92,7 +92,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 btnSkinAzulActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSkinAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 110, 70));
+        jPanel3.add(btnSkinAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 110, 70));
 
         btnSkinGorrito.setBackground(new java.awt.Color(13, 13, 60));
         btnSkinGorrito.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -105,7 +105,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 btnSkinGorritoActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSkinGorrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 120, 80));
+        jPanel3.add(btnSkinGorrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, 120, 80));
 
         btnSkinNaranja.setBackground(new java.awt.Color(13, 13, 60));
         btnSkinNaranja.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -118,7 +118,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 btnSkinNaranjaActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSkinNaranja, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 130, 120));
+        jPanel3.add(btnSkinNaranja, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 130, 120));
 
         btnSkinCasco.setBackground(new java.awt.Color(13, 13, 60));
         btnSkinCasco.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -131,7 +131,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 btnSkinCascoActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSkinCasco, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 266, 110, 130));
+        jPanel3.add(btnSkinCasco, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 246, 110, 130));
 
         jButton2.setBackground(new java.awt.Color(126, 77, 181));
         jButton2.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 36)); // NOI18N
@@ -144,7 +144,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 620, 360, 40));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 590, 360, 40));
 
         jButton1.setBackground(new java.awt.Color(237, 17, 101));
         jButton1.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -156,7 +156,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 127, 130));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 127, 130));
 
         jButton9.setBackground(new java.awt.Color(237, 17, 101));
         jButton9.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -168,7 +168,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 127, 130));
+        jPanel3.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 127, 130));
 
         jButton10.setBackground(new java.awt.Color(237, 17, 101));
         jButton10.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -180,7 +180,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, 125, 130));
+        jPanel3.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 450, 125, 130));
 
         jButton11.setBackground(new java.awt.Color(237, 17, 101));
         jButton11.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
@@ -192,7 +192,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 470, 130, 130));
+        jPanel3.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, 130, 130));
 
         jLabel3.setBackground(new java.awt.Color(0, 255, 0));
         jLabel3.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
@@ -202,7 +202,7 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 170, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/SM.jpg"))); // NOI18N
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 700));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 700, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

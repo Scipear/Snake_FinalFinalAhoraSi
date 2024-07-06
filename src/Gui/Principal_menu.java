@@ -62,7 +62,7 @@ public class Principal_menu extends JFrame {
                 btn_comenzarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_comenzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 220, 50));
+        jPanel1.add(btn_comenzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 220, 50));
 
         btn_conectar.setBackground(new java.awt.Color(237, 17, 101));
         btn_conectar.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 18)); // NOI18N
@@ -75,7 +75,7 @@ public class Principal_menu extends JFrame {
                 btn_conectarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_conectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, 170, 60));
+        jPanel1.add(btn_conectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, 170, 60));
 
         btn_reglas.setBackground(new java.awt.Color(145, 146, 228));
         btn_reglas.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 18)); // NOI18N
@@ -88,7 +88,7 @@ public class Principal_menu extends JFrame {
                 btn_reglasActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_reglas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, 160, 54));
+        jPanel1.add(btn_reglas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 160, 54));
 
         btn_credits.setBackground(new java.awt.Color(237, 17, 101));
         btn_credits.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 18)); // NOI18N
@@ -101,7 +101,7 @@ public class Principal_menu extends JFrame {
                 btn_creditsActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_credits, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 550, 120, 56));
+        jPanel1.add(btn_credits, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 450, 120, 56));
 
         btn_estadis.setBackground(new java.awt.Color(145, 146, 228));
         btn_estadis.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 18)); // NOI18N
@@ -109,11 +109,11 @@ public class Principal_menu extends JFrame {
         btn_estadis.setText("Puntajes");
         btn_estadis.setBorder(null);
         btn_estadis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btn_estadis, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 550, 120, 56));
+        jPanel1.add(btn_estadis, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 120, 56));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Fondo_MenuPrincipal.jpeg"))); // NOI18N
         jLabel3.setText("jLabel3");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, -190, 760, 1110));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -225, 760, 1110));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

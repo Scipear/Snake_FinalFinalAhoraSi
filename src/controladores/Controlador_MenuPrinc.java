@@ -16,18 +16,8 @@ public class Controlador_MenuPrinc extends Pantalla {
     private static final String menuOstRuta = "\\src\\ost\\Fantasia Ritmica.mp3";
     private static int modoJuego;
 
-    public static int getModoJuego() {
-        return modoJuego;
-    }
-
-    public static void setModoJuego(int modoJuego) {
-        Controlador_MenuPrinc.modoJuego = modoJuego;
-        System.out.println("Modo juego");
-    }
-
     //Metodos
     public static void mostrar() {
-
         inicializar(ventanaPrin);
         fondoOst.musicaDeFondo(menuOstRuta);
 
@@ -38,29 +28,35 @@ public class Controlador_MenuPrinc extends Pantalla {
     }
 
     public static void eventLobbie() {
-
         modoJuego = 1;
         Lobbie_Controlador.mostrar();   //Aqui abre el lobby para jugar single player
         ocultar(ventanaPrin);
     }
 
     public static void eventComoJugar() {
-
         ComoJugar_Controlador.mostrar();    //Aqui abre la Pantalla de controles y reglas
         ocultar(ventanaPrin);
     }
 
     public static void eventCreditos() {
-
         Creditos_Controlador.mostrar();     //Aqui abre la pantalla de creditos
         // Controlador_MenuPrinc.ocultar();
         ocultar(ventanaPrin);
     }
 
     public static void eventConectarse() {
-
         PreConeccion_Controlador.mostrar(); //Aqui abre la pantalla del multijugador
         ocultar(ventanaPrin);
+    }
+
+    
+    public static void setModoJuego(int modoJuego) {
+        Controlador_MenuPrinc.modoJuego = modoJuego;
+        System.out.println("Modo juego");
+    }
+
+    public static int getModoJuego() {
+        return modoJuego;
     }
 
 }
