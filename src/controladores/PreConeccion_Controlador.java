@@ -22,6 +22,8 @@ public class PreConeccion_Controlador extends Pantalla{
     public static void eventOnlineHost() {
         server = new Server();
         System.out.println(server.getDireccionIP());
+        cliente = new Cliente(server.getDireccionIP());
+        cliente.enviarPaquete("Hola mundoooooo soy cliente".getBytes());
         Controlador_MenuPrinc.setModoJuego(2);
         HostLobbie_Controlador.mostrar(); //Abrir la pantalla del Host Online
         ocultar(ventanaPrin);

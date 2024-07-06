@@ -18,7 +18,7 @@ public class Controles implements KeyListener{
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(KeyEvent e){
         switch(e.getKeyChar()){
             case 'd':{
                 if(personaje.getCuerpo(0).getDireccion() == "Abajo" || personaje.getCuerpo(0).getDireccion() == "Arriba"){
