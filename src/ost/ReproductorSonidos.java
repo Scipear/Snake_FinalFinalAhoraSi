@@ -23,6 +23,12 @@ public class ReproductorSonidos {
         rutaSonidoActual = rutaSonido;
         reproducir();
     }
+    
+    public void reproducirSFX(String rutaSonido){
+    
+        rutaSonidoActual = rutaSonido;
+        reproducir();
+    }
 
     private void reproducir() {
         if (player != null) {
