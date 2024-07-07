@@ -4,20 +4,17 @@ import javax.swing.JOptionPane;
 
 import Gui.Panta_Online_HostLobbie;
 import snake2.Game;
-import snake2.Front.GraficoPersonaje;
-import snake2.Front.Pantalla;
+import snake2.Contenedor_Paquetes.Paquete02Play;
 
-public class HostLobbie_Controlador extends Pantalla {
+public class HostLobbie_Controlador extends ClienteLobbie_Controlador{
 
-//Para poder usarlo en cualquier parte del codigo
-    public static Panta_Online_HostLobbie ventanaPrin = new Panta_Online_HostLobbie();
-    public static GraficoPersonaje seleccion;
-    public static int skinSeleccionada = -1;
+    //Para poder usarlo en cualquier parte del codigo
+    public static Panta_Online_HostLobbie ventanaHost = new Panta_Online_HostLobbie();
     public static int mapaSeleccionado = -1;
 
     //Metodos
     public static void mostrar() {
-        inicializar(ventanaPrin);
+        inicializar(ventanaHost);
         System.out.println("Pantalla del lobbie del host");
     }
 
@@ -27,49 +24,18 @@ public class HostLobbie_Controlador extends Pantalla {
             JOptionPane.showMessageDialog(null, "Por favor, elige una skin y un mapa para poder jugar");        
         
         }else{
-            Controlador_MenuPrinc.pararMusica();
-            Game game = new Game();
-            ocultar(ventanaPrin);
+            isReady = true;
+            Paquete02Play play = new Paquete02Play(Login_Controlador.getNombreUsuario(), skinSeleccionada);
+            play.enviarData(PreConeccion_Controlador.cliente);
+            //Controlador_MenuPrinc.pararMusica();
+            //Game game = new Game();
+            //ocultar(ventanaPrin);
         }
     }
 
     public static void eventVolverAlMenu() {
         Controlador_MenuPrinc.mostrar();
-        ocultar(ventanaPrin);
-    }
-
-    public static void selec_Skin1() {
-        skinSeleccionada = 1;
-        System.out.println("Selecciono skin ");
-    }
-
-    public static void selec_Skin2() {
-        skinSeleccionada = 2;
-        System.out.println("Selecciono skin ");
-    }
-
-    public static void selec_Skin3() {
-        skinSeleccionada = 3;
-        System.out.println("Selecciono skin ");
-    }
-
-    public static void selec_Skin4() {
-        skinSeleccionada = 4;
-        System.out.println("Selecciono skin ");
-    }
-
-    public static void selec_Skin5() {
-        skinSeleccionada = 5;
-        System.out.println("Selecciono skin ");
-    }
-
-    public static void selec_Skin6() {
-        skinSeleccionada = 6;
-        System.out.println("Selecciono skin ");
-    }
-
-    public static int getSkinSeleccionada() {
-        return skinSeleccionada;
+        ocultar(ventanaHost);
     }
 
     public static void selec_Mapa1() {

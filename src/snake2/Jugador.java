@@ -9,7 +9,16 @@ public class Jugador{
     private int puntaje;
     private String usuario;
     private int numero;
-    //Este es un modificador
+    private boolean estaListo;
+    private boolean host;
+
+    public Jugador(String usuario, int numero){
+        this.usuario = usuario;
+        this.numero = numero;
+        puntaje = 0;
+        estaListo = false;
+        activarHost();
+    }
 
     public Jugador(String usuario, int numero, int x, int y, String direccion, int skin){
         this.usuario = usuario;
@@ -24,10 +33,21 @@ public class Jugador{
      */
     public void aumentaPuntaje(){
         puntaje++;
+        System.out.println(puntaje);
     }
 
-    public void setPuntaje(int puntaje){
-        this.puntaje = puntaje;
+    public void asignaPersonaje(int x, int y, String direccion, int skin){
+        personaje = new Personaje(x, y, direccion, skin);
+    }
+    
+    public void alistaJugador(boolean estaListo){
+        this.estaListo = estaListo;
+    }
+    
+    public void activarHost(){
+        if(numero == 0){
+            host = true;
+        }
     }
 
     public int getPuntaje(){
@@ -45,4 +65,9 @@ public class Jugador{
     public int getNumero(){
         return numero;
     }
+
+    public boolean getEstaListo(){
+        return estaListo;
+    }
+
 }

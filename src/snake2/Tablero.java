@@ -25,7 +25,7 @@ public class Tablero {
      * 
      * @param jugador Persona, jugador o usuario que va a jugar en el tablero
      */
-    public Tablero(Personaje personaje, int tipo){
+    public Tablero(ArrayList<Jugador> jugadores, int tipo){
         ancho = 22;
         alto = 22;
         cantidadComidasEspeciales = 4;
@@ -34,8 +34,8 @@ public class Tablero {
         pausa = false;  
         rapidezActivada = false;
         tiempoComidaEspecial = 60;
-        personajes = new ArrayList<>();
-        setPersonaje(personaje);
+        this.personajes = new ArrayList<>();
+        iniciarPersonajes(jugadores);
         inicializarTablero(tipo);
         generarComida();
     }
@@ -145,12 +145,13 @@ public class Tablero {
      * 
      * @version 1.1.1
      */
-    public boolean personajeSobreComida(){
+    public boolean personajeSobreComida(ArrayList<Jugador> jugadores){
         for(int i = 0; i < personajes.size(); i++){
             if(personajes.get(i).getCuerpo(0).getPosX() == comidaRegular.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaRegular.getPosY()){
                 comidaRegular.hacerEfecto(personajes.get(i));
                 comidaRegular = null;
                 generarComida();
+                jugadores.get(i).aumentaPuntaje();
                 return true;
                 //Podria ponerse aqui el sonido cuando come
     
@@ -158,6 +159,7 @@ public class Tablero {
                 comidaEspecial.hacerEfecto(personajes.get(i));
                 comidaEspecial = null;
                 tiempoComidaEspecial = 60;
+                jugadores.get(i).aumentaPuntaje();
                 return true;
             }
         }
@@ -331,8 +333,10 @@ public class Tablero {
         rapidezActivada = rapidez;
     }
     
-    public void setPersonaje(Personaje personaje){
-        personajes.add(personaje);
+    public void iniciarPersonajes(ArrayList<Jugador> jugadores){
+        for(int i = 0; i < jugadores.size(); i++){
+            personajes.add(jugadores.get(i).getPersonaje());
+        }
     }
 
     public Personaje getPersonaje(int i){

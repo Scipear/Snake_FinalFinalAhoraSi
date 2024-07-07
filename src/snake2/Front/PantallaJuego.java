@@ -3,6 +3,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.util.ArrayList;
 
 import snake2.Controles;
 import snake2.Jugador;
@@ -20,8 +21,9 @@ public class PantallaJuego extends Pantalla {
     private GraficoTablero mapa; //Grafico que se encarga de dibujar el tablero y todo lo que tiene encima
     private Controles controles; //Configuracion del teclado (En esta ventana) para la manipulacion del personaje
     private JLayeredPane multiPanel;
-    private JPanel fondo, recuadro;
+    private JPanel fondo;
     private JLabel fondoImagen, recuadroImagen, pausa;
+    private ArrayList<JPanel> recuadros = new ArrayList<>();
     private boolean estaEnPausa = false;
     private boolean estaEnJuego;
     private static ReproductorSonidos fondoOst;
@@ -33,21 +35,20 @@ public class PantallaJuego extends Pantalla {
     * la partida
     * @param jugador Jugador que esta jugando en el tablero
     */
-    public PantallaJuego(Tablero tablero, Jugador jugador){
+    public PantallaJuego(Tablero tablero, ArrayList<Jugador> jugadores){
         inicializar(this);
-        controles = new Controles(tablero, tablero.getPersonaje(jugador.getNumero()));
+        setVisible(false);
         mapa = new GraficoTablero(tablero);
         multiPanel = new JLayeredPane();
         fondo = new JPanel();
-        recuadro = new JPanel();
         fondoImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/FondoTablero.png")));
         recuadroImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png")));
         pausa = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Pausa8.png")));
         fondoOst = new ReproductorSonidos();
         estaEnJuego = true;
-        iniciarPaneles(jugador);
+        iniciarPaneles(jugadores);
         add(multiPanel);
-        addKeyListener(controles);
+        asignarControles(tablero, jugadores);
         setFocusable(true);
         fondoOst.musicaDeFondo(gameOstRuta);
     }
@@ -58,22 +59,16 @@ public class PantallaJuego extends Pantalla {
      * @param jugador Jugador que esta jugando en el tablero
      * @version 1.1.3
      */
-    public void iniciarPaneles(Jugador jugador){
+    public void iniciarPaneles(ArrayList<Jugador> jugadores){
         fondoImagen.setBounds(0, 0, 685, 662);        
         fondo.setBounds(0, 0, ancho, alto);
         fondo.setLayout(null);
-        fondo.add(fondoImagen);        
-        recuadroImagen.setBounds(0, 0, 100, 15);
-        recuadroImagen.setText(jugador.getUsuario() + ": " + Integer.toString(jugador.getPuntaje()));
-        recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
-        recuadro.setBounds(15, 5, 100, 15);
-        recuadro.setLayout(null);
-        recuadro.add(recuadroImagen); 
+        fondo.add(fondoImagen);
+        iniciarPuntaje(jugadores);
         pausa.setBounds(80, 260, 600, 150);
         multiPanel.setBounds(0, 0, ancho, alto);
         multiPanel.add(fondo, Integer.valueOf(0));
         multiPanel.add(mapa, Integer.valueOf(1));
-        multiPanel.add(recuadro, Integer.valueOf(2));
     }
 
     /**
@@ -81,11 +76,14 @@ public class PantallaJuego extends Pantalla {
     * 
     * @version 1.0.4
     */
-    public void actualizaMapa(Jugador jugador){
+    public void actualizaMapa(ArrayList<Jugador> jugadores, int cantidad){
         repaint();
-        recuadro.remove(recuadroImagen);
-        recuadroImagen.setText(jugador.getUsuario() + ": " + Integer.toString(jugador.getPuntaje()));
-        recuadro.add(recuadroImagen);
+        for(int i = 0; i < cantidad; i++){
+            recuadros.get(i).remove(recuadroImagen);
+            recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
+            recuadros.get(i).add(recuadroImagen);
+            System.out.println("Puntaje en pantalla: " + jugadores.get(i).getPuntaje());
+        }
     }
     
     /**
@@ -100,6 +98,49 @@ public class PantallaJuego extends Pantalla {
 
         }else{
             multiPanel.remove(pausa);
+        }
+    }
+
+    public void asignarControles(Tablero tablero, ArrayList<Jugador> jugadores){
+        for(int i = 0; i < jugadores.size(); i++){
+            controles = new Controles(tablero, jugadores.get(i).getPersonaje());
+            addKeyListener(controles);
+        }
+    }
+
+    public void iniciarPuntaje(ArrayList<Jugador> jugadores){
+        for(int i = 0; i < jugadores.size(); i++){
+            recuadros.add(new JPanel());
+
+            switch(jugadores.get(i).getNumero()){
+                case 0:
+                    recuadroImagen.setBounds(0, 0, 100, 15);
+                    recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
+                    recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
+                    recuadros.get(i).setBounds(15, 5, 100, 15);
+                    break;
+                case 1:
+                    recuadroImagen.setBounds(0, 0, 100, 15);
+                    recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
+                    recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
+                    recuadros.get(i).setBounds(570,645, 100, 15);
+                    break;
+                case 2:
+                    recuadroImagen.setBounds(0, 0, 100, 15);
+                    recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
+                    recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
+                    recuadros.get(i).setBounds(15, 645, 100, 15);
+                    break;
+                case 3:
+                    recuadroImagen.setBounds(0, 0, 100, 15);
+                    recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
+                    recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
+                    recuadros.get(i).setBounds(570, 5, 100, 15);
+                    break;       
+            }
+            recuadros.get(i).setLayout(null);
+            recuadros.get(i).add(recuadroImagen);
+            multiPanel.add(recuadros.get(i), Integer.valueOf(2));
         }
     }
 

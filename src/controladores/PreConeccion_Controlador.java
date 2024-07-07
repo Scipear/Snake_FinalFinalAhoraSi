@@ -23,7 +23,7 @@ public class PreConeccion_Controlador extends Pantalla{
         server = new Server();
         System.out.println(server.getDireccionIP());
         cliente = new Cliente(server.getDireccionIP());
-        cliente.enviarPaquete("Hola mundoooooo soy cliente".getBytes());
+        //cliente.enviarPaquete("Hola mundoooooo soy cliente".getBytes());
         Controlador_MenuPrinc.setModoJuego(2);
         HostLobbie_Controlador.mostrar(); //Abrir la pantalla del Host Online
         ocultar(ventanaPrin);
@@ -32,7 +32,7 @@ public class PreConeccion_Controlador extends Pantalla{
     public static void eventOnlineCliente(){
         String direccionIP = JOptionPane.showInputDialog("Ingrese la direccion IP de la partida que desea ingresar");  
         cliente = new Cliente(direccionIP);
-        cliente.enviarPaquete("Hola mundoooooo soy cliente".getBytes());
+        //cliente.enviarPaquete("Hola mundoooooo soy cliente".getBytes());
         ClienteLobbie_Controlador.mostrar(); //Abrir la pantalla del Host Online
         System.out.println("Se abrio el cliente");
         ocultar(ventanaPrin);

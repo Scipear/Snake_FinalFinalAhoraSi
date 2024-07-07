@@ -4,28 +4,28 @@ import controladores.*;
 import ost.ReproductorSonidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.Timer;
 import snake2.Front.PantallaJuego;
 
 public class Game implements Runnable, ActionListener {
 
     private volatile boolean iniciado = true;
-    protected static Timer timer;
+    private static Timer timer;
     private PantallaJuego pantalla;
     private Thread thread;
-    protected Jugador jugador;
+    private ArrayList<Jugador> jugadores = new ArrayList<>();
+    private int indiceJugadores = -1;
     protected Tablero tablero;
-    private String usuario;
-    private int skin;
     private int mapa; // Guarda el mapa seleccionado por el usuario
     private static boolean gameOver;
     private boolean partidaIniciada;
     private ReproductorSonidos reproductorSonidos = new ReproductorSonidos();
 
-    public Game() {
+    public Game(){
         gameOver = false;
-        usuario = Login_Controlador.getNombreUsuario();
-        int modoOpcion = Controlador_MenuPrinc.getModoJuego();
+        /*int modoOpcion = Controlador_MenuPrinc.getModoJuego();
         switch (modoOpcion) {
             case 1:{
                 skin = Lobbie_Controlador.getSkinSeleccionada();
@@ -37,7 +37,29 @@ public class Game implements Runnable, ActionListener {
                 mapa = HostLobbie_Controlador.getMapaSeleccionada();
                 break;
             }
+        }*/
+        //iniciarJuego();
+    }
+
+    public void iniciarSinglePlayer(){
+        String usuario = Login_Controlador.getNombreUsuario();
+        int skin = Lobbie_Controlador.getSkinSeleccionada();
+        mapa = Lobbie_Controlador.getMapaSeleccionada();
+        jugadores.add(new Jugador(usuario, 0, 5, 1, "Derecha", skin));
+        indiceJugadores++;
+        tablero = new Tablero(jugadores, mapa);
+        pantalla = new PantallaJuego(tablero, jugadores);
+        iniciarJuego();
+    }
+
+    public void iniciarMultiplayer(ArrayList<JugadorMP> jugadores){
+        for(int i = 0; i < jugadores.size(); i++){
+            this.jugadores.add(jugadores.get(i));
+            indiceJugadores++;
         }
+        mapa = HostLobbie_Controlador.getMapaSeleccionada();
+        tablero = new Tablero(this.jugadores, mapa);
+        pantalla = new PantallaJuego(tablero, this.jugadores);
         iniciarJuego();
     }
 
@@ -60,12 +82,9 @@ public class Game implements Runnable, ActionListener {
         //Jugador j2 = new Jugador("pacheco", 1, 16, 20, "Izquierda", 3);
         //Jugador j3= new Jugador("jejex", 2, 1, 16, "Arriba", 5);
         //Jugador j4= new Jugador("Yippiii", 3, 20, 5, "Abajo", 6);
-        jugador = new Jugador(usuario, 0, 5, 1, "Derecha", skin);
-        tablero = new Tablero(jugador.getPersonaje(), mapa); //Problema para seleccionar el mapa
         //tablero.setPersonaje(j2.getPersonaje());
         //tablero.setPersonaje(j3.getPersonaje());
         //tablero.setPersonaje(j4.getPersonaje());
-        pantalla = new PantallaJuego(tablero, jugador);
     }
 
     public static void setDelay(int delay) {
@@ -74,16 +93,17 @@ public class Game implements Runnable, ActionListener {
 
     @Override
     public void run() {
+        pantalla.setVisible(true);
         while(iniciado){
             if(!partidaIniciada){
                 iniciarPartida();
-                pantalla.actualizaMapa(jugador);
-                try {
+                pantalla.actualizaMapa(jugadores, jugadores.size());
+                try{
                     Thread.sleep(3000);
                     partidaIniciada = true;
                     timer = new Timer(175, this);
                     timer.start();
-                } catch (InterruptedException e) {
+                }catch(InterruptedException e){
                     e.printStackTrace();
                 } 
             }
@@ -95,13 +115,13 @@ public class Game implements Runnable, ActionListener {
         if(!tablero.getPausa()){
             tablero.chequeaPersonajes();
 
-            if(tablero.personajeSobreComida()){
-                jugador.aumentaPuntaje();
+            if(tablero.personajeSobreComida(jugadores)){
+                //jugador.aumentaPuntaje();
             }
 
             tablero.conteoComidaEspecial();
-            pantalla.actualizaMapa(jugador);
-            
+            pantalla.actualizaMapa(jugadores, jugadores.size());
+            /*
             if(!jugador.getPersonaje().getEstado()){
                 detenerJuego();
                 reproductorSonidos.detener();
@@ -110,7 +130,7 @@ public class Game implements Runnable, ActionListener {
                 pantalla.setVisible(false);
                 pantalla.detenerMusica();
                 FinalPartida_Controlador.mostrar();
-            }
+            }*/
         }
         pantalla.muestraPausa(tablero);
     }

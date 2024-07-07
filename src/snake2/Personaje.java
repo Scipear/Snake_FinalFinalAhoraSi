@@ -196,7 +196,7 @@ public class Personaje{
      * @version 1.1.4
      */
     public void aumentaLongitud(){
-        longitud++;;
+        longitud++;
     }
     
     public void setEstado(boolean estado){

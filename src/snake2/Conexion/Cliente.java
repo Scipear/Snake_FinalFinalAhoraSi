@@ -7,15 +7,23 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import controladores.ClienteLobbie_Controlador;
+import controladores.Login_Controlador;
+import snake2.Contenedor_Paquetes.Paquete;
+import snake2.Contenedor_Paquetes.Paquete.TiposPaquetes;
+import snake2.Contenedor_Paquetes.Paquete00Login;
+import snake2.Contenedor_Paquetes.Paquete01Desconectar;
+import snake2.Contenedor_Paquetes.Paquete02Play;
+
 public class Cliente implements Runnable{
     private byte[] datos;
     private InetAddress direccionIP;
     private DatagramSocket socket;
     private int puerto;
     private Thread thread;
+    private boolean tieneSkin = false;
 
     public Cliente(String direccionIP){
-        datos = new byte[1024];
         this.puerto = Server.getPuerto();
         try {
             this.direccionIP = InetAddress.getByName(direccionIP);
@@ -33,20 +41,53 @@ public class Cliente implements Runnable{
         thread.start();
     }
     @Override
-    public void run() {
+    public void run(){
+        Paquete00Login conexion = new Paquete00Login(Login_Controlador.getNombreUsuario());
+        conexion.enviarData(this);
+        
         while(true){
+            if(ClienteLobbie_Controlador.isReady == true && tieneSkin == false){
+                Paquete02Play play = new Paquete02Play(Login_Controlador.nombreUsuario, ClienteLobbie_Controlador.skinSeleccionada);
+                play.enviarData(this);
+                tieneSkin = true;
+            }
             recibirPaquete();
         }
     }
 
     public void recibirPaquete(){
+        datos = new byte[1024];
         DatagramPacket paquete = new DatagramPacket(datos, datos.length);
         try {
             socket.receive(paquete);
-            String mensaje = new String(paquete.getData());
-            System.out.println("El cliente ha recibido un paquete: " + mensaje);
+            //String mensaje = new String(paquete.getData());
+            //System.out.println("El cliente ha recibido un paquete: " + mensaje);
+            analizarPaquete(datos, paquete.getAddress(), paquete.getPort());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void analizarPaquete(byte[] datos, InetAddress direccionIP, int puerto) {
+        String message = new String(datos).trim();
+        TiposPaquetes type = Paquete.buscarPaquete(message.substring(0, 2));
+        switch(type){
+        case INVALID:
+            break;
+        case LOGIN:
+            Paquete00Login conexion = new Paquete00Login(datos);
+            System.out.println("[" + direccionIP.getHostAddress() + ":" + puerto + "] "
+                    + conexion.getUsername() + " has joined...");
+            break;
+        case DISCONNECT:
+            Paquete01Desconectar desconexion = new Paquete01Desconectar(datos);
+            System.out.println("[" + direccionIP.getHostAddress() + ":" + puerto + "] "
+                    + desconexion.getUsername() + " has left...");
+            break;
+        case PLAY:
+            Paquete02Play jugar = new Paquete02Play(datos);
+            System.out.println("El jugador " + jugar.getUsuario() + " ya esta listo para jugar");
+            break;
         }
     }
 
@@ -58,4 +99,19 @@ public class Cliente implements Runnable{
             e.printStackTrace();
         }
     }
+
+    public void setTieneSkin(boolean tieneSkin){
+        this.tieneSkin = tieneSkin;
+    }
+    /*
+    public void sendData(byte[] data) 
+    {
+            if (!game.isApplet) {
+            DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, 1331);
+            try {
+                socket.send(packet);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }    }*/
 }
