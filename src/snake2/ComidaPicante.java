@@ -1,13 +1,26 @@
 package snake2;
 
+import javazoom.jl.decoder.JavaLayerException;
+import ost.ReproductorSonidos;
+
 /**
  * Clase parte del back. Hereda de la clase Comida
  * 
  * @version 1.1.4
  */
 public class ComidaPicante extends Comida{
-    public ComidaPicante(int posX, int posY){
+    
+    private final  ReproductorSonidos ostSFX;
+    private final String sfxOstRuta;
+    
+    
+    public ComidaPicante(int posX, int posY) throws JavaLayerException{
         super(posX, posY);
+        this.sfxOstRuta = "\\src\\ost\\ComidaPicante_SFX.mp3";
+        
+        ostSFX= new ReproductorSonidos();
+        System.out.println(System.getProperty("user.dir"));
+        ostSFX.reproducirSFX(sfxOstRuta);
     }
 
     /**

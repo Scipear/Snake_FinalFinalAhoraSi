@@ -4,7 +4,10 @@ import controladores.*;
 import ost.ReproductorSonidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
+import javazoom.jl.decoder.JavaLayerException;
 import snake2.Front.PantallaJuego;
 
 public class Game implements Runnable, ActionListener {
@@ -99,7 +102,11 @@ public class Game implements Runnable, ActionListener {
                 jugador.aumentaPuntaje();
             }
 
-            tablero.conteoComidaEspecial();
+            try {
+                tablero.conteoComidaEspecial();
+            } catch (JavaLayerException ex) {
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            }
             pantalla.actualizaMapa(jugador);
             
             if(!jugador.getPersonaje().getEstado()){

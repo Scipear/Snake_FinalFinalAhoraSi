@@ -1,5 +1,7 @@
 package snake2;
 
+import ost.ReproductorSonidos;
+
 /**
  * Clase parte del back
  * 

@@ -24,6 +24,13 @@ public class ReproductorSonidos {
         reproducir();
     }
 
+    public void reproducirSFX(String rutaSonido) {
+        
+        rutaSonidoActual = rutaSonido;
+        reproducir();
+
+    }
+
     private void reproducir() {
         if (player != null) {
             player.close(); // Detener cualquier reproducción anterior
