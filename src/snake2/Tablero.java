@@ -2,6 +2,12 @@ package snake2;
 
 import java.util.ArrayList;
 
+import controladores.HostLobbie_Controlador;
+import controladores.PreConeccion_Controlador;
+import ost.ReproductorSonidos;
+import snake2.Contenedor_Paquetes.Paquete05Update;
+import snake2.Contenedor_Paquetes.Paquete06Comida;
+
 /**
  * Clase parte del back. Donde ocurre toda la partida
  * 
@@ -12,6 +18,9 @@ public class Tablero {
     private final int alto;
     private final int cantidadComidasEspeciales;
     private static boolean rapidezActivada;
+    private static ReproductorSonidos ostSFX = new ReproductorSonidos();
+    private static String sfxOstRuta;
+    private Paquete06Comida food;
     private Celda celdas[][];
     private Comida comidaRegular;
     private Comida comidaEspecial;
@@ -34,10 +43,9 @@ public class Tablero {
         pausa = false;  
         rapidezActivada = false;
         tiempoComidaEspecial = 60;
-        this.personajes = new ArrayList<>();
+        personajes = new ArrayList<>();
         iniciarPersonajes(jugadores);
         inicializarTablero(tipo);
-        generarComida();
     }
 
     /**
@@ -47,7 +55,12 @@ public class Tablero {
      */
     public void generarComida(){
         int posiciones[] = casillaAleatoria();
-        comidaRegular = new Comida(posiciones[0], posiciones[1]);        
+        comidaRegular = new Comida(posiciones[0], posiciones[1]);
+        
+        if(PreConeccion_Controlador.server != null){
+            food = new Paquete06Comida(posiciones[0], posiciones[1], 4);
+            food.enviarData(PreConeccion_Controlador.server);
+        }
     }
 
     /**
@@ -79,6 +92,11 @@ public class Tablero {
                 comidaEspecial = new ComidaRocosa(posiciones[0], posiciones[1]);
                 break;
             }
+        }
+
+        if(PreConeccion_Controlador.server != null){
+            food = new Paquete06Comida(posiciones[0], posiciones[1], indice);
+            food.enviarData(PreConeccion_Controlador.server);
         }
         desactivarEfectos();
         //Sonido cuando genera comida especial
@@ -145,25 +163,30 @@ public class Tablero {
      * 
      * @version 1.1.1
      */
-    public boolean personajeSobreComida(ArrayList<Jugador> jugadores){
+    public void personajeSobreComida(ArrayList<Jugador> jugadores){
         for(int i = 0; i < personajes.size(); i++){
             if(personajes.get(i).getCuerpo(0).getPosX() == comidaRegular.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaRegular.getPosY()){
                 comidaRegular.hacerEfecto(personajes.get(i));
                 comidaRegular = null;
+                if(PreConeccion_Controlador.server != null){
+                    food = new Paquete06Comida(0, 0, -2);
+                    food.enviarData(PreConeccion_Controlador.server);
+                }
                 generarComida();
                 jugadores.get(i).aumentaPuntaje();
-                return true;
                 //Podria ponerse aqui el sonido cuando come
     
             }else if(hayComidaEspecial() && personajes.get(i).getCuerpo(0).getPosX() == comidaEspecial.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaEspecial.getPosY()){
                 comidaEspecial.hacerEfecto(personajes.get(i));
                 comidaEspecial = null;
+                if(PreConeccion_Controlador.server != null){
+                    food = new Paquete06Comida(0, 0, -1);
+                    food.enviarData(PreConeccion_Controlador.server);
+                }
                 tiempoComidaEspecial = 60;
                 jugadores.get(i).aumentaPuntaje();
-                return true;
             }
         }
-        return false;
         
     }
 
@@ -176,7 +199,7 @@ public class Tablero {
     public void inicializarTablero(int tipo){
         for(int i = 0; i < alto; i++){
             for(int j = 0; j < ancho; j++){ //Inicializa los valores de cada celda
-                if(i == 0 || i == alto-1 || j == 0 || j == ancho-1){ //Si esta en el borde, es una pared
+                if(i == 0 || i == alto - 1 || j == 0 || j == ancho - 1){ //Si esta en el borde, es una pared
                     celdas[i][j] = new Celda("Pared");
                     
                 }else{
@@ -224,7 +247,7 @@ public class Tablero {
 
     public void chequeaPersonajes(){
         for(int i = 0; i < personajes.size(); i++){
-            personajes.get(i).movimiento();
+            personajes.get(i).movimiento(i);
             personajes.get(i).chocaConCuerpo();
             chocaConSerpiente(i);
             chocaConPared(i);
@@ -244,6 +267,11 @@ public class Tablero {
 
             if(comidaEspecial.getTiempoVisible() == 0){
                 borraComidaEspecial();
+
+                if(PreConeccion_Controlador.server != null){
+                    food = new Paquete06Comida(0, 0, -1);
+                    food.enviarData(PreConeccion_Controlador.server);
+                }
             }
 
         }
@@ -324,19 +352,70 @@ public class Tablero {
     public void disminuyeTiempoEspecial(){
         tiempoComidaEspecial--;
     }
-    
-    public void setPausa(boolean pausa){
-        this.pausa = pausa;
-    }
-    
-    public static void setRapidez(boolean rapidez){
-        rapidezActivada = rapidez;
-    }
-    
+
     public void iniciarPersonajes(ArrayList<Jugador> jugadores){
         for(int i = 0; i < jugadores.size(); i++){
             personajes.add(jugadores.get(i).getPersonaje());
         }
+    }
+    
+    public void setPausa(boolean pausa){
+        this.pausa = pausa;
+    }
+
+    public void actualizarComida(int x, int y, int tipo){
+        switch(tipo){
+            case -2:
+                comidaRegular = null;
+                break;
+            
+
+            case -1:
+                borraComidaEspecial();
+                break;
+            
+            case 0:
+                comidaEspecial = new ComidaDoble(x, y);
+                break;
+            
+
+            case 1:
+                comidaEspecial = new ComidaPicante(x, y);
+                break;
+            
+
+            case 2:
+                comidaEspecial = new ComidaCongelada(x, y);
+                break;
+            
+
+            case 3:
+                comidaEspecial = new ComidaRocosa(x, y);
+                break;
+            
+
+            case 4:
+                comidaRegular = new Comida(x, y);
+                break;
+            
+        }
+    }
+
+    //Metodos encargados de reproducir el sonido de la comida cuando se come
+    public static void comidaEstandarSFX() {
+        sfxOstRuta = "\\src\\ost\\ComidaEstandar_SFX.mp3";
+        ostSFX.reproducirSFX(sfxOstRuta);
+        System.out.println("Comida estandar sonido");
+    }
+
+    public static void comidaEspecialSFX() {
+        sfxOstRuta = "\\src\\ost\\ComidaDoble_SFX.mp3";
+        ostSFX.reproducirSFX(sfxOstRuta);
+        System.out.println("Comida estandar sonido");
+    }
+    
+    public static void setRapidez(boolean rapidez){
+        rapidezActivada = rapidez;
     }
 
     public Personaje getPersonaje(int i){

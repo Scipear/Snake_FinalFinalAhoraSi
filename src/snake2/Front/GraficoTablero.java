@@ -71,7 +71,7 @@ public class GraficoTablero extends Grafico{
         for(int i = 0; i < graficoPersonaje.size(); i++){
             pintarPersonaje(g2d, i);
         }
-
+        
         pintarComida(g2d);
         
     }
@@ -89,52 +89,52 @@ public class GraficoTablero extends Grafico{
 
             switch(body.getTipo()){
                 case "Cabeza":{
-                    if(body.getDireccion() == "Arriba"){
+                    if(body.getDireccion().equals("Arriba")){
                         g.drawImage(graficoPersonaje.get(puesto).getCabeza(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "Derecha"){
+                    }else if(body.getDireccion().equals("Derecha")){
                         g.drawImage(graficoPersonaje.get(puesto).getCabeza(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "Abajo"){
+                    }else if(body.getDireccion().equals("Abajo")){
                         g.drawImage(graficoPersonaje.get(puesto).getCabeza(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "Izquierda"){
+                    }else if(body.getDireccion().equals("Izquierda")){
                         g.drawImage(graficoPersonaje.get(puesto).getCabeza(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }
                     break;
                 }
                 
                 case "Cuerpo":{
-                    if(body.getDireccion() == "Arriba"){
+                    if(body.getDireccion().equals("Arriba")){
                         g.drawImage(graficoPersonaje.get(puesto).getCuerpo(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "Derecha"){
+                    }else if(body.getDireccion().equals("Derecha")){
                         g.drawImage(graficoPersonaje.get(puesto).getCuerpo(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "Abajo"){
+                    }else if(body.getDireccion().equals("Abajo")){
                         g.drawImage(graficoPersonaje.get(puesto).getCuerpo(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "Izquierda"){
+                    }else if(body.getDireccion().equals("Izquierda")){
                         g.drawImage(graficoPersonaje.get(puesto).getCuerpo(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }
                     break;
                 }
 
                 case "Curva":{
-                    if(body.getDireccion() == "LtoD"){
+                    if(body.getDireccion().equals("LtoD")){
                         g.drawImage(graficoPersonaje.get(puesto).getCurva(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "LtoU"){
+                    }else if(body.getDireccion().equals("LtoU")){
                         g.drawImage(graficoPersonaje.get(puesto).getCurva(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "RtoD"){
+                    }else if(body.getDireccion().equals("RtoD")){
                         g.drawImage(graficoPersonaje.get(puesto).getCurva(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "RtoU"){
+                    }else if(body.getDireccion().equals("RtoU")){
                         g.drawImage(graficoPersonaje.get(puesto).getCurva(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }
                     break;
                 }
                 
                 case "Cola":{
-                    if(body.getDireccion() == "Arriba"){
+                    if(body.getDireccion().equals("Arriba")){
                         g.drawImage(graficoPersonaje.get(puesto).getCola(0), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "Derecha"){
+                    }else if(body.getDireccion().equals("Derecha")){
                         g.drawImage(graficoPersonaje.get(puesto).getCola(1), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "Abajo"){
+                    }else if(body.getDireccion().equals("Abajo")){
                         g.drawImage(graficoPersonaje.get(puesto).getCola(2), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
-                    }else if(body.getDireccion() == "Izquierda"){
+                    }else if(body.getDireccion().equals("Izquierda")){
                         g.drawImage(graficoPersonaje.get(puesto).getCola(3), body.getPosX() * celdaSize, body.getPosY() * celdaSize, this);
                     }
                     break;

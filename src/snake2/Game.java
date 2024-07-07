@@ -48,7 +48,9 @@ public class Game implements Runnable, ActionListener {
         jugadores.add(new Jugador(usuario, 0, 5, 1, "Derecha", skin));
         indiceJugadores++;
         tablero = new Tablero(jugadores, mapa);
-        pantalla = new PantallaJuego(tablero, jugadores);
+        tablero.generarComida();
+        pantalla = new PantallaJuego(tablero, jugadores, 0);
+        pantalla.setVisible(true);
         iniciarJuego();
     }
 
@@ -59,6 +61,7 @@ public class Game implements Runnable, ActionListener {
         }
         mapa = HostLobbie_Controlador.getMapaSeleccionada();
         tablero = new Tablero(this.jugadores, mapa);
+        tablero.generarComida();
         pantalla = new PantallaJuego(tablero, this.jugadores);
         iniciarJuego();
     }
@@ -78,13 +81,16 @@ public class Game implements Runnable, ActionListener {
         }
     }
 
-    public void iniciarPartida(){
-        //Jugador j2 = new Jugador("pacheco", 1, 16, 20, "Izquierda", 3);
-        //Jugador j3= new Jugador("jejex", 2, 1, 16, "Arriba", 5);
-        //Jugador j4= new Jugador("Yippiii", 3, 20, 5, "Abajo", 6);
-        //tablero.setPersonaje(j2.getPersonaje());
-        //tablero.setPersonaje(j3.getPersonaje());
-        //tablero.setPersonaje(j4.getPersonaje());
+    public int getMapa(){
+        return mapa;
+    }
+
+    public PantallaJuego getPantalla(){
+        return pantalla;
+    }    
+
+    public Tablero getTablero(){
+        return tablero;
     }
 
     public static void setDelay(int delay) {
@@ -92,12 +98,11 @@ public class Game implements Runnable, ActionListener {
     }
 
     @Override
-    public void run() {
-        pantalla.setVisible(true);
+    public void run(){
+        //pantalla.setVisible(true);
         while(iniciado){
             if(!partidaIniciada){
-                iniciarPartida();
-                pantalla.actualizaMapa(jugadores, jugadores.size());
+                //pantalla.actualizaMapa(jugadores, jugadores.size());
                 try{
                     Thread.sleep(3000);
                     partidaIniciada = true;
@@ -114,10 +119,7 @@ public class Game implements Runnable, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(!tablero.getPausa()){
             tablero.chequeaPersonajes();
-
-            if(tablero.personajeSobreComida(jugadores)){
-                //jugador.aumentaPuntaje();
-            }
+            tablero.personajeSobreComida(jugadores);
 
             tablero.conteoComidaEspecial();
             pantalla.actualizaMapa(jugadores, jugadores.size());

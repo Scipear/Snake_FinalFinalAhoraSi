@@ -7,28 +7,33 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.List;
 
+import snake2.Comida;
 import snake2.Game;
 import snake2.JugadorMP;
+import snake2.Jugador;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete.TiposPaquetes;
 import snake2.Contenedor_Paquetes.Paquete00Login;
 import snake2.Contenedor_Paquetes.Paquete01Desconectar;
-import snake2.Contenedor_Paquetes.Paquete02Mover;
 import snake2.Contenedor_Paquetes.Paquete02Play;
-import snake2.Contenedor_Paquetes.Paquete03Comida;
+import snake2.Contenedor_Paquetes.Paquete03Show;
+import snake2.Contenedor_Paquetes.Paquete04Player;
+import snake2.Contenedor_Paquetes.Paquete05Update;
+import snake2.Contenedor_Paquetes.Paquete06Comida;
+import snake2.Contenedor_Paquetes.Paquete07Move;
 
 
 public class Server implements Runnable{
     private static final int puerto = 9999;
+    private boolean juegoIniciado = false;
     private byte[] datos;
     private DatagramSocket socket;
     private Thread thread;
     private ArrayList<JugadorMP> jugadoresActivos = new ArrayList<>();
-    private ArrayList<String> nombreJugadores = new ArrayList<>();
     private int jugadoresListos;
     private Game game;
+    private int mapa;
  
 
     public Server(){
@@ -49,9 +54,14 @@ public class Server implements Runnable{
     public void run(){
         while (true) {
             recibirPaquete();
-            if(jugadoresActivos.size() == jugadoresListos){
+            if((jugadoresActivos.size() == jugadoresListos) && !juegoIniciado){
                 game = new Game();
                 game.iniciarMultiplayer(jugadoresActivos);
+                mapa = game.getMapa();
+                juegoIniciado = true;
+                //game.getPantalla().setVisible(true);
+                Paquete03Show mostrar = new Paquete03Show(jugadoresListos, mapa);
+                mostrar.enviarData(this);
             }
         }
     }
@@ -71,6 +81,7 @@ public class Server implements Runnable{
     private void analizarPaquete(byte[] datos, InetAddress direccionIP, int puerto) {
         String message = new String(datos).trim();
         TiposPaquetes type = Paquete.buscarPaquete(message.substring(0, 2));
+
         switch(type){
         default:
         case INVALID:
@@ -78,12 +89,13 @@ public class Server implements Runnable{
 
         case LOGIN:
             Paquete00Login conexion = new Paquete00Login(datos);
-            nombreJugadores.add(conexion.getUsername());
             conectarJugador(conexion, direccionIP, puerto);
             System.out.println("[" + direccionIP.getHostAddress() + ":" + puerto + "] "
                     + conexion.getUsername() + " has connected...");
-            //conexion.enviarData(this);
+            conexion.setNumCliente(jugadoresActivos.size() - 1);
+            conexion.enviarData(this);
             break;
+            
         case DISCONNECT:
             Paquete01Desconectar desconexion = new Paquete01Desconectar(datos);
             System.out.println("[" + direccionIP.getHostAddress() + ":" + puerto + "] "
@@ -96,7 +108,13 @@ public class Server implements Runnable{
             System.out.println("El usuario " + jugar.getUsuario() + " ha elegido la skin " + jugar.getSkin() + " y esta listo para jugar");
             prepararJugador(jugar);
             break;
+
+        case MOVE:
+            Paquete07Move mover = new Paquete07Move(datos);
+            actualizarMovimiento(mover); 
+            break;     
         }
+
     }
 
     public void conectarJugador(Paquete00Login paquete, InetAddress direccion, int puerto){
@@ -114,11 +132,6 @@ public class Server implements Runnable{
                 conectado = true;
             }else{
                 enviarPaquete(paquete.getData(), j.getDireccionIP(), j.getPuerto());
-                
-                // relay to the new player that the currently connect player
-                // exists
-                //packet = new Packet00Login(p.getUsername(), p.x, p.y);
-                //sendData(packet.getData(), player.ipAddress, player.port);
             }
         }
         if(!conectado){
@@ -127,11 +140,12 @@ public class Server implements Runnable{
     }
     
     public void desconectarJugador(Paquete01Desconectar paquete){
-        nombreJugadores.remove(getIndiceJugador(paquete.getUsername()));
-        paquete.enviarData(this);
+        jugadoresActivos.remove(getIndiceJugador(paquete.getUsername()));
+        //paquete.enviarData(this);
     }
 
     public void prepararJugador(Paquete02Play paquete){
+        Jugador jugador;
         String direccion = "";
         int x = -1;
         int y = -1;
@@ -160,12 +174,20 @@ public class Server implements Runnable{
         }
         jugadoresActivos.get(getIndiceJugador(paquete.getUsuario())).asignaPersonaje(x, y, direccion, paquete.getSkin());
 
-        System.out.println("Jugador: " + jugadoresActivos.get(getIndiceJugador(paquete.getUsuario())).getUsuario() + " Skin: " + jugadoresActivos.get(getIndiceJugador(paquete.getUsuario())).getPersonaje().getSkin());
         if(!jugadoresActivos.get(getIndiceJugador(paquete.getUsuario())).getEstaListo()){
             jugadoresListos++;
             jugadoresActivos.get(getIndiceJugador(paquete.getUsuario())).alistaJugador(true);
         }
-        System.out.println(jugadoresListos);
+        jugador = jugadoresActivos.get(getIndiceJugador(paquete.getUsuario()));
+        Paquete04Player guardar = new Paquete04Player(jugador.getUsuario(), jugador.getNumero(), jugador.getPersonaje().getCuerpo(0).getPosX(),
+                                                        jugador.getPersonaje().getCuerpo(0).getPosY(), jugador.getPersonaje().getCuerpo(0).getDireccion(),
+                                                         jugador.getPersonaje().getSkin());
+        guardar.enviarData(this);
+    }
+
+    public void actualizarMovimiento(Paquete07Move paquete){
+        JugadorMP jugador = jugadoresActivos.get(paquete.getIndice());
+        jugador.getPersonaje().getCuerpo(0).setDireccion(paquete.getDireccion());
         paquete.enviarData(this);
     }
        
@@ -183,48 +205,11 @@ public class Server implements Runnable{
             enviarPaquete(datos, j.getDireccionIP(), j.getPuerto());
         }
     }
-    
-    /*
-    public JugadorMP getPlayerMP(String username) {
-        for (JugadorMP player : this.connectedPlayers) {
-            if (player.getUsername().equals(username)) {
-                return player;
-                }
-                }
-                return null;
-                }
-                
-                public void sendData(byte[] data, InetAddress ipAddress, int port) {
-                    if (!game.isApplet) {
-
-                    DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, port);
-                    try {
-                        this.socket.send(packet);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            }
-                            }
-                            }
-                            */
-                            /*
-                            private void handleMove(Principal02Mover packet) 
-                            {
-                                if (getPlayerMP(packet.getUsername()) != null) {
-                                    int index = getPlayerMPIndex(packet.getUsername());
-                                    JugadorMP player = this.connectedPlayers.get(index);
-                                    //player.x = packet.getX();
-                                    // player.y = packet.getY();
-                                    player.setMoving(packet.isMoving());
-                                    player.setMovingDir(packet.getMovingDir());
-                                    player.setNumSteps(packet.getNumSteps());
-                                    packet.writeData(this);
-                                    }
-                                    }
-                                    */
         
     public int getIndiceJugador(String usuario){
         int indice = 0;
-        for(String user : nombreJugadores){
+        for(Jugador j : jugadoresActivos){
+            String user = j.getUsuario();
             if(user.equals(usuario)){
                 break;
             }
@@ -246,6 +231,5 @@ public class Server implements Runnable{
                                     
     public static int getPuerto() {
         return puerto;
-    }
-                                    
+    }                              
 }

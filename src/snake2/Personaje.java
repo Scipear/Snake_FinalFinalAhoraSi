@@ -2,12 +2,16 @@ package snake2;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import controladores.PreConeccion_Controlador;
+import snake2.Contenedor_Paquetes.Paquete05Update;
 /**
  * Clase parte del back
  * 
  * @version 1.0.1
  */
 public class Personaje{
+    private Paquete05Update actualizar;
     private List<Cuerpo> serpiente = new ArrayList<>(); //Representa todo el cuerpo de la serpiente
     private int velocidad;
     private int longitud;
@@ -99,7 +103,7 @@ public class Personaje{
      * 
      * @version 1.0.4
      */
-    void movimiento(){
+    public void movimiento(int indice){
         if(!estaCongelado && estado){
             for(int i = longitud-1; i >= 0; i--){
                 if(serpiente.get(i).esCurva()){
@@ -120,6 +124,11 @@ public class Personaje{
                 if(serpiente.get(i).esCola() && !serpiente.get(i).mismaDireccion(serpiente.get(i-1).getDireccion())){
                     serpiente.get(i).cambioCola(serpiente.get(i-1).getDireccion());
                 }
+
+                if(PreConeccion_Controlador.server != null){
+                    actualizar = new Paquete05Update(indice, i, serpiente.get(i).getTipo(), serpiente.get(i).getPosX(), serpiente.get(i).getPosY(), serpiente.get(i).getDireccion());
+                    actualizar.enviarData(PreConeccion_Controlador.server);
+                }
             }
         }
     }
@@ -136,13 +145,13 @@ public class Personaje{
             Cuerpo aux = serpiente.get(longitud-diferencia);
             serpiente.get(longitud-diferencia).setTipo("Cuerpo");
 
-            if(aux.getDireccion() == "Arriba"){
+            if(aux.getDireccion().equals("Arriba")){
                 serpiente.add(new Cuerpo(aux.getPosX(), aux.getPosY()+velocidad, "Cola", "Arriba"));
-            }else if(aux.getDireccion() == "Derecha"){
+            }else if(aux.getDireccion().equals("Derecha")){
                 serpiente.add(new Cuerpo(aux.getPosX()-velocidad, aux.getPosY(), "Cola", "Derecha"));
-            }else if(aux.getDireccion() == "Abajo"){
+            }else if(aux.getDireccion().equals("Abajo")){
                 serpiente.add(new Cuerpo(aux.getPosX(), aux.getPosY()-velocidad, "Cola", "Abajo"));
-            }else if(aux.getDireccion() == "Izquierda"){
+            }else if(aux.getDireccion().equals("Izquierda")){
                 serpiente.add(new Cuerpo(aux.getPosX()+velocidad, aux.getPosY(), "Cola", "Izquierda"));
             }
             diferencia--;    

@@ -1,8 +1,6 @@
 package controladores;
 
 import Gui.Panta_Online_ClienteLobbie;
-import snake2.Game;
-import snake2.Contenedor_Paquetes.Paquete02Play;
 import snake2.Front.GraficoPersonaje;
 import snake2.Front.Pantalla;
 
@@ -22,11 +20,8 @@ public class ClienteLobbie_Controlador extends Pantalla{
     //Metodo encargado de iniciar la pantalla de juego
     public static void eventIniciar() {
         isReady = true;
-        //Controlador_MenuPrinc.setModoJuego(3);
-        //Controlador_MenuPrinc.pararMusica();
-        //Game game = new Game();
-        //ocultar(ventanaPrin);
-        //System.out.println("Pantalla del lobbie del cliente");
+        Controlador_MenuPrinc.pararMusica();
+        ocultar(ventanaCliente);
     }
 
     public static void eventVolverAlMenu() {

@@ -24,12 +24,10 @@ public class HostLobbie_Controlador extends ClienteLobbie_Controlador{
             JOptionPane.showMessageDialog(null, "Por favor, elige una skin y un mapa para poder jugar");        
         
         }else{
-            isReady = true;
             Paquete02Play play = new Paquete02Play(Login_Controlador.getNombreUsuario(), skinSeleccionada);
             play.enviarData(PreConeccion_Controlador.cliente);
-            //Controlador_MenuPrinc.pararMusica();
-            //Game game = new Game();
-            //ocultar(ventanaPrin);
+            Controlador_MenuPrinc.pararMusica();
+            ocultar(ventanaHost);
         }
     }
 

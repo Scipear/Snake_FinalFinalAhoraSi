@@ -35,6 +35,25 @@ public class PantallaJuego extends Pantalla {
     * la partida
     * @param jugador Jugador que esta jugando en el tablero
     */
+    public PantallaJuego(Tablero tablero, ArrayList<Jugador> jugadores, int indice){
+        inicializar(this);
+        setVisible(false);
+        controles = new Controles(tablero, jugadores.get(indice).getPersonaje(), indice);
+        mapa = new GraficoTablero(tablero);
+        multiPanel = new JLayeredPane();
+        fondo = new JPanel();
+        fondoImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/FondoTablero.png")));
+        recuadroImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png")));
+        pausa = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Pausa8.png")));
+        fondoOst = new ReproductorSonidos();
+        estaEnJuego = true;
+        iniciarPaneles(jugadores);
+        add(multiPanel);
+        addKeyListener(controles);
+        setFocusable(true);
+        fondoOst.musicaDeFondo(gameOstRuta);
+    }
+
     public PantallaJuego(Tablero tablero, ArrayList<Jugador> jugadores){
         inicializar(this);
         setVisible(false);
@@ -48,7 +67,6 @@ public class PantallaJuego extends Pantalla {
         estaEnJuego = true;
         iniciarPaneles(jugadores);
         add(multiPanel);
-        asignarControles(tablero, jugadores);
         setFocusable(true);
         fondoOst.musicaDeFondo(gameOstRuta);
     }
@@ -82,7 +100,6 @@ public class PantallaJuego extends Pantalla {
             recuadros.get(i).remove(recuadroImagen);
             recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
             recuadros.get(i).add(recuadroImagen);
-            System.out.println("Puntaje en pantalla: " + jugadores.get(i).getPuntaje());
         }
     }
     
@@ -101,12 +118,12 @@ public class PantallaJuego extends Pantalla {
         }
     }
 
-    public void asignarControles(Tablero tablero, ArrayList<Jugador> jugadores){
-        for(int i = 0; i < jugadores.size(); i++){
-            controles = new Controles(tablero, jugadores.get(i).getPersonaje());
-            addKeyListener(controles);
-        }
-    }
+    //public void asignarControles(Tablero tablero, ArrayList<Jugador> jugadores){
+    //    for(int i = 0; i < jugadores.size(); i++){
+    //        controles = new Controles(tablero, jugadores.get(i).getPersonaje());
+    //        addKeyListener(controles);
+    //    }
+    //}
 
     public void iniciarPuntaje(ArrayList<Jugador> jugadores){
         for(int i = 0; i < jugadores.size(); i++){

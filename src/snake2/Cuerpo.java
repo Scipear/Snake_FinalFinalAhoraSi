@@ -28,10 +28,10 @@ public class Cuerpo {
     public void cambioACuerpo(Cuerpo anterior){
         tipo = "Cuerpo";
 
-        if(anterior.tipo == "Cuerpo"){
+        if(anterior.tipo.equals("Cuerpo")){
             direccion = anterior.direccion;
 
-        }else if(anterior.tipo == "Cabeza" || anterior.tipo == "Curva"){
+        }else if(anterior.tipo.equals("Cabeza") || anterior.tipo.equals("Curva")){
             if(anterior.posX > posX){
                 direccion = "Derecha";
 
@@ -58,16 +58,16 @@ public class Cuerpo {
         if(!mismaDireccion(direccionAnterior)){
             tipo = "Curva";
 
-            if((direccion == "Derecha" && direccionAnterior == "Abajo") || (direccion == "Arriba" && direccionAnterior == "Izquierda")){
+            if((direccion.equals("Derecha") && direccionAnterior.equals("Abajo")) || (direccion.equals("Arriba") && direccionAnterior.equals("Izquierda"))){
                 direccion = "LtoD";
                     
-            }else if((direccion == "Derecha" && direccionAnterior == "Arriba") || (direccion == "Abajo" && direccionAnterior == "Izquierda")){
+            }else if((direccion.equals("Derecha") && direccionAnterior.equals("Arriba")) || (direccion.equals("Abajo") && direccionAnterior.equals("Izquierda"))){
                 direccion = "LtoU";
                     
-            }else if((direccion == "Arriba" && direccionAnterior == "Derecha") || (direccion == "Izquierda" && direccionAnterior == "Abajo")){
+            }else if((direccion.equals("Arriba") && direccionAnterior.equals("Derecha")) || (direccion.equals("Izquierda") && direccionAnterior.equals("Abajo"))){
                 direccion = "RtoD";
                     
-            }else if((direccion == "Abajo" && direccionAnterior == "Derecha") || (direccion == "Izquierda" && direccionAnterior == "Arriba")){
+            }else if((direccion.equals("Abajo") && direccionAnterior.equals("Derecha")) || (direccion.equals("Izquierda") && direccionAnterior.equals("Arriba"))){
                 direccion = "RtoU";
 
             }
@@ -83,10 +83,10 @@ public class Cuerpo {
     public void cambioCola(String direccionAnterior){
         switch(direccionAnterior){
             case "LtoD":{
-                if(direccion == "Derecha"){
+                if(direccion.equals("Derecha")){
                     direccion = "Abajo";
 
-                }else if(direccion == "Arriba"){
+                }else if(direccion.equals("Arriba")){
                     direccion = "Izquierda";
 
                 }
@@ -94,10 +94,10 @@ public class Cuerpo {
             }
 
             case "LtoU":{
-                if(direccion == "Derecha"){
+                if(direccion.equals("Derecha")){
                     direccion = "Arriba";
 
-                }else if(direccion == "Abajo"){
+                }else if(direccion.equals("Abajo")){
                     direccion = "Izquierda";
 
                 }
@@ -105,10 +105,10 @@ public class Cuerpo {
             }
 
             case "RtoD":{
-                if(direccion == "Izquierda"){
+                if(direccion.equals("Izquierda")){
                     direccion = "Abajo";
 
-                }else if(direccion == "Arriba"){
+                }else if(direccion.equals("Arriba")){
                     direccion = "Derecha";
 
                 }
@@ -116,10 +116,10 @@ public class Cuerpo {
             }
 
             case "RtoU":{
-                if(direccion == "Izquierda"){
+                if(direccion.equals("Izquierda")){
                     direccion = "Arriba";
 
-                }else if(direccion == "Abajo"){
+                }else if(direccion.equals("Abajo")){
                     direccion = "Derecha";
 
                 }
@@ -136,7 +136,7 @@ public class Cuerpo {
      * @version 1.0.4
      */
     public boolean mismaDireccion(String direccion){
-        return this.direccion == direccion;
+        return this.direccion.equals(direccion);
     }
     
     /**
@@ -146,7 +146,7 @@ public class Cuerpo {
      * @version 1.0.4
      */
     public boolean esCabeza(){
-        return tipo == "Cabeza";
+        return tipo.equals("Cabeza");
     }
 
     /**
@@ -156,7 +156,7 @@ public class Cuerpo {
      * @version 1.0.4
      */
     public boolean esCuerpo(){
-        return tipo == "Cuerpo";
+        return tipo.equals("Cuerpo");
     }
 
     /**
@@ -166,7 +166,7 @@ public class Cuerpo {
      * @version 1.0.4
      */
     public boolean esCurva(){
-        return tipo == "Curva";
+        return tipo.equals("Curva");
     }
 
     /**
@@ -176,7 +176,7 @@ public class Cuerpo {
      * @version 1.0.4
      */
     public boolean esCola(){
-        return tipo == "Cola";
+        return tipo.equals("Cola");
     }
 
     public void setPosX(int posX){

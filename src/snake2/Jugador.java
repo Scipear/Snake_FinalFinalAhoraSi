@@ -26,6 +26,7 @@ public class Jugador{
         puntaje = 0;
         personaje = new Personaje(x, y, direccion, skin);
     }
+    
     /**
      * Aumenta el puntaje del jugador
      * 
@@ -33,7 +34,6 @@ public class Jugador{
      */
     public void aumentaPuntaje(){
         puntaje++;
-        System.out.println(puntaje);
     }
 
     public void asignaPersonaje(int x, int y, String direccion, int skin){

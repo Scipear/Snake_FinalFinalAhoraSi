@@ -1,7 +1,6 @@
 package snake2.Contenedor_Paquetes;
 
 import java.lang.Integer;
-import snake2.Jugador;
 import snake2.Conexion.Cliente;
 import snake2.Conexion.Server;
 
