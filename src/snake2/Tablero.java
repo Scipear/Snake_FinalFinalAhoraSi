@@ -167,6 +167,7 @@ public class Tablero {
         for(int i = 0; i < personajes.size(); i++){
             if(personajes.get(i).getCuerpo(0).getPosX() == comidaRegular.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaRegular.getPosY()){
                 comidaRegular.hacerEfecto(personajes.get(i));
+                comidaEstandarSFX(); 
                 comidaRegular = null;
                 if(PreConeccion_Controlador.server != null){
                     food = new Paquete06Comida(0, 0, -2);
@@ -178,6 +179,7 @@ public class Tablero {
     
             }else if(hayComidaEspecial() && personajes.get(i).getCuerpo(0).getPosX() == comidaEspecial.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaEspecial.getPosY()){
                 comidaEspecial.hacerEfecto(personajes.get(i));
+                comidaEspecialSFX();
                 comidaEspecial = null;
                 if(PreConeccion_Controlador.server != null){
                     food = new Paquete06Comida(0, 0, -1);
