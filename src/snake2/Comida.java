@@ -1,5 +1,4 @@
 package snake2;
-
 /**
  * Clase parte del back
  * 
@@ -23,7 +22,7 @@ public class Comida {
      * @version 1.1
      */
     public void hacerEfecto(Personaje personaje){
-        personaje.aumentaLongitud();;
+        personaje.aumentaLongitud();
         personaje.creceCuerpo();
     }
 
