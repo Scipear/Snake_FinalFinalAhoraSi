@@ -3,7 +3,7 @@ package snake2;
 import ost.ReproductorSonidos;
 
 /**
- * Clase parte del back. Hereda de la clase Comida
+ * Clase que representa el tipo de comida especial Roca Espacial. Hereda de la clase Comida
  *
  * @version 1.1.4
  */

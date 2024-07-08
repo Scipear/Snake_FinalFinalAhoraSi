@@ -8,7 +8,6 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import snake2.Comida;
 import snake2.Game;
 import snake2.JugadorMP;
 import snake2.Jugador;
@@ -19,54 +18,98 @@ import snake2.Contenedor_Paquetes.Paquete01Desconectar;
 import snake2.Contenedor_Paquetes.Paquete02Play;
 import snake2.Contenedor_Paquetes.Paquete03Show;
 import snake2.Contenedor_Paquetes.Paquete04Player;
-import snake2.Contenedor_Paquetes.Paquete05Update;
-import snake2.Contenedor_Paquetes.Paquete06Comida;
 import snake2.Contenedor_Paquetes.Paquete07Move;
 
-
+/**
+ * Clase que representa al servidor que contendra la informacion principal de la partida y se mantendra
+ * en constante comunicacion con los clientes
+ * 
+ * @version 1.2
+ */
 public class Server implements Runnable{
-    private static final int puerto = 9999;
-    private boolean juegoIniciado = false;
-    private byte[] datos;
+    private static final int MAX_JUGADORES = 4; // Maximo de clientes que pueden conectarse al servidor
+    private static final int puerto = 9999; // Puerto del servidor
+    private boolean juegoIniciado = false; // Si el juego ya ha comenzado
+    private boolean servidorActivo = false; // Si el servidor se encuentra activo
+    private byte[] datos; // Forma en la que los datos se van a intercambiar entre cliente y servidor
     private DatagramSocket socket;
     private Thread thread;
-    private ArrayList<JugadorMP> jugadoresActivos = new ArrayList<>();
-    private int jugadoresListos;
-    private Game game;
-    private int mapa;
+    private ArrayList<JugadorMP> jugadoresActivos = new ArrayList<>(); // Arreglo que guarda los jugadores que se van conectando
+    private int jugadoresListos; // Cantidad de jugadores que ya estan listos para iniciar la partida
+    private Game game; // La partida que va a ser compartida con los clientes
+    private int mapa; // Mapa elegido por el host
  
-
+    /**
+     * Constructor de la clase
+     * 
+     */
     public Server(){
-        jugadoresListos = 0;
         try {
+            jugadoresListos = 0;
             socket = new DatagramSocket(puerto);
+            iniciarServidor();        
         } catch (SocketException e) {
             e.printStackTrace();
         }
-        iniciarServidor();        
     }
-    
+
+    /**
+     * Inicia el hilo de la clase, lo que hace que se ejecute el metodo run automaticamente
+     * 
+     * @version 1.2
+     */
     public synchronized void iniciarServidor() {
         thread = new Thread(this);
         thread.start();
+        servidorActivo = true;
     }
 
+    /**
+     * Cierra el hilo de la clase, funciona para cerrar el socket del servidor y asi detenga su ejecucion
+     * 
+     * @version 1.2 
+     */
+    public synchronized void cerrarServidor(){
+        try {
+            servidorActivo = false;
+            socket.close();
+            thread.join();
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Metodo implementado que viene de Runnable
+     * 
+     * Ejecutara ciertas acciones al mismo tiempo que otras en el programa,
+     * esto gracias al uso de los hilos
+     * 
+     * @version 1.2
+     * 
+     */
+    @Override
     public void run(){
-        while (true) {
+        while (servidorActivo){
             recibirPaquete();
             if((jugadoresActivos.size() == jugadoresListos) && !juegoIniciado){
                 game = new Game();
                 game.iniciarMultiplayer(jugadoresActivos);
                 mapa = game.getMapa();
                 juegoIniciado = true;
-                //game.getPantalla().setVisible(true);
+                // game.getPantalla().setVisible(true);
+                enviarJugadores();
                 Paquete03Show mostrar = new Paquete03Show(jugadoresListos, mapa);
                 mostrar.enviarData(this);
-            }
+            } //Si todos los jugadores estan listos para jugar, entonces comienza la partida
         }
     }
 
-
+    /**
+     * Recibe un paquete enviado por algun cliente
+     * 
+     * @version 1.2
+     */
     public void recibirPaquete(){
         datos = new byte[1024];
         DatagramPacket paquete = new DatagramPacket(datos, datos.length);
@@ -78,6 +121,41 @@ public class Server implements Runnable{
         }
     }
 
+    /**
+     * Envia un paquete a un unico cliente
+     * 
+     * @param datos Lo que se enviara al cliente
+     * @param direccionIP Direccion del cliente
+     * @param port  Puerto del cliente
+     */
+    public void enviarPaquete(byte[] datos, InetAddress direccionIP, int port){
+        DatagramPacket paquete = new DatagramPacket(datos, datos.length, direccionIP, port);
+        try {
+            socket.send(paquete);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Le envia un paquete a todos los clientes
+     * 
+     * @param datos Lo que se enviara a los clientes
+     */
+    public void enviarAtodosLosClientes(byte[] datos){
+        for (JugadorMP j : jugadoresActivos) {
+            enviarPaquete(datos, j.getDireccionIP(), j.getPuerto());
+        }
+    }
+
+    /**
+     * Determina que tipo de paquete fue recibido, dependiendo del tipo de paquete se hara una accion distinta
+     * 
+     * @param datos Lo que contiene el paquete
+     * @param direccionIP IP del paquete
+     * @param puerto Puerto del paquete
+     * @version 1.2
+     */
     private void analizarPaquete(byte[] datos, InetAddress direccionIP, int puerto) {
         String message = new String(datos).trim();
         TiposPaquetes type = Paquete.buscarPaquete(message.substring(0, 2));
@@ -93,7 +171,7 @@ public class Server implements Runnable{
             System.out.println("[" + direccionIP.getHostAddress() + ":" + puerto + "] "
                     + conexion.getUsername() + " has connected...");
             conexion.setNumCliente(jugadoresActivos.size() - 1);
-            conexion.enviarData(this);
+            conexion.enviarData(this); // Envia el mismo paquete a todos los clientes
             break;
             
         case DISCONNECT:
@@ -117,9 +195,17 @@ public class Server implements Runnable{
 
     }
 
+    /**
+     * Toma a un jugador que acaba de conectarse y lo agrega a la lista de jugadores
+     * 
+     * @param paquete Datos del jugador
+     * @param direccion IP del paquete
+     * @param puerto Puerto del paquete
+     * @version 1.2
+     */
     public void conectarJugador(Paquete00Login paquete, InetAddress direccion, int puerto){
         JugadorMP jugador = new JugadorMP(paquete.getUsername(), jugadoresActivos.size(), direccion, puerto);
-        boolean conectado = false;
+        boolean conectado = false; // Si el jugador ya se encuentra dentro de la lista, por lo tanto ya esta conectado
         
         for(JugadorMP j : jugadoresActivos){
             if(jugador.getUsuario().equalsIgnoreCase(j.getUsuario())){
@@ -139,13 +225,28 @@ public class Server implements Runnable{
         }
     }
     
+    /**
+     * Saca a un jugador de la lista en caso de que este se desconecte del servidor
+     * 
+     * @param paquete Datos del jugador
+     * @version 1.2
+     */
     public void desconectarJugador(Paquete01Desconectar paquete){
         jugadoresActivos.remove(getIndiceJugador(paquete.getUsername()));
-        //paquete.enviarData(this);
+        if(comprobarJugadores()){
+            paquete.enviarData(this);
+        }
     }
 
+    /**
+     * Cuando un jugador este listo para jugar se le asignara los datos
+     * de su personaje, dependiendo la skin que haya elegido y su numero
+     * de conexion
+     * 
+     * @param paquete Datos del personaje del jugador
+     * @version 1.2
+     */
     public void prepararJugador(Paquete02Play paquete){
-        Jugador jugador;
         String direccion = "";
         int x = -1;
         int y = -1;
@@ -178,32 +279,48 @@ public class Server implements Runnable{
             jugadoresListos++;
             jugadoresActivos.get(getIndiceJugador(paquete.getUsuario())).alistaJugador(true);
         }
-        jugador = jugadoresActivos.get(getIndiceJugador(paquete.getUsuario()));
-        Paquete04Player guardar = new Paquete04Player(jugador.getUsuario(), jugador.getNumero(), jugador.getPersonaje().getCuerpo(0).getPosX(),
-                                                        jugador.getPersonaje().getCuerpo(0).getPosY(), jugador.getPersonaje().getCuerpo(0).getDireccion(),
-                                                         jugador.getPersonaje().getSkin());
-        guardar.enviarData(this);
     }
 
+    /**
+     * Le envia los datos de los jugadores que estaran en la partida a los clientes
+     * 
+     * @version 1.2
+     */
+    public void enviarJugadores(){
+        for(int i = 0; i < jugadoresActivos.size(); i++){
+            Jugador jugador = jugadoresActivos.get(i);
+            Paquete04Player guardar = new Paquete04Player(jugador.getUsuario(), jugador.getNumero(), jugador.getPersonaje().getCuerpo(0).getPosX(),
+                                                        jugador.getPersonaje().getCuerpo(0).getPosY(), jugador.getPersonaje().getCuerpo(0).getDireccion(),
+                                                         jugador.getPersonaje().getSkin());
+            guardar.enviarData(this);
+        }
+    }
+
+    /**
+     * Si uno de los clientes movio a su personaje, 
+     * actualiza el movimiento de su personaje en el juego iniciado en el servidor
+     * 
+     * @param paquete Datos del movimiento
+     * @version 1.2
+     */
     public void actualizarMovimiento(Paquete07Move paquete){
         JugadorMP jugador = jugadoresActivos.get(paquete.getIndice());
         jugador.getPersonaje().getCuerpo(0).setDireccion(paquete.getDireccion());
-        paquete.enviarData(this);
+        // paquete.enviarData(this);
     }
-       
-    public void enviarPaquete(byte[] datos, InetAddress direccionIP, int port){
-        DatagramPacket paquete = new DatagramPacket(datos, datos.length, direccionIP, port);
-        try {
-            socket.send(paquete);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    /**
+     * Comprueba si aun hay jugadores conectados al servidor
+     * 
+     * @return true si el servidor aun cuenta con jugadores
+     * @version 1.2
+     */
+    public boolean comprobarJugadores(){
+        if(jugadoresActivos.size() == 0){
+            cerrarServidor();
+            return false;
         }
-    }
-    
-    public void enviarAtodosLosClientes(byte[] datos){
-        for (JugadorMP j : jugadoresActivos) {
-            enviarPaquete(datos, j.getDireccionIP(), j.getPuerto());
-        }
+        return true;
     }
         
     public int getIndiceJugador(String usuario){
@@ -228,8 +345,20 @@ public class Server implements Runnable{
         }
         return null;
     }
+
+    public int getJugadoresActivos(){
+        return jugadoresActivos.size();
+    }
+
+    public int getJugadoresListos(){
+        return jugadoresListos;
+    }
                                     
     public static int getPuerto() {
         return puerto;
-    }                              
+    }
+    
+    public static int getMAX_JUGADORES(){
+        return MAX_JUGADORES;
+    }
 }

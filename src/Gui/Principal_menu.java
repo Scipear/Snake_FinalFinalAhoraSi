@@ -130,19 +130,19 @@ public class Principal_menu extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_comenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_comenzarActionPerformed
-        controladores.Controlador_MenuPrinc.eventLobbie();
+        controladores.Controlador_MenuPrincipal.eventLobbie();
     }//GEN-LAST:event_btn_comenzarActionPerformed
 
     private void btn_reglasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reglasActionPerformed
-        controladores.Controlador_MenuPrinc.eventComoJugar();
+        controladores.Controlador_MenuPrincipal.eventComoJugar();
     }//GEN-LAST:event_btn_reglasActionPerformed
 
     private void btn_creditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_creditsActionPerformed
-        controladores.Controlador_MenuPrinc.eventCreditos();
+        controladores.Controlador_MenuPrincipal.eventCreditos();
     }//GEN-LAST:event_btn_creditsActionPerformed
 
     private void btn_conectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conectarActionPerformed
-        controladores.Controlador_MenuPrinc.eventConectarse();
+        controladores.Controlador_MenuPrincipal.eventConectarse();
     }//GEN-LAST:event_btn_conectarActionPerformed
 
 

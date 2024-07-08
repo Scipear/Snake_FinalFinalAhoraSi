@@ -9,44 +9,39 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 import snake2.Front.PantallaJuego;
 
+/**
+ * Clase que representa la partida
+ * 
+ * @version 1.1.4
+ */
 public class Game implements Runnable, ActionListener {
-
-    private volatile boolean iniciado = true;
-    private static Timer timer;
-    private PantallaJuego pantalla;
-    private Thread thread;
-    private ArrayList<Jugador> jugadores = new ArrayList<>();
-    private int indiceJugadores = -1;
-    protected Tablero tablero;
-    private int mapa; // Guarda el mapa seleccionado por el usuario
-    private static boolean gameOver;
-    private boolean partidaIniciada;
+    private volatile boolean iniciado = false; // Para controlar el hilo
+    private static boolean gameOver; // Si ya acabo la partida
+    private static Timer timer; // Permite que la pantalla se actualice constantemente
     private ReproductorSonidos reproductorSonidos = new ReproductorSonidos();
+    private PantallaJuego pantalla; // Pantalla en donde ocurrira la partida
+    private Thread thread;
+    protected Tablero tablero; // Tablero en donde ocurrira la partida
+    private ArrayList<Jugador> jugadores = new ArrayList<>(); // Jugadores que seran parte de la partida
+    private boolean partidaIniciada; // Si la partida ya ha sido iniciada
+    private int mapa; // Guarda el mapa seleccionado por el usuario
+    // private int indiceJugadores = -1; Para tener control del indice de cada jugador
 
     public Game(){
         gameOver = false;
-        /*int modoOpcion = Controlador_MenuPrinc.getModoJuego();
-        switch (modoOpcion) {
-            case 1:{
-                skin = Lobbie_Controlador.getSkinSeleccionada();
-                mapa = Lobbie_Controlador.getMapaSeleccionada();
-                break;
-            }
-            case 2:{
-                skin = HostLobbie_Controlador.getSkinSeleccionada();
-                mapa = HostLobbie_Controlador.getMapaSeleccionada();
-                break;
-            }
-        }*/
-        //iniciarJuego();
     }
 
+    /**
+     * Inicia una partida en caso de que el modo de juego sea para un solo jugador
+     * 
+     * @version 1.2
+     */
     public void iniciarSinglePlayer(){
-        String usuario = Login_Controlador.getNombreUsuario();
-        int skin = Lobbie_Controlador.getSkinSeleccionada();
-        mapa = Lobbie_Controlador.getMapaSeleccionada();
+        String usuario = Controlador_Login.nombreUsuario;
+        int skin = Controlador_Lobby.getSkinSeleccionada();
+        mapa = Controlador_Lobby.getMapaSeleccionada();
         jugadores.add(new Jugador(usuario, 0, 5, 1, "Derecha", skin));
-        indiceJugadores++;
+        // indiceJugadores++;
         tablero = new Tablero(jugadores, mapa);
         tablero.generarComida();
         pantalla = new PantallaJuego(tablero, jugadores, 0);
@@ -54,23 +49,40 @@ public class Game implements Runnable, ActionListener {
         iniciarJuego();
     }
 
+    /**
+     * Inicia una partida en caso que el modo de juego sea multijugador
+     * 
+     * @param jugadores Quienes seran parte de la partida
+     * @version 1.2
+     */
     public void iniciarMultiplayer(ArrayList<JugadorMP> jugadores){
         for(int i = 0; i < jugadores.size(); i++){
             this.jugadores.add(jugadores.get(i));
-            indiceJugadores++;
+            // indiceJugadores++;
         }
-        mapa = HostLobbie_Controlador.getMapaSeleccionada();
+        mapa = Controlador_Host.getMapaSeleccionada();
         tablero = new Tablero(this.jugadores, mapa);
         tablero.generarComida();
         pantalla = new PantallaJuego(tablero, this.jugadores);
         iniciarJuego();
     }
 
+    /**
+     * Inicia el hilo de la clase, lo que hace que se ejecute el metodo run automaticamente
+     * 
+     * @version 1.1.4
+     */
     public synchronized void iniciarJuego() {
         thread = new Thread(this);
         thread.start();
+        iniciado = true;
     }
 
+    /**
+     * Cierra el hilo de la clase, funciona para terminar la partida
+     * 
+     * @version 1.1.4
+     */
     public synchronized void detenerJuego() {
         iniciado = false;
 
@@ -79,22 +91,6 @@ public class Game implements Runnable, ActionListener {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public int getMapa(){
-        return mapa;
-    }
-
-    public PantallaJuego getPantalla(){
-        return pantalla;
-    }    
-
-    public Tablero getTablero(){
-        return tablero;
-    }
-
-    public static void setDelay(int delay) {
-        timer.setDelay(delay);
     }
 
     @Override
@@ -113,16 +109,18 @@ public class Game implements Runnable, ActionListener {
                 } 
             }
         }
-    } //Realmente no se para que sirve este hilo, practicamente no hace nada
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(!tablero.getPausa()){
             tablero.chequeaPersonajes();
-            tablero.personajeSobreComida(jugadores);
+            if(tablero.personajeSobreComida(jugadores)){
+                pantalla.actualizaPuntaje(jugadores);
+            }
 
             tablero.conteoComidaEspecial();
-            pantalla.actualizaMapa(jugadores, jugadores.size());
+            pantalla.actualizaMapa();
             /*
             if(!jugador.getPersonaje().getEstado()){
                 detenerJuego();
@@ -131,9 +129,25 @@ public class Game implements Runnable, ActionListener {
                 gameOver = true;
                 pantalla.setVisible(false);
                 pantalla.detenerMusica();
-                FinalPartida_Controlador.mostrar();
+                Controlador_FinalPartida.mostrar();
             }*/
         }
         pantalla.muestraPausa(tablero);
+    }
+
+    public static void setDelay(int delay) {
+        timer.setDelay(delay);
+    }
+
+    public int getMapa(){
+        return mapa;
+    }
+
+    public PantallaJuego getPantalla(){
+        return pantalla;
+    }    
+
+    public Tablero getTablero(){
+        return tablero;
     }
 }

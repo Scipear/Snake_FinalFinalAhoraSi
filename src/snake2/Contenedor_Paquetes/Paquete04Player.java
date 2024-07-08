@@ -1,8 +1,10 @@
 package snake2.Contenedor_Paquetes;
 
-import snake2.Conexion.Cliente;
-import snake2.Conexion.Server;
-
+/**
+ * Clase que representa a un paquete para los datos iniciales de un jugador
+ * 
+ * @version 1.2
+ */
 public class Paquete04Player extends Paquete{
     private String usuario;
     private int numero;
@@ -31,16 +33,6 @@ public class Paquete04Player extends Paquete{
         this.y = y;
         this.direccion = direccion;
         this.skin = skin;
-    }
-
-    @Override
-    public void enviarData(Cliente client){
-       client.enviarPaquete(getData());
-    }    
-
-    @Override
-    public void enviarData(Server server){
-       server.enviarAtodosLosClientes(getData());
     }
 
     @Override

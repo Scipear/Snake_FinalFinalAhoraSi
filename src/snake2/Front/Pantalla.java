@@ -11,13 +11,18 @@ import javax.swing.JFrame;
  * @version 1.0
  *
  */
-public class Pantalla extends JFrame {
+public abstract class Pantalla extends JFrame {
 
     protected static final int ancho = 700;
     protected static final int alto = 700;/* Tamanio fijo que tendra cada ventana, esto podria ajustarse
     en un futuro, en caso que en la resolucion de las pantallas del laboratorio o alguna computadora no
     entre completa o se vea muy pequeña, hay que ir haciendo pruebas*/
     
+    /**
+     * Iniicaliza los valores de la ventana y la muestra en pantalla
+     * 
+     * @version 1.0
+     */
     public static void inicializar(JFrame ventana) {
         ventana.setSize(ancho, alto);
         ventana.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -26,7 +31,11 @@ public class Pantalla extends JFrame {
         ventana.setLayout(null);
         ventana.setVisible(true);
     }
-
+    /**
+     * Quita la visibilidad de una ventada
+     * 
+     * @param ventana Frame que dejara de ser visible
+     */
     public static void ocultar(JFrame ventana) {
         ventana.setVisible(false);
     }

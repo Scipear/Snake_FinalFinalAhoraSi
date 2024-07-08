@@ -1,12 +1,11 @@
 package snake2.Contenedor_Paquetes;
 
 import java.lang.Integer;
-import snake2.Conexion.Cliente;
-import snake2.Conexion.Server;
-
 /**
- *
+ *  Clase que representa a un paquete para conocer si un jugador esta listo para jugar
+ * 
  * @author IVANNA
+ * @version 1.2
  */
 public class Paquete02Play extends Paquete{
     private String usuario;
@@ -23,16 +22,6 @@ public class Paquete02Play extends Paquete{
         super(02);
         this.usuario = usuario;
         this.skin = skin;
-    }
-
-    @Override
-    public void enviarData(Cliente client){
-       client.enviarPaquete(getData());
-    }    
-
-    @Override
-    public void enviarData(Server server){
-       server.enviarAtodosLosClientes(getData());
     }
 
     @Override

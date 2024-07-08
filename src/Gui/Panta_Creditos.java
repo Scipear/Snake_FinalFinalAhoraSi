@@ -57,7 +57,7 @@ public class Panta_Creditos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        controladores.Creditos_Controlador.eventVolverMenu();
+        controladores.Controlador_Creditos.eventVolverMenu();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

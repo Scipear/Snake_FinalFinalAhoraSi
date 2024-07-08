@@ -143,35 +143,35 @@ public class Panta_Online_ClienteLobbie extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSkinRosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinRosaActionPerformed
-        controladores.ClienteLobbie_Controlador.selec_Skin2();
+        controladores.Controlador_Cliente.selec_Skin2();
     }//GEN-LAST:event_btnSkinRosaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        controladores.ClienteLobbie_Controlador.eventIniciar();
+        controladores.Controlador_Cliente.eventIniciar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnSkinNaranjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinNaranjaActionPerformed
-        controladores.ClienteLobbie_Controlador.selec_Skin3();
+        controladores.Controlador_Cliente.selec_Skin3();
     }//GEN-LAST:event_btnSkinNaranjaActionPerformed
 
     private void btnSkinAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinAzulActionPerformed
-        controladores.ClienteLobbie_Controlador.selec_Skin4();
+        controladores.Controlador_Cliente.selec_Skin4();
     }//GEN-LAST:event_btnSkinAzulActionPerformed
 
     private void btnSkinVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinVerdeActionPerformed
-        controladores.ClienteLobbie_Controlador.selec_Skin1();
+        controladores.Controlador_Cliente.selec_Skin1();
     }//GEN-LAST:event_btnSkinVerdeActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        controladores.ClienteLobbie_Controlador.eventVolverAlMenu();
+        controladores.Controlador_Cliente.eventVolverAlPre();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btn_gorritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gorritoActionPerformed
-        controladores.ClienteLobbie_Controlador.selec_Skin6();
+        controladores.Controlador_Cliente.selec_Skin6();
     }//GEN-LAST:event_btn_gorritoActionPerformed
 
     private void btn_cascoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cascoActionPerformed
-        controladores.ClienteLobbie_Controlador.selec_Skin5();
+        controladores.Controlador_Cliente.selec_Skin5();
     }//GEN-LAST:event_btn_cascoActionPerformed
 
 

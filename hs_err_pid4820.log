@@ -30,7 +30,7 @@
 Command Line: -XX:+ShowCodeDetailsInExceptionMessages snake2.Snake2
 
 Host: Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz, 4 cores, 7G,  Windows 10 , 64 bit Build 19041 (10.0.19041.3636)
-Time: Sat Jul  6 20:41:30 2024 Hora estándar de Venezuela elapsed time: 0.342411 seconds (0d 0h 0m 0s)
+Time: Sat Jul  6 20:41:30 2024 Hora estï¿½ndar de Venezuela elapsed time: 0.342411 seconds (0d 0h 0m 0s)
 
 ---------------  T H R E A D  ---------------
 
@@ -108,7 +108,7 @@ j  java.awt.Frame.addNotify()V+20 java.desktop@17.0.10
 j  java.awt.Window.pack()V+28 java.desktop@17.0.10
 j  Gui.Panta_Login.initComponents()V+490
 j  Gui.Panta_Login.<init>()V+5
-j  controladores.Login_Controlador.<clinit>()V+4
+j  controladores.Controlador_Login.<clinit>()V+4
 v  ~StubRoutines::call_stub
 j  snake2.Snake2.main([Ljava/lang/String;)V+0
 v  ~StubRoutines::call_stub
@@ -740,7 +740,7 @@ symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Us
 VM Arguments:
 jvm_args: -XX:+ShowCodeDetailsInExceptionMessages 
 java_command: snake2.Snake2
-java_class_path (initial): C:\Users\PC1\AppData\Roaming\Code\User\workspaceStorage\b4a83ee400d60e41797bc0485eb57087\redhat.java\jdt_ws\Snake_FinalFinalAhoraSi_e8b0d868\bin;c:\Users\PC1\Desktop\UNIVERSIDAD\IV Semestre\Programación III\Mine\Snake_FinalFinalAhoraSi\lib\jlayer-1.0.1-1.jar;c:\Users\PC1\Desktop\UNIVERSIDAD\IV Semestre\Programación III\Mine\Snake_FinalFinalAhoraSi\lib\AbsoluteLayout-RELEASE220.jar
+java_class_path (initial): C:\Users\PC1\AppData\Roaming\Code\User\workspaceStorage\b4a83ee400d60e41797bc0485eb57087\redhat.java\jdt_ws\Snake_FinalFinalAhoraSi_e8b0d868\bin;c:\Users\PC1\Desktop\UNIVERSIDAD\IV Semestre\Programaciï¿½n III\Mine\Snake_FinalFinalAhoraSi\lib\jlayer-1.0.1-1.jar;c:\Users\PC1\Desktop\UNIVERSIDAD\IV Semestre\Programaciï¿½n III\Mine\Snake_FinalFinalAhoraSi\lib\AbsoluteLayout-RELEASE220.jar
 Launcher Type: SUN_STANDARD
 
 [Global flags]

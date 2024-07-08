@@ -223,51 +223,51 @@ public class Panta_Online_HostLobbie extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        controladores.HostLobbie_Controlador.eventIniciar();
+        controladores.Controlador_Host.eventIniciar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnSkinRosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinRosaActionPerformed
-        controladores.HostLobbie_Controlador.selec_Skin2();
+        controladores.Controlador_Host.selec_Skin2();
     }//GEN-LAST:event_btnSkinRosaActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        controladores.HostLobbie_Controlador.eventVolverAlMenu();
+        controladores.Controlador_Host.eventVolverAlPre();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btnSkinGorritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinVerdeActionPerformed
-        controladores.HostLobbie_Controlador.selec_Skin5();
+        controladores.Controlador_Host.selec_Skin5();
     }//GEN-LAST:event_btnSkinVerdeActionPerformed
 
     private void btnSkinAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinAzulActionPerformed
-        controladores.HostLobbie_Controlador.selec_Skin4();
+        controladores.Controlador_Host.selec_Skin4();
     }//GEN-LAST:event_btnSkinAzulActionPerformed
 
     private void btnSkinCascoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinNaranjaActionPerformed
-        controladores.HostLobbie_Controlador.selec_Skin5();
+        controladores.Controlador_Host.selec_Skin5();
     }//GEN-LAST:event_btnSkinNaranjaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controladores.HostLobbie_Controlador.selec_Mapa1();
+        controladores.Controlador_Host.selec_Mapa1();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        controladores.HostLobbie_Controlador.selec_Mapa2();
+        controladores.Controlador_Host.selec_Mapa2();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        controladores.HostLobbie_Controlador.selec_Mapa3();
+        controladores.Controlador_Host.selec_Mapa3();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        controladores.HostLobbie_Controlador.selec_Mapa4();
+        controladores.Controlador_Host.selec_Mapa4();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void btnSkinVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinVerde1ActionPerformed
-        controladores.HostLobbie_Controlador.selec_Skin1();
+        controladores.Controlador_Host.selec_Skin1();
     }//GEN-LAST:event_btnSkinVerde1ActionPerformed
 
     private void btnSkinNaranjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkinNaranja1ActionPerformed
-        controladores.HostLobbie_Controlador.selec_Skin3();
+        controladores.Controlador_Host.selec_Skin3();
     }//GEN-LAST:event_btnSkinNaranja1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,6 +1,6 @@
 package snake2;
 /**
- * Clase parte del back
+ * Clase parte que representa la comida que aparecera durante el juego
  * 
  * @version 1.1
  */

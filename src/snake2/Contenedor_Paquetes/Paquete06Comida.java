@@ -4,12 +4,11 @@
  */
 package snake2.Contenedor_Paquetes;
 
-import snake2.Conexion.Cliente;
-import snake2.Conexion.Server;
-
 /**
- *
+ * Clase que representa a un paquete para conocer los datos de una comida
+ * 
  * @author IVANNA
+ * @version 1.2
  */
 public class Paquete06Comida extends Paquete{
     private int tipo_comida;  
@@ -30,15 +29,7 @@ public class Paquete06Comida extends Paquete{
         this.Y = y;
         this.tipo_comida = tipo_comida;   
     }
-       
-    @Override
-    public void enviarData(Cliente client){
-      client.enviarPaquete(getData());    
-    }
-    @Override
-    public void enviarData(Server server){
-        server.enviarAtodosLosClientes(getData());       
-    }
+
     @Override
     public byte[] getData(){
         return ("06" + this.tipo_comida + "," + this.X + "," + this.Y).getBytes();    

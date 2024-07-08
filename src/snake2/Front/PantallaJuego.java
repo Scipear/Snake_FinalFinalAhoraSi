@@ -18,16 +18,17 @@ import ost.ReproductorSonidos;
 */
 
 public class PantallaJuego extends Pantalla {
+    private static ReproductorSonidos fondoOst;
+    private static final String gameOstRuta = "\\src\\ost\\ARRR.mp3";
+    private boolean estaEnPausa = false;
+    private boolean estaEnJuego;
     private GraficoTablero mapa; //Grafico que se encarga de dibujar el tablero y todo lo que tiene encima
     private Controles controles; //Configuracion del teclado (En esta ventana) para la manipulacion del personaje
     private JLayeredPane multiPanel;
     private JPanel fondo;
-    private JLabel fondoImagen, recuadroImagen, pausa;
+    private JLabel fondoImagen, pausa;
+    private ArrayList<JLabel> recuadrosImagen = new ArrayList<>();
     private ArrayList<JPanel> recuadros = new ArrayList<>();
-    private boolean estaEnPausa = false;
-    private boolean estaEnJuego;
-    private static ReproductorSonidos fondoOst;
-    private static final String gameOstRuta = "\\src\\ost\\ARRR.mp3";
 
     /**
     *
@@ -43,7 +44,7 @@ public class PantallaJuego extends Pantalla {
         multiPanel = new JLayeredPane();
         fondo = new JPanel();
         fondoImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/FondoTablero.png")));
-        recuadroImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png")));
+        // recuadroImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png")));
         pausa = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Pausa8.png")));
         fondoOst = new ReproductorSonidos();
         estaEnJuego = true;
@@ -61,7 +62,7 @@ public class PantallaJuego extends Pantalla {
         multiPanel = new JLayeredPane();
         fondo = new JPanel();
         fondoImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/FondoTablero.png")));
-        recuadroImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png")));
+        // recuadroImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png")));
         pausa = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Pausa8.png")));
         fondoOst = new ReproductorSonidos();
         estaEnJuego = true;
@@ -94,12 +95,15 @@ public class PantallaJuego extends Pantalla {
     * 
     * @version 1.0.4
     */
-    public void actualizaMapa(ArrayList<Jugador> jugadores, int cantidad){
+    public void actualizaMapa(){
         repaint();
-        for(int i = 0; i < cantidad; i++){
-            recuadros.get(i).remove(recuadroImagen);
-            recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
-            recuadros.get(i).add(recuadroImagen);
+    }
+
+    public void actualizaPuntaje(ArrayList<Jugador> jugadores){
+        for(int i = 0; i < jugadores.size(); i++){
+            recuadros.get(i).remove(recuadrosImagen.get(i));
+            recuadrosImagen.get(i).setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
+            recuadros.get(i).add(recuadrosImagen.get(i));
         }
     }
     
@@ -118,45 +122,39 @@ public class PantallaJuego extends Pantalla {
         }
     }
 
-    //public void asignarControles(Tablero tablero, ArrayList<Jugador> jugadores){
-    //    for(int i = 0; i < jugadores.size(); i++){
-    //        controles = new Controles(tablero, jugadores.get(i).getPersonaje());
-    //        addKeyListener(controles);
-    //    }
-    //}
-
     public void iniciarPuntaje(ArrayList<Jugador> jugadores){
         for(int i = 0; i < jugadores.size(); i++){
             recuadros.add(new JPanel());
+            recuadrosImagen.add(new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png"))));
+            recuadrosImagen.get(i).setBounds(0, 0, 100, 15);
+            recuadrosImagen.get(i).setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
+            recuadrosImagen.get(i).setHorizontalTextPosition(JLabel.CENTER);
 
             switch(jugadores.get(i).getNumero()){
                 case 0:
-                    recuadroImagen.setBounds(0, 0, 100, 15);
-                    recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
-                    recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
                     recuadros.get(i).setBounds(15, 5, 100, 15);
                     break;
                 case 1:
-                    recuadroImagen.setBounds(0, 0, 100, 15);
-                    recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
-                    recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
+                    // recuadroImagen.setBounds(0, 0, 100, 15);
+                    // recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
+                    // recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
                     recuadros.get(i).setBounds(570,645, 100, 15);
                     break;
                 case 2:
-                    recuadroImagen.setBounds(0, 0, 100, 15);
-                    recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
-                    recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
+                    // recuadroImagen.setBounds(0, 0, 100, 15);
+                    // recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
+                    // recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
                     recuadros.get(i).setBounds(15, 645, 100, 15);
                     break;
                 case 3:
-                    recuadroImagen.setBounds(0, 0, 100, 15);
-                    recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
-                    recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
+                    // recuadroImagen.setBounds(0, 0, 100, 15);
+                    // recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
+                    // recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
                     recuadros.get(i).setBounds(570, 5, 100, 15);
                     break;       
             }
             recuadros.get(i).setLayout(null);
-            recuadros.get(i).add(recuadroImagen);
+            recuadros.get(i).add(recuadrosImagen.get(i));
             multiPanel.add(recuadros.get(i), Integer.valueOf(2));
         }
     }

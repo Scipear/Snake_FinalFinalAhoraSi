@@ -102,15 +102,15 @@ public class Panta_ComoJugar1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controladores.ComoJugar_Controlador.eventVolverMenu();
+        controladores.Controlador_ComoJugar.eventVolverMenu();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_regla2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regla2ActionPerformed
-        controladores.ComoJugar_Controlador.eventMostrarRegla2();
+        controladores.Controlador_ComoJugar.eventMostrarRegla2();
     }//GEN-LAST:event_btn_regla2ActionPerformed
 
     private void btn_regla1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regla1ActionPerformed
-        controladores.ComoJugar_Controlador.eventMostrarRegla1();
+        controladores.Controlador_ComoJugar.eventMostrarRegla1();
     }//GEN-LAST:event_btn_regla1ActionPerformed
 
     

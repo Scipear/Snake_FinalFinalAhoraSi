@@ -1,6 +1,5 @@
 package snake2.Conexion;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -9,15 +8,11 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Timer;
-
-import controladores.ClienteLobbie_Controlador;
-import controladores.Login_Controlador;
+import controladores.Controlador_Cliente;
+import controladores.Controlador_Login;
+import snake2.AlertException;
 import snake2.Comida;
 import snake2.Jugador;
-import snake2.JugadorMP;
 import snake2.Tablero;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete.TiposPaquetes;
@@ -28,57 +23,96 @@ import snake2.Contenedor_Paquetes.Paquete03Show;
 import snake2.Contenedor_Paquetes.Paquete04Player;
 import snake2.Contenedor_Paquetes.Paquete05Update;
 import snake2.Contenedor_Paquetes.Paquete06Comida;
-import snake2.Contenedor_Paquetes.Paquete07Move;
 import snake2.Front.PantallaJuego;
 
+/**
+ * Clase que representa a un cliente que intercambia datos (Paquetes) con un servidor
+ * 
+ * @version 1.2
+ */
 public class Cliente implements Runnable{
-    private static Timer timer;
-    private static int cantidadJugadores = 0;
-    private byte[] datos;
-    private InetAddress direccionIP;
+    private static int cantidadJugadores = 0; // Cantidad de jugadores que estaran en la partida
+    private int numCliente = -1; // Representa si es el primer, segundo, etc cliente en conectarse al servidor
+    private boolean jugadoresListos = false; // Si todos los jugadores estan listos para iniciar la partida
+    private boolean estaConectado = false; // Si el cliente esta conectado al servidor
+    private int puerto; // Puerto del servidor para el intercambio de datos
+    private InetAddress direccionIP; // Direccion IP del servidor
     private DatagramSocket socket;
-    private int puerto;
+    private byte[] datos; // Forma en la que los datos se van a intercambiar entre cliente y servidor
     private Thread thread;
-    private Comida comidaAux;
-    private ArrayList<Jugador> jugadores = new ArrayList<>();
-    private PantallaJuego pantalla;
-    private boolean tieneSkin = false;
-    private boolean jugadoresListos = false;
-    private Tablero tablero;
-    private int numCliente = -1;
+    private Comida comidaAux; // Comida auxiliar para  hacer que aparezca la primera fruta en la pantalla de los clientes
+    private ArrayList<Jugador> jugadores = new ArrayList<>(); // Lista de los jugadores que estaran en la partida
+    private PantallaJuego pantalla; // Pantalla que mostrará la partida
+    private Tablero tablero; // Tablero en el que ocurrirá la partida
 
+    /**
+     * Constructor de la clase
+     * 
+     * @param direccionIP La direccion del servidor
+     */
     public Cliente(String direccionIP){
         this.puerto = Server.getPuerto();
         try {
             this.direccionIP = InetAddress.getByName(direccionIP);
             socket = new DatagramSocket();
+            iniciarCliente();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (SocketException e) {
             e.printStackTrace();
         }
-        iniciarCliente();
     }
 
+    /**
+     * Inicia el hilo de la clase, lo que hace que se ejecute el metodo run automaticamente
+     * 
+     * @version 1.2
+     */
     public synchronized void iniciarCliente() {
         thread = new Thread(this);
         thread.start();
+        estaConectado = true;
     }
+
+    /**
+     * Cierra el hilo de la clase, funciona para cerrar el socket del cliente
+     * 
+     * @version 1.2 
+     */
+    public synchronized void cerrarCliente(){
+        try {
+            estaConectado = false;
+            socket.close();
+            thread.join();
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Metodo implementado que proviene de Runnable
+     * 
+     * Ejecutara ciertas acciones al mismo tiempo que otras en el programa,
+     * esto gracias al uso de los hilos
+     * 
+     * @version 1.2
+     * 
+     */
     @Override
     public void run(){
-        Paquete00Login conexion = new Paquete00Login(Login_Controlador.getNombreUsuario(), 0);
-        conexion.enviarData(this);
+        Paquete00Login conexion = new Paquete00Login(Controlador_Login.nombreUsuario, 0);
+        conexion.enviarData(this); // Avisa al servidor que esta conectandose a este
         
-        while(true){
-            if(ClienteLobbie_Controlador.isReady == true && tieneSkin == false){
-                Paquete02Play play = new Paquete02Play(Login_Controlador.nombreUsuario, ClienteLobbie_Controlador.skinSeleccionada);
-                play.enviarData(this);
-                tieneSkin = true;
-            }
+        while(estaConectado){
             recibirPaquete();
         }
     }
 
+    /**
+     * Recibe un paquete enviado por el servidor
+     * 
+     * @version 1.2
+     */
     public void recibirPaquete(){
         datos = new byte[1024];
         DatagramPacket paquete = new DatagramPacket(datos, datos.length);
@@ -90,6 +124,11 @@ public class Cliente implements Runnable{
         }
     }
 
+    /**
+     * Le envia un paquete al servidor
+     * 
+     * @param datos Lo que se enviara al servidor
+     */
     public void enviarPaquete(byte[] datos){
         DatagramPacket paquete = new DatagramPacket(datos, datos.length, direccionIP, puerto);
         try {
@@ -98,17 +137,36 @@ public class Cliente implements Runnable{
             e.printStackTrace();
         }
     }
-    
-    private void analizarPaquete(byte[] datos, InetAddress direccionIP, int puerto) {
+
+    /**
+     * Determina que tipo de paquete fue recibido, dependiendo del tipo de paquete se hara una accion distinta
+     * 
+     * @param datos Lo que contiene el paquete
+     * @param direccionIP IP del paquete
+     * @param puerto Puerto del paquete
+     * @version 1.2
+     */
+    private void analizarPaquete(byte[] datos, InetAddress direccionIP, int puerto){
         String message = new String(datos).trim();
         TiposPaquetes type = Paquete.buscarPaquete(message.substring(0, 2));
         switch(type){
+        default:
         case INVALID:
             break;
         case LOGIN:
-            Paquete00Login conexion = new Paquete00Login(datos);
-            if(numCliente == -1){
-                numCliente = conexion.getNumCliente();
+            try{
+                Paquete00Login conexion = new Paquete00Login(datos);
+                if(conexion.getNumCliente() == Server.getMAX_JUGADORES()-1){
+                    throw new AlertException("No se puede ingresar al servidor debido a que se encuentra lleno");
+                } // Si el servidor se encuentra lleno desconecta al cliente del servidor
+
+                if(numCliente == -1){
+                    numCliente = conexion.getNumCliente();
+                } // Toma el numero de conexion del cliente
+
+            }catch(AlertException e){
+                e.mostrarAlerta();
+                Controlador_Cliente.eventVolverAlPre();
             }
             break;
 
@@ -131,7 +189,9 @@ public class Cliente implements Runnable{
                 tablero.actualizarComida(comidaAux.getPosX(), comidaAux.getPosY(), 4);
                 pantalla = new PantallaJuego(tablero, jugadores, numCliente);
                 pantalla.setVisible(true);
-            }
+            } /*Inicia el juego para los jugadores creando el tablero y 
+                la ventana que estara en constante actualizacion con los cambios 
+                que haya en el servidor*/
             break;
 
         case PLAYER:
@@ -148,20 +208,26 @@ public class Cliente implements Runnable{
             Paquete06Comida comida = new Paquete06Comida(datos);
             actualizarEntidades(comida);
             break;
-
-        // case MOVE:
-        //     Paquete07Move mover = new Paquete07Move(datos);
-        //     actualizarEntidades(mover);
-        //     break;
         }
     }
 
+    /**
+     * Tomas los datos de un jugador enviados por el servidor y los guarda en la lista
+     * @param paquete Datos de un jugador
+     * @version 1.2
+     */
     public void guardarJugador(Paquete04Player paquete){
         Jugador jugador = new Jugador(paquete.getUsuario(), paquete.getNumero(), paquete.getX(), paquete.getY(), paquete.getDireccion(), paquete.getSkin());
         jugadores.add(jugador);
         cantidadJugadores++;
     }
 
+    /**
+     * Actualiza estados que estan sobre el tablero como posiciones de jugadores o comida
+     * 
+     * @param packet Datos para la actualizacion
+     * @version 1.2
+     */
     public void actualizarEntidades(Paquete packet){
         if(packet instanceof Paquete05Update){
             Paquete05Update paquete = (Paquete05Update) packet;
@@ -184,16 +250,12 @@ public class Cliente implements Runnable{
                 tablero.actualizarComida(paquete.getX(), paquete.getY(), paquete.getTipo());
             }
 
-        }// }else if(packet instanceof Paquete07Move){
-        //      Paquete07Move paquete = (Paquete07Move) packet;
-        //      Jugador jugador = jugadores.get(paquete.getIndice());
-        //      jugador.getPersonaje().getCuerpo(0).setDireccion(paquete.getDireccion());
-        // }
+        }
+        
         if(pantalla != null){
-            pantalla.actualizaMapa(jugadores, jugadores.size());
+            pantalla.actualizaMapa();
         }
     }
-
     public int getIndiceJugador(String usuario){
         int indice = 0;
         for(Jugador j : jugadores){
@@ -205,13 +267,4 @@ public class Cliente implements Runnable{
         }
         return indice;
     }
-
-    public void actualizaComida(Paquete06Comida paquete){
-        tablero.actualizarComida(paquete.getX(), paquete.getY(), paquete.getTipo());
-    }
-
-    public void setTieneSkin(boolean tieneSkin){
-        this.tieneSkin = tieneSkin;
-    }
-
 }

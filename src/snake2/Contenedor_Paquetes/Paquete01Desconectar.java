@@ -4,9 +4,11 @@
  */
 package snake2.Contenedor_Paquetes;
 
-import snake2.Conexion.Cliente;
-import snake2.Conexion.Server;
-
+/**
+ * Clase que representa a un paquete para conocer si un jugador se ha desconectado
+ * 
+ * @version 1.2
+ */
 public class Paquete01Desconectar extends Paquete{ 
     private String username;
 
@@ -18,16 +20,6 @@ public class Paquete01Desconectar extends Paquete{
     public Paquete01Desconectar(String username){
         super(01);
         this.username = username;
-    }
-
-    @Override
-    public void enviarData(Cliente client){
-        client.enviarPaquete(getData());
-    }
-
-    @Override
-    public void enviarData(Server server){
-        server.enviarAtodosLosClientes(getData());
     }
 
     @Override

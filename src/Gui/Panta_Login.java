@@ -1,7 +1,7 @@
 
 package Gui;
 
-import controladores.Login_Controlador;
+import controladores.Controlador_Login;
 
 public class Panta_Login extends javax.swing.JFrame {
 
@@ -10,7 +10,7 @@ public class Panta_Login extends javax.swing.JFrame {
      */
     public Panta_Login() {
         initComponents();
-        Login_Controlador.usuario = TextUsuario;
+        Controlador_Login.usuario = TextUsuario;
     }
 
     /**
@@ -82,7 +82,7 @@ public class Panta_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_TextUsuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Login_Controlador.eventAsignarUsuario();
+        Controlador_Login.eventAsignarUsuario();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -77,11 +77,11 @@ public class Panta_FinalPartida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controladores.FinalPartida_Controlador.eventVolverMenu();
+        controladores.Controlador_FinalPartida.eventVolverMenu();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        controladores.FinalPartida_Controlador.eventniciarJuego();
+        controladores.Controlador_FinalPartida.eventniciarJuego();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

@@ -1,8 +1,10 @@
 package snake2.Contenedor_Paquetes;
 
-import snake2.Conexion.Cliente;
-import snake2.Conexion.Server;
-
+/**
+ * Clase que representa a un paquete para conocer los datos iniciales de una partida recien iniciada
+ * 
+ * @version 1.2
+ */
 public class Paquete03Show extends Paquete{
     private int cantidad;
     private int mapa;
@@ -19,16 +21,6 @@ public class Paquete03Show extends Paquete{
         super(03);
         this.cantidad = cantidad;
         this.mapa = mapa;
-    }
-
-    @Override
-    public void enviarData(Cliente client){
-       client.enviarPaquete(getData());
-    }    
-
-    @Override
-    public void enviarData(Server server){
-       server.enviarAtodosLosClientes(getData());
     }
 
     @Override

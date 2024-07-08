@@ -3,7 +3,7 @@ package snake2;
 import ost.ReproductorSonidos;
 
 /**
- * Clase parte del back. Hereda de la clase Comida
+ * Clase que representa el tipo de comida especial Comida Congelada. Hereda de la clase Comida
  *
  * @version 1.1.4
  */
@@ -20,13 +20,6 @@ public class ComidaCongelada extends Comida{
         ostSFX.reproducirSFX(sfxOstRuta);
     }
 
-    /**
-     * Aplica un efecto en el juego o al personaje cuando se es comido
-     *
-     * @param personaje Personaje al que se le va a aplicar el efecto de la
-     * comida cuando este la coma
-     * @version 1.1.4
-     */
     public void hacerEfecto(Personaje personaje) {
         personaje.setCongelado(true);
         super.hacerEfecto(personaje);

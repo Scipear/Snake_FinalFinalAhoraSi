@@ -1,6 +1,6 @@
 package snake2;
 /**
- * Clase parte del back
+ * Clase que representa un jugador
  * 
  * @version 1.0.4
  */
@@ -9,14 +9,12 @@ public class Jugador{
     private int puntaje;
     private String usuario;
     private int numero;
-    private boolean estaListo;
     private boolean host;
 
     public Jugador(String usuario, int numero){
         this.usuario = usuario;
         this.numero = numero;
         puntaje = 0;
-        estaListo = false;
         activarHost();
     }
 
@@ -35,13 +33,17 @@ public class Jugador{
     public void aumentaPuntaje(){
         puntaje++;
     }
-
+    /**
+     * Le asigna un personaje al jugador
+     * 
+     * @param x Posicion en X del personaje
+     * @param y Posicion en Y del personaje
+     * @param direccion A donde esta mirando el personaje
+     * @param skin Avatar del personaje
+     * @version 1.2
+     */
     public void asignaPersonaje(int x, int y, String direccion, int skin){
         personaje = new Personaje(x, y, direccion, skin);
-    }
-    
-    public void alistaJugador(boolean estaListo){
-        this.estaListo = estaListo;
     }
     
     public void activarHost(){
@@ -65,9 +67,4 @@ public class Jugador{
     public int getNumero(){
         return numero;
     }
-
-    public boolean getEstaListo(){
-        return estaListo;
-    }
-
 }

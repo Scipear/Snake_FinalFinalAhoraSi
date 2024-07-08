@@ -3,15 +3,16 @@ package snake2;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import controladores.PreConeccion_Controlador;
+import controladores.Controlador_PreConeccion;
+import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete07Move;
 
 /**
- * Clase parte del back. Configura los controles para cuando se esta dentro de una partida
+ * Clase parte del back. Configura los controles para un personaje especifico en la partida
  * 
  * @version 1.0.4
  */
-public class Controles implements KeyListener{
+public class Controles implements KeyListener, Comunicacion{
     private Paquete07Move mover;
     private Personaje personaje;
     private Tablero tablero;
@@ -57,10 +58,8 @@ public class Controles implements KeyListener{
         }
         if(direccion != null){
             personaje.getCuerpo(0).setDireccion(direccion);
-            if(PreConeccion_Controlador.cliente != null){
-                mover = new Paquete07Move(indice, direccion);
-                mover.enviarData(PreConeccion_Controlador.cliente);
-            }
+            mover = new Paquete07Move(indice, direccion);
+            enviarServidor(mover);
         }
     }
 
@@ -100,16 +99,21 @@ public class Controles implements KeyListener{
         }
         if(direccion != null){
             personaje.getCuerpo(0).setDireccion(direccion);
-            if(PreConeccion_Controlador.cliente != null){
-                mover = new Paquete07Move(indice, direccion);
-                mover.enviarData(PreConeccion_Controlador.cliente);
-            }
+            mover = new Paquete07Move(indice, direccion);
+            enviarServidor(mover);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    @Override
+    public void enviarServidor(Paquete paquete){
+        if(Controlador_PreConeccion.cliente != null){
+            paquete.enviarData(Controlador_PreConeccion.cliente);
+        }
     }
 
 }

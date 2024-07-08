@@ -1,7 +1,7 @@
 package snake2;
 
 /**
- * Clase parte del back
+ * Clase que representa las partes del cuerpo que conforman la serpiente
  * 
  * @version 1.0.2
  */

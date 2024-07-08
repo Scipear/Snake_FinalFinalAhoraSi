@@ -3,14 +3,16 @@ package snake2;
 import java.util.ArrayList;
 import java.util.List;
 
-import controladores.PreConeccion_Controlador;
+import controladores.Controlador_PreConeccion;
+import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete05Update;
+
 /**
- * Clase parte del back
+ * Clase que representa a una serpiente del juego
  * 
  * @version 1.0.1
  */
-public class Personaje{
+public class Personaje implements Comunicacion{
     private Paquete05Update actualizar;
     private List<Cuerpo> serpiente = new ArrayList<>(); //Representa todo el cuerpo de la serpiente
     private int velocidad;
@@ -21,7 +23,6 @@ public class Personaje{
 
     /**
      * Constructor de la clase
-     * 
      * 
      * @param posX Posicion en X de en que parte del tablero aparecera el personaje
      * @param posY Posicion en X de en que parte del tablero aparecera el personaje
@@ -36,6 +37,14 @@ public class Personaje{
         estado = true;
     }
 
+    /**
+     * Da los valores iniciales a la serpiente y sus partes del cuerpo
+     * 
+     * @param posX Posicion en X inicial de la serpiente
+     * @param posY Posicion en Y inicial de la serpiente
+     * @param direccion A donde esta mirando la serpiente
+     * @version 1.1.6
+     */
     public void iniciarSerpiente(int posX, int posY, String direccion){
         switch(direccion){
             case "Derecha":{
@@ -101,6 +110,7 @@ public class Personaje{
     /**
      * Recorre las partes del cuerpo de la serpiente y evalua sus estados
      * 
+     * @param indice Identificador del jugador al que le pertenece la serpiente
      * @version 1.0.4
      */
     public void movimiento(int indice){
@@ -109,27 +119,34 @@ public class Personaje{
                 if(serpiente.get(i).esCurva()){
                     serpiente.get(i).cambioACuerpo(serpiente.get(i-1));
                 }
-    
                 avanzar(i);
-                
-                if(i != 0 && serpiente.get(i-1).esCabeza()){
-                    serpiente.get(i).cambioACurva(serpiente.get(i-1).getDireccion());
-                }
-                
-                if(i != 0 && !serpiente.get(i).esCola() && !serpiente.get(i-1).esCabeza()){
-                    serpiente.get(i).setTipo(serpiente.get(i-1).getTipo());
-                    serpiente.get(i).setDireccion(serpiente.get(i-1).getDireccion());
-                }
-    
-                if(serpiente.get(i).esCola() && !serpiente.get(i).mismaDireccion(serpiente.get(i-1).getDireccion())){
-                    serpiente.get(i).cambioCola(serpiente.get(i-1).getDireccion());
-                }
 
-                if(PreConeccion_Controlador.server != null){
-                    actualizar = new Paquete05Update(indice, i, serpiente.get(i).getTipo(), serpiente.get(i).getPosX(), serpiente.get(i).getPosY(), serpiente.get(i).getDireccion());
-                    actualizar.enviarData(PreConeccion_Controlador.server);
+                if(i != 0){
+                    examinar(i);
                 }
+                
+                actualizar = new Paquete05Update(indice, i, serpiente.get(i).getTipo(), serpiente.get(i).getPosX(), serpiente.get(i).getPosY(), serpiente.get(i).getDireccion());
+                enviarServidor(actualizar);
             }
+        }
+    }
+
+    /**
+     * Examina las partes del cuerpo de la serpiente y si es necesario cambiarlas
+     * @param i indice de la parte del cuerpo
+     */
+    public void examinar(int i){
+        if(serpiente.get(i-1).esCabeza()){
+            serpiente.get(i).cambioACurva(serpiente.get(i-1).getDireccion());
+        }
+        
+        if(!serpiente.get(i).esCola() && !serpiente.get(i-1).esCabeza()){
+            serpiente.get(i).setTipo(serpiente.get(i-1).getTipo());
+            serpiente.get(i).setDireccion(serpiente.get(i-1).getDireccion());
+        }
+
+        if(serpiente.get(i).esCola() && !serpiente.get(i).mismaDireccion(serpiente.get(i-1).getDireccion())){
+            serpiente.get(i).cambioCola(serpiente.get(i-1).getDireccion());
         }
     }
 
@@ -230,5 +247,12 @@ public class Personaje{
 
     public int getSkin(){
         return skin;
+    }
+
+    @Override
+    public void enviarServidor(Paquete paquete) {
+        if(Controlador_PreConeccion.server != null){
+            actualizar.enviarData(Controlador_PreConeccion.server);
+        }
     }
 }

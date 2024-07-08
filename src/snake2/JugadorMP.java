@@ -5,12 +5,15 @@
 package snake2;
 import java.net.InetAddress;
 /**
- *
+ * Clase que representa un jugador en multijugador
+ * 
  * @author IVANNA
+ * @version 1.2
  */
 public class JugadorMP extends Jugador{
     private InetAddress direccionIP;
     private int puerto;
+    private boolean estaListo;
 
     public JugadorMP(String usuario, int numero, int posX, int posY, String direccion, int skin){
         super(usuario, numero, posX, posY, direccion, skin);
@@ -20,12 +23,14 @@ public class JugadorMP extends Jugador{
         super(usuario, numero);
         this.direccionIP = direccionIP;
         this.puerto = puerto;
+        estaListo = false;
     }
 
     public JugadorMP(String usuario, int numero, int posX, int posY, String direccion, int skin, InetAddress direccionIP, int puerto){
         super(usuario, numero, posX, posY, direccion, skin);
         this.direccionIP = direccionIP;
         this.puerto = puerto;
+        estaListo = false;
     }
 
     public void setDireccionIP(InetAddress direccionIP){
@@ -36,11 +41,19 @@ public class JugadorMP extends Jugador{
         this.puerto = puerto;
     }
 
+    public void alistaJugador(boolean estaListo){
+        this.estaListo = estaListo;
+    }
+
     public InetAddress getDireccionIP(){
         return direccionIP;
     }
 
     public int getPuerto(){
         return puerto;
-    }    
+    }
+    
+    public boolean getEstaListo(){
+        return estaListo;
+    }
 }

@@ -1,6 +1,6 @@
 package snake2;
 /**
- * Clase parte del back
+ * Clase que representa las celdas o casillas del mapa
  * 
  * version 1.0.1
  */

@@ -2,18 +2,19 @@ package snake2;
 
 import java.util.ArrayList;
 
-import controladores.HostLobbie_Controlador;
-import controladores.PreConeccion_Controlador;
+import controladores.Controlador_Host;
+import controladores.Controlador_PreConeccion;
 import ost.ReproductorSonidos;
+import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete05Update;
 import snake2.Contenedor_Paquetes.Paquete06Comida;
 
 /**
- * Clase parte del back. Donde ocurre toda la partida
+ * Clase parte que representa al tablero donde ocurre toda la partida
  * 
  * @version 1.0.1
  */
-public class Tablero {
+public class Tablero implements Comunicacion{
     private final int ancho;
     private final int alto;
     private final int cantidadComidasEspeciales;
@@ -32,7 +33,8 @@ public class Tablero {
     /**
      * Constructor de la clase
      * 
-     * @param jugador Persona, jugador o usuario que va a jugar en el tablero
+     * @param jugadores Jugador o jugadores que van a jugar en el tablero
+     * @param tipo Mapa elegido por el jugador
      */
     public Tablero(ArrayList<Jugador> jugadores, int tipo){
         ancho = 22;
@@ -56,11 +58,8 @@ public class Tablero {
     public void generarComida(){
         int posiciones[] = casillaAleatoria();
         comidaRegular = new Comida(posiciones[0], posiciones[1]);
-        
-        if(PreConeccion_Controlador.server != null){
-            food = new Paquete06Comida(posiciones[0], posiciones[1], 4);
-            food.enviarData(PreConeccion_Controlador.server);
-        }
+        food = new Paquete06Comida(posiciones[0], posiciones[1], 4);
+        enviarServidor(food);
     }
 
     /**
@@ -93,13 +92,9 @@ public class Tablero {
                 break;
             }
         }
-
-        if(PreConeccion_Controlador.server != null){
-            food = new Paquete06Comida(posiciones[0], posiciones[1], indice);
-            food.enviarData(PreConeccion_Controlador.server);
-        }
+        food = new Paquete06Comida(posiciones[0], posiciones[1], indice);
+        enviarServidor(food);
         desactivarEfectos();
-        //Sonido cuando genera comida especial
     }
     /**
      * Genera una posicion libre y aleatoria en el tablero
@@ -116,15 +111,6 @@ public class Tablero {
         }while(!casillaLibre(posiciones[0], posiciones[1]));
 
         return posiciones;
-    }
-
-    /**
-     * Decide que tipo de comida especial se va a generar
-     * 
-     * @return Un numero aleatorio que representa un tipo de comida especial
-     */
-    public int comidaAleatoria(){
-        return (int) (Math.random() * ((cantidadComidasEspeciales - 1) + 1));
     }
 
     /**
@@ -161,35 +147,33 @@ public class Tablero {
     /**
      * Verifica si el personaje se encuentra sobre una comida
      * 
+     * @param jugadores Jugadores que se encuentran en la partida
      * @version 1.1.1
      */
-    public void personajeSobreComida(ArrayList<Jugador> jugadores){
+    public boolean personajeSobreComida(ArrayList<Jugador> jugadores){
         for(int i = 0; i < personajes.size(); i++){
             if(personajes.get(i).getCuerpo(0).getPosX() == comidaRegular.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaRegular.getPosY()){
                 comidaRegular.hacerEfecto(personajes.get(i));
                 comidaEstandarSFX();
                 comidaRegular = null;
-                if(PreConeccion_Controlador.server != null){
-                    food = new Paquete06Comida(0, 0, -2);
-                    food.enviarData(PreConeccion_Controlador.server);
-                }
+                food = new Paquete06Comida(0, 0, -2);
+                enviarServidor(food);
                 generarComida();
                 jugadores.get(i).aumentaPuntaje();
-                //Podria ponerse aqui el sonido cuando come
+                return true;
     
             }else if(hayComidaEspecial() && personajes.get(i).getCuerpo(0).getPosX() == comidaEspecial.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaEspecial.getPosY()){
                 comidaEspecial.hacerEfecto(personajes.get(i));
                 comidaEspecialSFX();
                 comidaEspecial = null;
-                if(PreConeccion_Controlador.server != null){
-                    food = new Paquete06Comida(0, 0, -1);
-                    food.enviarData(PreConeccion_Controlador.server);
-                }
+                food = new Paquete06Comida(0, 0, -1);
+                enviarServidor(food);
                 tiempoComidaEspecial = 60;
                 jugadores.get(i).aumentaPuntaje();
+                return true;
             }
         }
-        
+        return false;      
     }
 
     /**
@@ -246,7 +230,11 @@ public class Tablero {
             }
         }
     }
-
+    /**
+     * Revisa y actualiza el estado de cada personaje que esta dentro del juego
+     * 
+     * @version 1.1.6
+     */
     public void chequeaPersonajes(){
         for(int i = 0; i < personajes.size(); i++){
             personajes.get(i).movimiento(i);
@@ -255,7 +243,11 @@ public class Tablero {
             chocaConPared(i);
         }
     }
-
+    /**
+     * Actualiza el tiempo que falta para que aparezca una comida especial y el tiempo en el que aparece en pantalla
+     * 
+     * @version 1.1.6
+     */
     public void conteoComidaEspecial(){
         if(tiempoComidaEspecial != 0){
             tiempoComidaEspecial--;
@@ -269,11 +261,8 @@ public class Tablero {
 
             if(comidaEspecial.getTiempoVisible() == 0){
                 borraComidaEspecial();
-
-                if(PreConeccion_Controlador.server != null){
-                    food = new Paquete06Comida(0, 0, -1);
-                    food.enviarData(PreConeccion_Controlador.server);
-                }
+                food = new Paquete06Comida(0, 0, -1);
+                enviarServidor(food);
             }
 
         }
@@ -290,6 +279,12 @@ public class Tablero {
         }
     }
 
+    /**
+     * Verifica si una serpiente ha chocado con otras en el tablero
+     * 
+     * @param puesto Indice para identificar la serpiente a evaluar
+     * @version 1.1.6
+     */
     public void chocaConSerpiente(int puesto){
         for(int i = 0; i < personajes.size(); i++){
             if(i != puesto){
@@ -324,47 +319,36 @@ public class Tablero {
         }
     }
 
+    /**
+     * Desactiva los efectos que esten puestos sobre el tablero o alguno de los personajes
+     * 
+     * @version 1.1.6
+     */
     public void desactivarEfectos(){
         for(int i = 0; i < personajes.size(); i++){
             personajes.get(i).descongelar();
         }
         desactivaRapidez();
     }
-    
-    /**
-     * Verifica si hay comida regular en el tablero
-     * 
-     * @return true si ya hay comida regular en el tablero
-     * @version 1.1
-     */
-    public boolean hayComida(){
-        return comidaRegular != null;
-    }
 
     /**
-     * Comprueba si hay comida especial en el tablero
+     * Guarda los personajes de los jugadores en el tablero
      * 
-     * @return true si hay algun tipo de comida especial en el tablero
-     * @version 1.1.4
+     * @param jugadores Los jugadores de quienes se va a tomar sus personajes
+     * @version 1.2
      */
-    public boolean hayComidaEspecial(){
-        return comidaEspecial != null;
-    }
-
-    public void disminuyeTiempoEspecial(){
-        tiempoComidaEspecial--;
-    }
-
     public void iniciarPersonajes(ArrayList<Jugador> jugadores){
         for(int i = 0; i < jugadores.size(); i++){
             personajes.add(jugadores.get(i).getPersonaje());
         }
     }
-    
-    public void setPausa(boolean pausa){
-        this.pausa = pausa;
-    }
-
+    /**
+     * Actualiza la comida en caso de una partida en multijugador
+     * 
+     * @param x Posicion en x de la comida
+     * @param y Posicion en y de la comida
+     * @param tipo Identificador de la comida
+     */
     public void actualizarComida(int x, int y, int tipo){
         switch(tipo){
             case -2:
@@ -415,6 +399,39 @@ public class Tablero {
         ostSFX.reproducirSFX(sfxOstRuta);
         System.out.println("Comida estandar sonido");
     }
+
+    /**
+     * Decide que tipo de comida especial se va a generar
+     * 
+     * @return Un numero aleatorio que representa un tipo de comida especial
+     */
+    public int comidaAleatoria(){
+        return (int) (Math.random() * ((cantidadComidasEspeciales - 1) + 1));
+    }
+
+    /**
+     * Verifica si hay comida regular en el tablero
+     * 
+     * @return true si ya hay comida regular en el tablero
+     * @version 1.1
+     */
+    public boolean hayComida(){
+        return comidaRegular != null;
+    }
+
+    /**
+     * Comprueba si hay comida especial en el tablero
+     * 
+     * @return true si hay algun tipo de comida especial en el tablero
+     * @version 1.1.4
+     */
+    public boolean hayComidaEspecial(){
+        return comidaEspecial != null;
+    }
+
+    public void setPausa(boolean pausa){
+        this.pausa = pausa;
+    }
     
     public static void setRapidez(boolean rapidez){
         rapidezActivada = rapidez;
@@ -454,5 +471,12 @@ public class Tablero {
 
     public int getMapa() {
         return mapa;
+    }
+
+    @Override
+    public void enviarServidor(Paquete paquete) {
+        if(Controlador_PreConeccion.server != null){
+            food.enviarData(Controlador_PreConeccion.server);
+        }
     }   
 }

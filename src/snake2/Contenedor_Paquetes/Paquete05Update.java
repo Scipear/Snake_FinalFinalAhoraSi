@@ -6,9 +6,11 @@ package snake2.Contenedor_Paquetes;
 
 import java.lang.Integer;
 
-import snake2.Conexion.Cliente;
-import snake2.Conexion.Server;
-
+/**
+ * Clase que representa a un paquete para conocer los datos de un personaje
+ * 
+ * @version 1.2
+ */
 public class Paquete05Update extends Paquete{
     private int indiceP;
     private int indiceC;
@@ -36,16 +38,6 @@ public class Paquete05Update extends Paquete{
         this.x = x;
         this.y = y;
         this.direccion = direccion;
-    }
-
-    @Override
-    public void enviarData(Cliente client){
-        client.enviarPaquete(getData());
-    }
-
-    @Override
-    public void enviarData(Server server){
-        server.enviarAtodosLosClientes(getData());
     }
 
     @Override

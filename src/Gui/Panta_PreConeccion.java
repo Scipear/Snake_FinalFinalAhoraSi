@@ -72,15 +72,15 @@ public class Panta_PreConeccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        controladores.PreConeccion_Controlador.eventVolverAlMenu();
+        controladores.Controlador_PreConeccion.eventVolverAlMenu();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controladores.PreConeccion_Controlador.eventOnlineHost();
+        controladores.Controlador_PreConeccion.eventOnlineHost();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        controladores.PreConeccion_Controlador.eventOnlineCliente();
+        controladores.Controlador_PreConeccion.eventOnlineCliente();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

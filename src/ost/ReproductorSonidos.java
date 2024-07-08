@@ -5,16 +5,26 @@ import javazoom.jl.player.Player;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
+/**
+ * Clase que se encarga de controlar la reproduccion de sonidos y musica de fondo durante
+ * la ejecucion del programa. Hace uso de la libreria externa Jlayer javazoom para la reproduccion
+ * de archivos de audio mp3
+ * 
+ * @version 1.1.6
+ */
 public class ReproductorSonidos {
-
     private Player player;
     private boolean loop = false;
     private boolean isPlaying = false;
     private String rutaSonidoActual;
     FileInputStream fis;
 
-    // Cargar y reproducir sonidos
+    /**
+     * Carga la ruta de alguna musica de fondo
+     * 
+     * @param rutaSonido la ruta o direccion del sonido a reproducirse
+     * @version 1.1.6
+     */
     public void musicaDeFondo(String rutaSonido) {
         if (isPlaying) {
             return; // Si la música ya está reproduciéndose, no hacer nada
@@ -24,12 +34,23 @@ public class ReproductorSonidos {
         reproducir();
     }
     
+    /**
+     * Carga el sonido de algun efecto especial
+     * 
+     * @param rutaSonido la ruta o direccion del sonido a reproducirse
+     * @version 1.2
+     */
     public void reproducirSFX(String rutaSonido){
     
         rutaSonidoActual = rutaSonido;
         reproducir();
     }
 
+    /**
+     * Reproduce los archivos de audio
+     * 
+     * @version 1.1.6
+     */
     private void reproducir() {
         if (player != null) {
             player.close(); // Detener cualquier reproducción anterior
@@ -67,6 +88,11 @@ public class ReproductorSonidos {
         }
     }
 
+    /**
+     * Detiene la reproducción del audio
+     * 
+     * @version 1.1.6
+     */
     public void detener() {
         loop = false;
         if (player != null) {

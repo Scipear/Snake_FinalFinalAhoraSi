@@ -4,12 +4,11 @@
  */
 package snake2.Contenedor_Paquetes;
 
-import snake2.Conexion.Cliente;
-import snake2.Conexion.Server;
-
 /**
- *
+ * Clase que representa a un paquete para conocer si un jugador se ha conectado
+ * 
  * @author IVANNA
+ * @version 1.2
  */
 public class Paquete00Login extends Paquete{
       private String username;
@@ -27,25 +26,16 @@ public class Paquete00Login extends Paquete{
         this.username = username;
         this.numCliente = numCliente;
     }
-    
-    @Override
-    public void enviarData(Cliente client){
-       client.enviarPaquete(getData());
-    }    
-
-    @Override
-    public void enviarData(Server server){
-       server.enviarAtodosLosClientes(getData());
-    }
-
-    public void setNumCliente(int numCliente){
-        this.numCliente = numCliente;
-    }
 
     @Override
     public byte[] getData(){
          return ("00" + this.username + "," + this.numCliente).getBytes();
     }
+    
+    public void setNumCliente(int numCliente){
+        this.numCliente = numCliente;
+    }
+
     
      public String getUsername(){
         return username;
