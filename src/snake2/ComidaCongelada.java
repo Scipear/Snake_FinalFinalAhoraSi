@@ -2,8 +2,6 @@ package snake2;
 
 import ost.ReproductorSonidos;
 
-import ost.ReproductorSonidos;
-
 /**
  * Clase parte del back. Hereda de la clase Comida
  *
