@@ -14,6 +14,7 @@ import snake2.AlertException;
 import snake2.Comida;
 import snake2.Jugador;
 import snake2.Tablero;
+import snake2.Chat.ChatCliente;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete.TiposPaquetes;
 import snake2.Contenedor_Paquetes.Paquete00Login;
@@ -23,6 +24,7 @@ import snake2.Contenedor_Paquetes.Paquete03Show;
 import snake2.Contenedor_Paquetes.Paquete04Player;
 import snake2.Contenedor_Paquetes.Paquete05Update;
 import snake2.Contenedor_Paquetes.Paquete06Comida;
+import snake2.Contenedor_Paquetes.Paquete10Effect;
 import snake2.Front.PantallaJuego;
 
 /**
@@ -36,6 +38,7 @@ public class Cliente implements Runnable{
     private boolean jugadoresListos = false; // Si todos los jugadores estan listos para iniciar la partida
     private boolean estaConectado = false; // Si el cliente esta conectado al servidor
     private int puerto; // Puerto del servidor para el intercambio de datos
+    private ChatCliente chatCliente;
     private InetAddress direccionIP; // Direccion IP del servidor
     private DatagramSocket socket;
     private byte[] datos; // Forma en la que los datos se van a intercambiar entre cliente y servidor
@@ -55,6 +58,8 @@ public class Cliente implements Runnable{
         try {
             this.direccionIP = InetAddress.getByName(direccionIP);
             socket = new DatagramSocket();
+            chatCliente = new ChatCliente(Controlador_Login.nombreUsuario);
+            chatCliente.setVisible(true);
             iniciarCliente();
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -208,6 +213,11 @@ public class Cliente implements Runnable{
             Paquete06Comida comida = new Paquete06Comida(datos);
             actualizarEntidades(comida);
             break;
+
+        case EFFECT:
+            Paquete10Effect efecto = new Paquete10Effect(datos);
+            actualizarEntidades(efecto);
+            break;
         }
     }
 
@@ -250,6 +260,9 @@ public class Cliente implements Runnable{
                 tablero.actualizarComida(paquete.getX(), paquete.getY(), paquete.getTipo());
             }
 
+        }else if(packet instanceof Paquete10Effect){
+            Paquete10Effect paquete = (Paquete10Effect) packet;
+            tablero.hacer_Efectos(paquete.getX(), paquete.getY(), paquete.getTipo(), paquete.getIndiceP());
         }
         
         if(pantalla != null){

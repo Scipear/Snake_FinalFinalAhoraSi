@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import snake2.Game;
 import snake2.JugadorMP;
+import snake2.Chat.ChatServer;
 import snake2.Jugador;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete.TiposPaquetes;
@@ -19,6 +20,7 @@ import snake2.Contenedor_Paquetes.Paquete02Play;
 import snake2.Contenedor_Paquetes.Paquete03Show;
 import snake2.Contenedor_Paquetes.Paquete04Player;
 import snake2.Contenedor_Paquetes.Paquete07Move;
+import snake2.Contenedor_Paquetes.Paquete10Effect;
 
 /**
  * Clase que representa al servidor que contendra la informacion principal de la partida y se mantendra
@@ -32,6 +34,7 @@ public class Server implements Runnable{
     private boolean juegoIniciado = false; // Si el juego ya ha comenzado
     private boolean servidorActivo = false; // Si el servidor se encuentra activo
     private byte[] datos; // Forma en la que los datos se van a intercambiar entre cliente y servidor
+    private ChatServer chatServer;
     private DatagramSocket socket;
     private Thread thread;
     private ArrayList<JugadorMP> jugadoresActivos = new ArrayList<>(); // Arreglo que guarda los jugadores que se van conectando
@@ -47,6 +50,7 @@ public class Server implements Runnable{
         try {
             jugadoresListos = 0;
             socket = new DatagramSocket(puerto);
+            chatServer = new ChatServer();
             iniciarServidor();        
         } catch (SocketException e) {
             e.printStackTrace();
@@ -190,8 +194,14 @@ public class Server implements Runnable{
         case MOVE:
             Paquete07Move mover = new Paquete07Move(datos);
             actualizarMovimiento(mover); 
-            break;     
+            break;
+
+        // case EFFECT:
+        //     Paquete10Effect efecto = new Paquete10Effect(datos);
+        //     actualizarComida(efecto);
+        //     break;
         }
+
 
     }
 
@@ -307,6 +317,10 @@ public class Server implements Runnable{
         JugadorMP jugador = jugadoresActivos.get(paquete.getIndice());
         jugador.getPersonaje().getCuerpo(0).setDireccion(paquete.getDireccion());
         // paquete.enviarData(this);
+    }
+
+    public void actualizarComida(Paquete10Effect paquete){
+
     }
 
     /**

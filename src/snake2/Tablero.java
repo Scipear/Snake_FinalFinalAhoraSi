@@ -8,6 +8,7 @@ import ost.ReproductorSonidos;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete05Update;
 import snake2.Contenedor_Paquetes.Paquete06Comida;
+import snake2.Contenedor_Paquetes.Paquete10Effect;
 
 /**
  * Clase parte que representa al tablero donde ocurre toda la partida
@@ -22,6 +23,7 @@ public class Tablero implements Comunicacion{
     private static ReproductorSonidos ostSFX = new ReproductorSonidos();
     private static String sfxOstRuta;
     private Paquete06Comida food;
+    private Paquete10Effect effect;
     private Celda celdas[][];
     private Comida comidaRegular;
     private Comida comidaEspecial;
@@ -154,6 +156,8 @@ public class Tablero implements Comunicacion{
         for(int i = 0; i < personajes.size(); i++){
             if(personajes.get(i).getCuerpo(0).getPosX() == comidaRegular.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaRegular.getPosY()){
                 comidaRegular.hacerEfecto(personajes.get(i));
+                effect = new Paquete10Effect(2, i, comidaRegular.getPosX(), comidaRegular.getPosY());
+                enviarServidor(effect);
                 comidaEstandarSFX();
                 comidaRegular = null;
                 food = new Paquete06Comida(0, 0, -2);
@@ -164,6 +168,8 @@ public class Tablero implements Comunicacion{
     
             }else if(hayComidaEspecial() && personajes.get(i).getCuerpo(0).getPosX() == comidaEspecial.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaEspecial.getPosY()){
                 comidaEspecial.hacerEfecto(personajes.get(i));
+                effect = new Paquete10Effect(1, i, comidaEspecial.getPosX(), comidaEspecial.getPosY());
+                enviarServidor(effect);
                 comidaEspecialSFX();
                 comidaEspecial = null;
                 food = new Paquete06Comida(0, 0, -1);
@@ -325,10 +331,12 @@ public class Tablero implements Comunicacion{
      * @version 1.1.6
      */
     public void desactivarEfectos(){
+        desactivaRapidez();
         for(int i = 0; i < personajes.size(); i++){
             personajes.get(i).descongelar();
-        }
-        desactivaRapidez();
+            effect = new Paquete10Effect(-1, i, 0, 0);
+            enviarServidor(effect);
+        } 
     }
 
     /**
@@ -386,6 +394,20 @@ public class Tablero implements Comunicacion{
             
         }
     }
+
+    public void hacer_Efectos (int x, int y, int sobre_Comida, int indice){
+        if(sobre_Comida == 1){
+            comidaEspecial.hacerEfecto(personajes.get(indice));
+
+        }else if(sobre_Comida == 2){
+            comidaRegular.hacerEfecto(personajes.get(indice));
+          
+        }if(sobre_Comida == -1){
+            desactivaRapidez();
+            personajes.get(indice).descongelar();
+        }
+        
+  }
 
     //Metodos encargados de reproducir el sonido de la comida cuando se come
     public static void comidaEstandarSFX() {
@@ -476,7 +498,7 @@ public class Tablero implements Comunicacion{
     @Override
     public void enviarServidor(Paquete paquete) {
         if(Controlador_PreConeccion.server != null){
-            food.enviarData(Controlador_PreConeccion.server);
+            paquete.enviarData(Controlador_PreConeccion.server);
         }
     }   
 }
