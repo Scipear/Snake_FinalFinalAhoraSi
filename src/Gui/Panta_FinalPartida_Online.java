@@ -19,24 +19,78 @@ public class Panta_FinalPartida_Online extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        lbl_PuntosJ1 = new javax.swing.JLabel();
+        lbl_PuntosJ2 = new javax.swing.JLabel();
+        lbl_PuntosJ3 = new javax.swing.JLabel();
+        lbl_PuntosJ4 = new javax.swing.JLabel();
+        btn_ReiniciarPartida = new javax.swing.JButton();
+        btn_Desc_Lobby = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_PuntosJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Puntos1.png"))); // NOI18N
+        getContentPane().add(lbl_PuntosJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        lbl_PuntosJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Puntos2.png"))); // NOI18N
+        getContentPane().add(lbl_PuntosJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, -1, -1));
+
+        lbl_PuntosJ3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Puntos3.png"))); // NOI18N
+        getContentPane().add(lbl_PuntosJ3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
+
+        lbl_PuntosJ4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Puntos4.png"))); // NOI18N
+        getContentPane().add(lbl_PuntosJ4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, -1, -1));
+
+        btn_ReiniciarPartida.setBackground(new java.awt.Color(13, 13, 32));
+        btn_ReiniciarPartida.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 20)); // NOI18N
+        btn_ReiniciarPartida.setForeground(new java.awt.Color(126, 77, 181));
+        btn_ReiniciarPartida.setText("Volver a jugar ");
+        btn_ReiniciarPartida.setBorder(null);
+        btn_ReiniciarPartida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_ReiniciarPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReiniciarPartidaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_ReiniciarPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 590, 210, 70));
+
+        btn_Desc_Lobby.setBackground(new java.awt.Color(13, 13, 32));
+        btn_Desc_Lobby.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 20)); // NOI18N
+        btn_Desc_Lobby.setForeground(new java.awt.Color(126, 77, 181));
+        btn_Desc_Lobby.setText("VOLVER AL LOBBY");
+        btn_Desc_Lobby.setBorder(null);
+        btn_Desc_Lobby.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_Desc_Lobby.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Desc_LobbyActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Desc_Lobby, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 590, 230, 70));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/FondoN2.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_ReiniciarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReiniciarPartidaActionPerformed
+        controladores.Controlador_FinalPartida.eventniciarJuego();
+    }//GEN-LAST:event_btn_ReiniciarPartidaActionPerformed
+
+    private void btn_Desc_LobbyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Desc_LobbyActionPerformed
+        controladores.Controlador_FinalPartida.eventVolverMenu();
+    }//GEN-LAST:event_btn_Desc_LobbyActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Desc_Lobby;
+    private javax.swing.JButton btn_ReiniciarPartida;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbl_PuntosJ1;
+    private javax.swing.JLabel lbl_PuntosJ2;
+    private javax.swing.JLabel lbl_PuntosJ3;
+    private javax.swing.JLabel lbl_PuntosJ4;
     // End of variables declaration//GEN-END:variables
 }

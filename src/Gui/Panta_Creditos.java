@@ -1,6 +1,8 @@
 
 package Gui;
 
+import javax.swing.ImageIcon;
+
 public class Panta_Creditos extends javax.swing.JFrame {
 
     /**
@@ -8,6 +10,7 @@ public class Panta_Creditos extends javax.swing.JFrame {
      */
     public Panta_Creditos() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/Recursos/snakeicon.png")).getImage());
     }
 
     /**
