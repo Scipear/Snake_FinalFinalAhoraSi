@@ -17,8 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase que representa el servidor para el chat del programa
+ * 
  * @author jose
+ * @version 1.2.1
  */
 public class ChatServer extends javax.swing.JFrame implements Runnable{
    String name, mensaje, ip;

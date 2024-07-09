@@ -6,11 +6,13 @@ package snake2.Chat;
 
 import java.io.Serializable;
 
-
-
-
+/**
+ * Clase que representa los datos que seran intercambiados durante la ejecucion del chat
+ * 
+ * @version 1.2.1
+ */
 public class ChatDatos implements Serializable{
-   String ip,name,mensaje; 
+   String ip, name, mensaje; 
 
     public ChatDatos(String ip, String name, String mensaje) {
         this.ip = ip;
@@ -44,7 +46,4 @@ public class ChatDatos implements Serializable{
 
     public ChatDatos() {
     }
-   
-   
-   
 }

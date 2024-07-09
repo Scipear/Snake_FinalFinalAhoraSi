@@ -31,11 +31,13 @@ public class PantallaJuego extends Pantalla {
     private ArrayList<JPanel> recuadros = new ArrayList<>();
 
     /**
-    *
-    * @param tablero Tablero que sera dibujado en la ventana, por lo tanto, en el cual se va a realizar
-    * la partida
-    * @param jugador Jugador que esta jugando en el tablero
-    */
+     * Constructor
+     * 
+     * @param tablero Tablero que sera dibujado en la ventana, por lo tanto, en el cual se va a realizar
+     * la partida
+     * @param jugadores Jugadores que pertenecen a la partida
+     * @param indice Numero identificador del jugador
+     */
     public PantallaJuego(Tablero tablero, ArrayList<Jugador> jugadores, int indice){
         inicializar(this);
         setVisible(false);
@@ -55,27 +57,10 @@ public class PantallaJuego extends Pantalla {
         fondoOst.musicaDeFondo(gameOstRuta);
     }
 
-    public PantallaJuego(Tablero tablero, ArrayList<Jugador> jugadores){
-        inicializar(this);
-        setVisible(false);
-        mapa = new GraficoTablero(tablero);
-        multiPanel = new JLayeredPane();
-        fondo = new JPanel();
-        fondoImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/FondoTablero.png")));
-        // recuadroImagen = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Boton.png")));
-        pausa = new JLabel(new ImageIcon(getClass().getResource("/Recursos/Pausa8.png")));
-        fondoOst = new ReproductorSonidos();
-        estaEnJuego = true;
-        iniciarPaneles(jugadores);
-        add(multiPanel);
-        setFocusable(true);
-        fondoOst.musicaDeFondo(gameOstRuta);
-    }
-
     /**
      * Inicializa los valores iniciales de los componentes que van en la pantalla
      * 
-     * @param jugador Jugador que esta jugando en el tablero
+     * @param jugadores Jugadores que esta jugando en el tablero
      * @version 1.1.3
      */
     public void iniciarPaneles(ArrayList<Jugador> jugadores){
@@ -99,6 +84,12 @@ public class PantallaJuego extends Pantalla {
         repaint();
     }
 
+    /**
+     * Actualiza los puntos de los jugadores mostrados en pantalla
+     * 
+     * @param jugadores Jugadores que pertenecen a la partida
+     * @version 1.2
+     */
     public void actualizaPuntaje(ArrayList<Jugador> jugadores){
         for(int i = 0; i < jugadores.size(); i++){
             recuadros.get(i).remove(recuadrosImagen.get(i));
@@ -122,6 +113,12 @@ public class PantallaJuego extends Pantalla {
         }
     }
 
+    /**
+     * Inicializa los componentes que se usan para mostrar el puntaje
+     * 
+     * @param jugadores Jugadores pertenecientes a la partida
+     * @version 1.2
+     */
     public void iniciarPuntaje(ArrayList<Jugador> jugadores){
         for(int i = 0; i < jugadores.size(); i++){
             recuadros.add(new JPanel());
@@ -134,22 +131,16 @@ public class PantallaJuego extends Pantalla {
                 case 0:
                     recuadros.get(i).setBounds(15, 5, 100, 15);
                     break;
+
                 case 1:
-                    // recuadroImagen.setBounds(0, 0, 100, 15);
-                    // recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
-                    // recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
                     recuadros.get(i).setBounds(570,645, 100, 15);
                     break;
+
                 case 2:
-                    // recuadroImagen.setBounds(0, 0, 100, 15);
-                    // recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
-                    // recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
                     recuadros.get(i).setBounds(15, 645, 100, 15);
                     break;
+
                 case 3:
-                    // recuadroImagen.setBounds(0, 0, 100, 15);
-                    // recuadroImagen.setText(jugadores.get(i).getUsuario() + ": " + Integer.toString(jugadores.get(i).getPuntaje()));
-                    // recuadroImagen.setHorizontalTextPosition(JLabel.CENTER);
                     recuadros.get(i).setBounds(570, 5, 100, 15);
                     break;       
             }

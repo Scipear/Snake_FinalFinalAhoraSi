@@ -44,6 +44,8 @@ public class Controlador_Lobby extends Controlador_Host{
      * @version 1.1.4
      */
     public static void eventVolverAlMenu(){
+        skinSeleccionada = -1;
+        mapaSeleccionado = -1;
         Controlador_MenuPrincipal.inicializar(Controlador_MenuPrincipal.ventana);
         ocultar(ventana);
     }

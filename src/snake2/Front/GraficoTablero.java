@@ -19,8 +19,8 @@ import snake2.Tablero;
  * @version 1.0.1
  */
 public class GraficoTablero extends Grafico{
+    private static ArrayList<GraficoPersonaje> graficoPersonaje; //Grafico que contiene las imagenes del personaje
     private Tablero tablero; //Tablero que sera dibujado
-    private ArrayList<GraficoPersonaje> graficoPersonaje; //Grafico que contiene las imagenes del personaje
     private GraficoComida graficoComida;
     private Image pared;
     private Image piso;
@@ -42,10 +42,20 @@ public class GraficoTablero extends Grafico{
         asignarGraficos(tablero);
     }
 
+    /**
+     * Le asigna los graficos correspondientes a cada personaje en el tablero
+     * 
+     * @param tablero En donde estan jugando los personajes
+     * @version 1.1.6
+     */
     public void asignarGraficos(Tablero tablero){
         for(int i = 0; i < tablero.getCantidadPersonajes(); i++){
             graficoPersonaje.add(new GraficoPersonaje(tablero.getPersonaje(i)));
         }
+    }
+
+    public static void quitarGraficos(int indice){
+        graficoPersonaje.remove(indice);
     }
     /**
      * Metodo que viene en la libreria de JComponent, se encarga de pintar los graficos en la pantalla.
@@ -69,7 +79,9 @@ public class GraficoTablero extends Grafico{
         }
 
         for(int i = 0; i < graficoPersonaje.size(); i++){
-            pintarPersonaje(g2d, i);
+            if(tablero.getPersonaje(i).getEstado()){
+                pintarPersonaje(g2d, i);
+            }
         }
         
         pintarComida(g2d);

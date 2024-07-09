@@ -6,6 +6,7 @@ import java.util.List;
 import controladores.Controlador_PreConeccion;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete05Update;
+import snake2.Contenedor_Paquetes.Paquete11Collision;
 
 /**
  * Clase que representa a una serpiente del juego
@@ -14,10 +15,12 @@ import snake2.Contenedor_Paquetes.Paquete05Update;
  */
 public class Personaje implements Comunicacion{
     private Paquete05Update actualizar;
+    private Paquete11Collision collision;
     private List<Cuerpo> serpiente = new ArrayList<>(); //Representa todo el cuerpo de la serpiente
     private int velocidad;
     private int longitud;
     private int skin;
+    private int numero;
     private boolean estado;
     private boolean estaCongelado;
 
@@ -29,9 +32,10 @@ public class Personaje implements Comunicacion{
      * @param direccion Direccion a la que estara mirando el personaje
      * @param skin Skin elegida por el jugador para su personaje
      */
-    public Personaje(int posX, int posY, String direccion, int skin){
+    public Personaje(int posX, int posY, String direccion, int skin, int numero){
         iniciarSerpiente(posX, posY, direccion);
         this.skin = skin;
+        this.numero = numero;
         velocidad = 1;
         longitud = serpiente.size();
         estado = true;
@@ -113,7 +117,7 @@ public class Personaje implements Comunicacion{
      * @param indice Identificador del jugador al que le pertenece la serpiente
      * @version 1.0.4
      */
-    public void movimiento(int indice){
+    public void movimiento(){
         if(!estaCongelado && estado){
             for(int i = longitud-1; i >= 0; i--){
                 if(serpiente.get(i).esCurva()){
@@ -125,7 +129,7 @@ public class Personaje implements Comunicacion{
                     examinar(i);
                 }
                 
-                actualizar = new Paquete05Update(indice, i, serpiente.get(i).getTipo(), serpiente.get(i).getPosX(), serpiente.get(i).getPosY(), serpiente.get(i).getDireccion());
+                actualizar = new Paquete05Update(numero, i, serpiente.get(i).getTipo(), serpiente.get(i).getPosX(), serpiente.get(i).getPosY(), serpiente.get(i).getDireccion());
                 enviarServidor(actualizar);
             }
         }
@@ -134,6 +138,7 @@ public class Personaje implements Comunicacion{
     /**
      * Examina las partes del cuerpo de la serpiente y si es necesario cambiarlas
      * @param i indice de la parte del cuerpo
+     * @version 1.2
      */
     public void examinar(int i){
         if(serpiente.get(i-1).esCabeza()){
@@ -195,12 +200,15 @@ public class Personaje implements Comunicacion{
     /**
      * Verifica si la serpienta ha chocado contra si misma
      * 
+     * @param indice Para identificar el jugador al que le pertenece la serpiente
      * @version 1.1.2
      */
     public void chocaConCuerpo(){
         for(int i = 1; i < longitud-1; i++){
             if(serpiente.get(0).getPosX() == serpiente.get(i).getPosX() && serpiente.get(0).getPosY() == serpiente.get(i).getPosY()){
                 estado = false;
+                collision = new Paquete11Collision(numero, 0);
+                enviarServidor(collision);
             }
         }
     }

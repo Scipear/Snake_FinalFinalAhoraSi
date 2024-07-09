@@ -21,6 +21,7 @@ import snake2.Contenedor_Paquetes.Paquete03Show;
 import snake2.Contenedor_Paquetes.Paquete04Player;
 import snake2.Contenedor_Paquetes.Paquete07Move;
 import snake2.Contenedor_Paquetes.Paquete10Effect;
+import snake2.Contenedor_Paquetes.Paquete11Collision;
 
 /**
  * Clase que representa al servidor que contendra la informacion principal de la partida y se mantendra
@@ -75,8 +76,6 @@ public class Server implements Runnable{
      */
     public synchronized void cerrarServidor(){
         try {
-            servidorActivo = false;
-            socket.close();
             thread.join();
         } catch (InterruptedException e){
             e.printStackTrace();
@@ -107,6 +106,8 @@ public class Server implements Runnable{
                 mostrar.enviarData(this);
             } //Si todos los jugadores estan listos para jugar, entonces comienza la partida
         }
+        servidorActivo = false;
+        socket.close();
     }
 
     /**
@@ -131,6 +132,7 @@ public class Server implements Runnable{
      * @param datos Lo que se enviara al cliente
      * @param direccionIP Direccion del cliente
      * @param port  Puerto del cliente
+     * @version 1.2
      */
     public void enviarPaquete(byte[] datos, InetAddress direccionIP, int port){
         DatagramPacket paquete = new DatagramPacket(datos, datos.length, direccionIP, port);
@@ -145,6 +147,7 @@ public class Server implements Runnable{
      * Le envia un paquete a todos los clientes
      * 
      * @param datos Lo que se enviara a los clientes
+     * @version 1.2
      */
     public void enviarAtodosLosClientes(byte[] datos){
         for (JugadorMP j : jugadoresActivos) {
@@ -196,10 +199,10 @@ public class Server implements Runnable{
             actualizarMovimiento(mover); 
             break;
 
-        // case EFFECT:
-        //     Paquete10Effect efecto = new Paquete10Effect(datos);
-        //     actualizarComida(efecto);
-        //     break;
+        case COLLISION:
+            Paquete11Collision efecto = new Paquete11Collision(datos);
+            actualizarTablero(efecto);
+            break;
         }
 
 
@@ -319,8 +322,21 @@ public class Server implements Runnable{
         // paquete.enviarData(this);
     }
 
-    public void actualizarComida(Paquete10Effect paquete){
+    /**
+     * Actualiza el estado del tablero dependiendo de lo enviado por el cliente
+     * 
+     * @param paquete Datos del estado del tablero
+     * @version 1.2.2
+     */
+    public void actualizarTablero(Paquete11Collision paquete){
+        if(paquete.getEstado() == 1){
+            game.getTablero().setPausa(false);
 
+        }else if(paquete.getEstado() == 2){
+            game.getTablero().setPausa(true);
+
+        }
+        paquete.enviarData(this);
     }
 
     /**

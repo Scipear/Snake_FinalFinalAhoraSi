@@ -1,4 +1,3 @@
-
 package snake2.Chat;
 
 import java.awt.Color;
@@ -17,8 +16,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 /**
- *
+ * Clase que representa el chat para los clientes conectados en el juego
+ * 
+ * 
  * @author jose
+ * @version 1.2.1
  */
 public class ChatCliente extends javax.swing.JFrame implements Runnable {
     //ip de la la maquina que recive el mensaje

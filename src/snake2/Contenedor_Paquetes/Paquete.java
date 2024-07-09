@@ -23,7 +23,8 @@ public abstract class Paquete{
      */
     public static enum TiposPaquetes{
         INVALID(-1), LOGIN(00), DISCONNECT(01), PLAY(02), SHOW(03), 
-        PLAYER(04), UPDATE(05), FOOD(06), MOVE(07), EFFECT(10);
+        PLAYER(04), UPDATE(05), FOOD(06), MOVE(07), EFFECT(10),
+        COLLISION(11);
         
         private int packetId;
 

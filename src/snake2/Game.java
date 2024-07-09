@@ -63,7 +63,7 @@ public class Game implements Runnable, ActionListener {
         mapa = Controlador_Host.getMapaSeleccionada();
         tablero = new Tablero(this.jugadores, mapa);
         tablero.generarComida();
-        pantalla = new PantallaJuego(tablero, this.jugadores);
+        pantalla = new PantallaJuego(tablero, this.jugadores, 0);
         iniciarJuego();
     }
 

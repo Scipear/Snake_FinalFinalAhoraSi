@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import controladores.Controlador_PreConeccion;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete07Move;
+import snake2.Contenedor_Paquetes.Paquete11Collision;
 
 /**
  * Clase parte del back. Configura los controles para un personaje especifico en la partida
@@ -13,6 +14,7 @@ import snake2.Contenedor_Paquetes.Paquete07Move;
  * @version 1.0.4
  */
 public class Controles implements KeyListener, Comunicacion{
+    private Paquete11Collision colision;
     private Paquete07Move mover;
     private Personaje personaje;
     private Tablero tablero;
@@ -91,11 +93,13 @@ public class Controles implements KeyListener, Comunicacion{
         }else if(tecla == KeyEvent.VK_SPACE){
             if(tablero.getPausa()){
                 tablero.setPausa(false);
+                colision = new Paquete11Collision(indice, 1);
 
             }else{
                 tablero.setPausa(true);
-
+                colision = new Paquete11Collision(indice, 2);
             }
+            enviarServidor(colision);
         }
         if(direccion != null){
             personaje.getCuerpo(0).setDireccion(direccion);

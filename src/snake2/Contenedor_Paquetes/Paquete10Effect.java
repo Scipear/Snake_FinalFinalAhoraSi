@@ -1,11 +1,18 @@
 package snake2.Contenedor_Paquetes;
 
+/**
+ * Clase que representa a un paquete para conocer el tipo de comida
+ * que ha comido un personaje
+ * 
+ * @version 1.2.1
+ */
 public class Paquete10Effect extends Paquete{
     private int tipo_comida_especial;  
     private int indiceP;
     private int X;
     private int Y;
 
+    
     public Paquete10Effect(byte[] data){        
         super(10);
         String[] dataArray = leerData(data).split(",");

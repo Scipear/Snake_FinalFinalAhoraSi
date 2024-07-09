@@ -25,6 +25,7 @@ import snake2.Contenedor_Paquetes.Paquete04Player;
 import snake2.Contenedor_Paquetes.Paquete05Update;
 import snake2.Contenedor_Paquetes.Paquete06Comida;
 import snake2.Contenedor_Paquetes.Paquete10Effect;
+import snake2.Contenedor_Paquetes.Paquete11Collision;
 import snake2.Front.PantallaJuego;
 
 /**
@@ -87,7 +88,6 @@ public class Cliente implements Runnable{
     public synchronized void cerrarCliente(){
         try {
             estaConectado = false;
-            socket.close();
             thread.join();
         } catch (InterruptedException e){
             e.printStackTrace();
@@ -111,6 +111,9 @@ public class Cliente implements Runnable{
         while(estaConectado){
             recibirPaquete();
         }
+        chatCliente.setVisible(false);
+        chatCliente = null;
+        socket.close();
     }
 
     /**
@@ -218,7 +221,13 @@ public class Cliente implements Runnable{
             Paquete10Effect efecto = new Paquete10Effect(datos);
             actualizarEntidades(efecto);
             break;
+
+        case COLLISION:
+            Paquete11Collision colision = new Paquete11Collision(datos);
+            actualizarTablero(colision);
+            break;
         }
+
     }
 
     /**
@@ -263,12 +272,42 @@ public class Cliente implements Runnable{
         }else if(packet instanceof Paquete10Effect){
             Paquete10Effect paquete = (Paquete10Effect) packet;
             tablero.hacer_Efectos(paquete.getX(), paquete.getY(), paquete.getTipo(), paquete.getIndiceP());
+
         }
-        
         if(pantalla != null){
             pantalla.actualizaMapa();
         }
     }
+    
+    /**
+     * Actualiza el estado del tablero
+     * 
+     * @param paquete Datos para la actualzacion
+     * @version 1.2.2
+     */
+    public void actualizarTablero(Paquete11Collision paquete){
+        switch(paquete.getEstado()){
+            case 0:
+                jugadores.get(paquete.getIndice()).getPersonaje().setEstado(false);
+                break;
+
+            case 1:
+                tablero.setPausa(false);
+                pantalla.muestraPausa(tablero);
+                break;
+
+            case 2:
+                tablero.setPausa(true);
+                pantalla.muestraPausa(tablero);
+                break;
+            
+            case 3:
+                jugadores.get(paquete.getIndice()).aumentaPuntaje();
+                pantalla.actualizaPuntaje(jugadores);
+                break;
+        }
+    }
+
     public int getIndiceJugador(String usuario){
         int indice = 0;
         for(Jugador j : jugadores){

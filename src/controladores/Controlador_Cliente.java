@@ -46,9 +46,11 @@ public class Controlador_Cliente extends Pantalla{
      * @version 1.1.5
      */
     public static void eventVolverAlPre(){
+        skinSeleccionada = -1;
         Paquete01Desconectar desconectar = new Paquete01Desconectar(Controlador_Login.nombreUsuario);
         desconectar.enviarData(Controlador_PreConeccion.cliente);
         Controlador_PreConeccion.cliente.cerrarCliente();
+        Controlador_PreConeccion.cliente = null;
         Controlador_PreConeccion.inicializar(Controlador_PreConeccion.ventana);
         ocultar(ventana);
     }

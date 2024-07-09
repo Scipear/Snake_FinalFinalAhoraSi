@@ -35,6 +35,7 @@ public abstract class Pantalla extends JFrame {
      * Quita la visibilidad de una ventada
      * 
      * @param ventana Frame que dejara de ser visible
+     * @version 1.1.4
      */
     public static void ocultar(JFrame ventana) {
         ventana.setVisible(false);

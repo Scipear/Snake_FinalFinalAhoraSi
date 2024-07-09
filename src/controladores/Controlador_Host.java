@@ -47,9 +47,14 @@ public class Controlador_Host extends Controlador_Cliente{
      * @version 1.1.5
      */
     public static void eventVolverAlPre(){
+        skinSeleccionada = -1;
+        mapaSeleccionado = -1;
         Paquete01Desconectar desconectar = new Paquete01Desconectar(Controlador_Login.nombreUsuario);
         desconectar.enviarData(Controlador_PreConeccion.cliente);
         Controlador_PreConeccion.cliente.cerrarCliente();
+        // Controlador_PreConeccion.server.cerrarServidor();
+        Controlador_PreConeccion.cliente = null;
+        // Controlador_PreConeccion.server = null;
         Controlador_PreConeccion.inicializar(Controlador_PreConeccion.ventana);
         ocultar(ventana);
     }

@@ -29,7 +29,7 @@ public class Controlador_ComoJugar extends Pantalla {
      * Accion que se ejecuta al presionar el boton de atras cuando se esta en la segunda
      * pagina de la seccion Como Jugar 
      * 
-     * @version 1.2-1
+     * @version 1.1.6
      */
     public static void eventMostrarRegla1() {
         inicializar(ventanaPrincipal);
@@ -41,7 +41,7 @@ public class Controlador_ComoJugar extends Pantalla {
      * Accion que se ejecuta al presionar el boton de siguiente cuando se esta en la primera
      * pagina de la seccion Como Jugar 
      * 
-     * @version 1.2-1
+     * @version 1.1.6
      */
     public static void eventMostrarRegla2() {
         inicializar(ventanaSecundaria);

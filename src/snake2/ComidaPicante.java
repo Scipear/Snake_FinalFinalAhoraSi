@@ -1,5 +1,7 @@
 package snake2;
 
+import controladores.Controlador_Lobby;
+import controladores.Controlador_PreConeccion;
 import ost.ReproductorSonidos;
 
 /**
@@ -21,8 +23,10 @@ public class ComidaPicante extends Comida {
     }
 
     public void hacerEfecto(Personaje personaje) {
-        Game.setDelay(100);
-        Tablero.setRapidez(true);
+        if(Controlador_PreConeccion.server != null || Controlador_Lobby.mapaSeleccionado != -1){
+            Game.setDelay(100);
+            Tablero.setRapidez(true);
+        }
         super.hacerEfecto(personaje);
     }
 }

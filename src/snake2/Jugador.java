@@ -22,7 +22,7 @@ public class Jugador{
         this.usuario = usuario;
         this.numero = numero;
         puntaje = 0;
-        personaje = new Personaje(x, y, direccion, skin);
+        personaje = new Personaje(x, y, direccion, skin, numero);
     }
     
     /**
@@ -31,7 +31,7 @@ public class Jugador{
      * @version 1.1.4
      */
     public void aumentaPuntaje(){
-        puntaje++;
+        puntaje = personaje.getLongitud() - 3;
     }
     /**
      * Le asigna un personaje al jugador
@@ -43,7 +43,7 @@ public class Jugador{
      * @version 1.2
      */
     public void asignaPersonaje(int x, int y, String direccion, int skin){
-        personaje = new Personaje(x, y, direccion, skin);
+        personaje = new Personaje(x, y, direccion, skin, numero);
     }
     
     public void activarHost(){
