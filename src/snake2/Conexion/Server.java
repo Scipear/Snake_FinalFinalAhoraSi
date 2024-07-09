@@ -76,6 +76,10 @@ public class Server implements Runnable{
      */
     public synchronized void cerrarServidor(){
         try {
+            chatServer.dispose();
+            chatServer = null;
+            servidorActivo = false;
+            socket.close();
             thread.join();
         } catch (InterruptedException e){
             e.printStackTrace();
@@ -106,8 +110,6 @@ public class Server implements Runnable{
                 mostrar.enviarData(this);
             } //Si todos los jugadores estan listos para jugar, entonces comienza la partida
         }
-        servidorActivo = false;
-        socket.close();
     }
 
     /**
@@ -351,6 +353,7 @@ public class Server implements Runnable{
      * @version 1.2
      */
     public boolean comprobarJugadores(){
+        System.out.println(jugadoresActivos.size());
         if(jugadoresActivos.size() == 0){
             cerrarServidor();
             return false;
@@ -358,15 +361,12 @@ public class Server implements Runnable{
         return true;
     }
 
+    /**
+     * Cambia los valores al estado de una partida no iniciada
+     * 
+     * @version 1.2.3
+     */
     public void acabarPartida(){
-        for(int i = 0; i < jugadoresActivos.size(); i++){
-            jugadoresActivos.get(i).alistaJugador(false);
-        }
-        juegoIniciado = false;
-        jugadoresListos = 0;
-    }
-
-    public void volverALobby(Paquete12Window paquete){
         for(int i = 0; i < jugadoresActivos.size(); i++){
             if(jugadoresActivos.get(i).getEstaListo()){
                 jugadoresActivos.get(i).alistaJugador(false);
@@ -374,6 +374,17 @@ public class Server implements Runnable{
         }
         juegoIniciado = false;
         jugadoresListos = 0;
+    }
+
+    /**
+     * En caso de que un cliente no quiera volver a jugar y vuelva al lobby, cambia el estado
+     * de los jugadores listos y envia a todos los clientes al lobby
+     * 
+     * @param paquete Datos para el cambio
+     * @version 1.2.3
+     */
+    public void volverALobby(Paquete12Window paquete){
+        acabarPartida();
         paquete.enviarData(this);
     }
         

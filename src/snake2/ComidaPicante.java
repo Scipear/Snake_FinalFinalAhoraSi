@@ -2,7 +2,6 @@ package snake2;
 
 import controladores.Controlador_Host;
 import controladores.Controlador_Lobby;
-import controladores.Controlador_PreConeccion;
 import ost.ReproductorSonidos;
 
 /**

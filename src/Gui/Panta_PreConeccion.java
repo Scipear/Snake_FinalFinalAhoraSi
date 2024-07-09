@@ -1,5 +1,6 @@
-
 package Gui;
+
+import javax.swing.ImageIcon;
 
 public class Panta_PreConeccion extends javax.swing.JFrame {
 
@@ -8,6 +9,7 @@ public class Panta_PreConeccion extends javax.swing.JFrame {
      */
     public Panta_PreConeccion() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/Recursos/snakeicon.png")).getImage());
     }
 
     /**
@@ -66,7 +68,7 @@ public class Panta_PreConeccion extends javax.swing.JFrame {
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Multijugador.jpg"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

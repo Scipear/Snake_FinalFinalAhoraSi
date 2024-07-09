@@ -1,7 +1,7 @@
-
 package Gui;
 
 import controladores.Controlador_Login;
+import javax.swing.ImageIcon;
 
 public class Panta_Login extends javax.swing.JFrame {
 
@@ -11,6 +11,7 @@ public class Panta_Login extends javax.swing.JFrame {
     public Panta_Login() {
         initComponents();
         Controlador_Login.usuario = TextUsuario;
+        this.setIconImage(new ImageIcon(getClass().getResource("/Recursos/snakeicon.png")).getImage());
     }
 
     /**
@@ -55,7 +56,7 @@ public class Panta_Login extends javax.swing.JFrame {
                 TextUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(TextUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 318, 220, -1));
+        jPanel1.add(TextUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 220, -1));
         TextUsuario.getAccessibleContext().setAccessibleDescription("");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Usuario.jpg"))); // NOI18N

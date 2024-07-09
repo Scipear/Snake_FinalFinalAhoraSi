@@ -4,7 +4,7 @@ package snake2;
  * 
  * @version 1.0.4
  */
-public class Jugador{
+public class Jugador implements Comparable<Jugador>{
     private Personaje personaje;
     private int puntaje;
     private String usuario;
@@ -66,5 +66,10 @@ public class Jugador{
 
     public int getNumero(){
         return numero;
+    }
+
+    @Override
+    public int compareTo(Jugador o) {
+        return o.getPuntaje() - puntaje;
     }
 }

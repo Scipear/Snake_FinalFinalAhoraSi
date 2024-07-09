@@ -142,9 +142,13 @@ public class ChatServer extends javax.swing.JFrame implements Runnable{
                     name=chatDatos.getName();
                     mensaje =chatDatos.getMensaje();
                     ip=chatDatos.getIp();
-                    if(mensaje.equals("online")) {
+                    //agrega el ip a la lista de jugadores online
+                    if (!ListaDeJugadores.contains(ip)) {
                         ListaDeJugadores.add(ip);
+                        System.out.println("Server.Server.run()"+ListaDeJugadores.size());
+                        System.out.println("Server.Server.run()"+ip);
                     }
+                    
                     //enviar datos a los jugadores
                     if (!mensaje.equals("online")) {
                         Socket newSocket;

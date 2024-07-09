@@ -7,7 +7,9 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collections;
 
+import Gui.Panta_FinalPartida_Online;
 import controladores.Controlador_Cliente;
 import controladores.Controlador_FinalPartida;
 import controladores.Controlador_Host;
@@ -90,7 +92,10 @@ public class Cliente implements Runnable{
      */
     public synchronized void cerrarCliente(){
         try {
+            chatCliente.dispose();
             estaConectado = false;
+            chatCliente = null;
+            socket.close();
             thread.join();
         } catch (InterruptedException e){
             e.printStackTrace();
@@ -114,9 +119,6 @@ public class Cliente implements Runnable{
         while(estaConectado){
             recibirPaquete();
         }
-        chatCliente.setVisible(false);
-        chatCliente = null;
-        socket.close();
     }
 
     /**
@@ -139,6 +141,7 @@ public class Cliente implements Runnable{
      * Le envia un paquete al servidor
      * 
      * @param datos Lo que se enviara al servidor
+     * @version 1.2
      */
     public void enviarPaquete(byte[] datos){
         DatagramPacket paquete = new DatagramPacket(datos, datos.length, direccionIP, puerto);
@@ -318,15 +321,22 @@ public class Cliente implements Runnable{
         }
     }
 
+    /**
+     * Gestiona cuales ventanas mostrar u ocultar
+     * 
+     * @param paquete Datos para la gestion de ventanas en los clientes
+     * @version 1.2.3
+     */
     public void gestionaVentanas(Paquete12Window paquete){
         switch(paquete.getTipo()){
             case 1:
+                Collections.sort(jugadores);
+                Controlador_FinalPartida.ventana = new Panta_FinalPartida_Online(jugadores);
                 pantalla.detenerMusica();
                 pantalla.dispose();
                 jugadoresListos = false;
                 cantidadJugadores = 0;
                 jugadores.clear();
-                System.out.println("Tamanio de la lista " + jugadores.size());
                 Controlador_FinalPartida.inicializar(Controlador_FinalPartida.ventana);
                 break;
             

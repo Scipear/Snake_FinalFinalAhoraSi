@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
+import Gui.Panta_FinalPartida_Online;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete12Window;
 import snake2.Front.PantallaJuego;
@@ -134,6 +135,7 @@ public class Game implements Runnable, ActionListener, Comunicacion {
                 pantalla.detenerMusica();
                 pantalla.dispose();
                 if(Controlador_Lobby.modo == 1){
+                    Controlador_FinalPartida.ventana = new Panta_FinalPartida_Online(jugadores);
                     Controlador_FinalPartida.inicializar(Controlador_FinalPartida.ventana);
                 }else{
                     Controlador_PreConeccion.server.acabarPartida();

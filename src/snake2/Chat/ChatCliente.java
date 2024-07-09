@@ -291,7 +291,7 @@ public class ChatCliente extends javax.swing.JFrame implements Runnable {
     }
     
     void EnviarIpAlServidor(String ip) throws IOException{
-          ChatDatos dataIp =  new ChatDatos();
+        ChatDatos dataIp =  new ChatDatos();
           
         //ip del servidor
         String ipServer=jTextField2.getText();
