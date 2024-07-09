@@ -22,8 +22,7 @@ public class Controlador_ComoJugar extends Pantalla {
      */
     public static void eventVolverMenu(){
         Controlador_MenuPrincipal.inicializar(Controlador_MenuPrincipal.ventana);
-        ocultar(ventanaPrincipal);
-        ocultar(ventanaSecundaria);
+        ventanaPrincipal.dispose();
     }
     /**
      * Accion que se ejecuta al presionar el boton de atras cuando se esta en la segunda
@@ -33,8 +32,7 @@ public class Controlador_ComoJugar extends Pantalla {
      */
     public static void eventMostrarRegla1() {
         inicializar(ventanaPrincipal);
-        ocultar(ventanaSecundaria);
-
+        ventanaSecundaria.dispose();
     }
 
     /**
@@ -45,6 +43,6 @@ public class Controlador_ComoJugar extends Pantalla {
      */
     public static void eventMostrarRegla2() {
         inicializar(ventanaSecundaria);
-        ocultar(ventanaPrincipal);
+        ventanaPrincipal.dispose();
     }
 }

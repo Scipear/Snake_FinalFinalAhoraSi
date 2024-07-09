@@ -22,6 +22,6 @@ public class Controlador_Creditos extends Pantalla{
     */
     public static void eventVolverMenu() {
         Controlador_MenuPrincipal.inicializar(Controlador_MenuPrincipal.ventana);
-        ocultar(ventana);
+        ventana.dispose();
     }
 }

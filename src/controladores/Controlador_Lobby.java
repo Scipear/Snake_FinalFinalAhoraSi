@@ -28,10 +28,11 @@ public class Controlador_Lobby extends Controlador_Host{
             if(skinSeleccionada == -1 || mapaSeleccionado == -1){
                 throw new AlertException("Por favor, elige una skin y un mapa para poder jugar");        
             }
+            modo = 1;
             Controlador_MenuPrincipal.pararMusica();
             Game game = new Game();
             game.iniciarSinglePlayer();
-            ocultar(ventana);
+            ventana.dispose();
         }catch(AlertException e){
             e.mostrarAlerta();
         }
@@ -47,6 +48,6 @@ public class Controlador_Lobby extends Controlador_Host{
         skinSeleccionada = -1;
         mapaSeleccionado = -1;
         Controlador_MenuPrincipal.inicializar(Controlador_MenuPrincipal.ventana);
-        ocultar(ventana);
+        ventana.dispose();
     }
 }

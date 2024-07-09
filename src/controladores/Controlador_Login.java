@@ -30,7 +30,7 @@ public class Controlador_Login extends Pantalla{
                 throw new AlertException("Por favor, ingrese un nombre de usuario.");
             }
             System.out.println("Usuario creado: " + nombreUsuario);
-            ocultar(ventana);
+            ventana.dispose();
             Controlador_MenuPrincipal.inicializar(Controlador_MenuPrincipal.ventana);
             Controlador_MenuPrincipal.iniciarMusica();
         }catch(AlertException e){

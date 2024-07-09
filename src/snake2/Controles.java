@@ -3,6 +3,8 @@ package snake2;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import controladores.Controlador_Cliente;
+import controladores.Controlador_Host;
 import controladores.Controlador_PreConeccion;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete07Move;
@@ -115,7 +117,7 @@ public class Controles implements KeyListener, Comunicacion{
 
     @Override
     public void enviarServidor(Paquete paquete){
-        if(Controlador_PreConeccion.cliente != null){
+        if(Controlador_Cliente.modo == 3 || Controlador_Host.modo == 2){
             paquete.enviarData(Controlador_PreConeccion.cliente);
         }
     }

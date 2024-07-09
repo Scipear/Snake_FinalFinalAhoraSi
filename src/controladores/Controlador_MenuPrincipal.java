@@ -52,7 +52,7 @@ public class Controlador_MenuPrincipal extends Pantalla {
      */
     public static void eventLobbie() {
         Controlador_Lobby.inicializar(Controlador_Lobby.ventana);   //Aqui abre el lobby para jugar single player
-        ocultar(ventana);
+        ventana.dispose();
     }
 
     /**
@@ -63,7 +63,7 @@ public class Controlador_MenuPrincipal extends Pantalla {
      */
     public static void eventComoJugar() {
         Controlador_ComoJugar.inicializar(Controlador_ComoJugar.ventanaPrincipal);    //Aqui abre la Pantalla de controles y reglas
-        ocultar(ventana);
+        ventana.dispose();
     }
 
     /**
@@ -74,7 +74,7 @@ public class Controlador_MenuPrincipal extends Pantalla {
      */
     public static void eventCreditos() {
         Controlador_Creditos.inicializar(Controlador_Creditos.ventana);     //Aqui abre la pantalla de creditos
-        ocultar(ventana);
+        ventana.dispose();
     }
 
     /**
@@ -85,7 +85,7 @@ public class Controlador_MenuPrincipal extends Pantalla {
      */
     public static void eventConectarse() {
         Controlador_PreConeccion.inicializar(Controlador_PreConeccion.ventana); //Aqui abre la pantalla del multijugador
-        ocultar(ventana);
+        ventana.dispose();
     }
 
 }

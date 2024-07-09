@@ -18,6 +18,7 @@ public class Controlador_Cliente extends Pantalla{
     public static Panta_Online_ClienteLobbie ventana = new Panta_Online_ClienteLobbie();
     public static GraficoPersonaje seleccion;
     public static int skinSeleccionada = -1;
+    public static int modo;
     public static boolean isReady = false;
 
     /**
@@ -31,10 +32,10 @@ public class Controlador_Cliente extends Pantalla{
             if(skinSeleccionada == -1){
                 throw new AlertException("Debes elegir una skin para poder iniciar");
             }
-            Paquete02Play play = new Paquete02Play(Controlador_Login.nombreUsuario, Controlador_Cliente.skinSeleccionada);
+            modo = 3;
+            Paquete02Play play = new Paquete02Play(Controlador_Login.nombreUsuario, skinSeleccionada);
             play.enviarData(Controlador_PreConeccion.cliente);
             Controlador_MenuPrincipal.pararMusica();
-            ocultar(ventana);
         }catch(AlertException e){
             e.mostrarAlerta();
         }
@@ -52,7 +53,7 @@ public class Controlador_Cliente extends Pantalla{
         Controlador_PreConeccion.cliente.cerrarCliente();
         Controlador_PreConeccion.cliente = null;
         Controlador_PreConeccion.inicializar(Controlador_PreConeccion.ventana);
-        ocultar(ventana);
+        ventana.dispose();
     }
 
     public static void selec_Skin1(){

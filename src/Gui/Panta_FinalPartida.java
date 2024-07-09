@@ -28,7 +28,7 @@ public class Panta_FinalPartida extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(13, 13, 32));
         jButton1.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(126, 77, 181));
-        jButton1.setText("Volver al Menu principal ");
+        jButton1.setText("Volver al Lobby");
         jButton1.setBorder(null);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {

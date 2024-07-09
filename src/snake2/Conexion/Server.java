@@ -20,8 +20,8 @@ import snake2.Contenedor_Paquetes.Paquete02Play;
 import snake2.Contenedor_Paquetes.Paquete03Show;
 import snake2.Contenedor_Paquetes.Paquete04Player;
 import snake2.Contenedor_Paquetes.Paquete07Move;
-import snake2.Contenedor_Paquetes.Paquete10Effect;
 import snake2.Contenedor_Paquetes.Paquete11Collision;
+import snake2.Contenedor_Paquetes.Paquete12Window;
 
 /**
  * Clase que representa al servidor que contendra la informacion principal de la partida y se mantendra
@@ -190,7 +190,7 @@ public class Server implements Runnable{
 
         case PLAY:
             Paquete02Play jugar = new Paquete02Play(datos);
-            System.out.println("El usuario " + jugar.getUsuario() + " ha elegido la skin " + jugar.getSkin() + " y esta listo para jugar");
+            System.out.println("El usuario " + jugar.getUsuario() + " esta listo para jugar");
             prepararJugador(jugar);
             break;
 
@@ -202,6 +202,11 @@ public class Server implements Runnable{
         case COLLISION:
             Paquete11Collision efecto = new Paquete11Collision(datos);
             actualizarTablero(efecto);
+            break;
+        
+        case WINDOW:
+            Paquete12Window ventana = new Paquete12Window(datos);
+            volverALobby(ventana);
             break;
         }
 
@@ -351,6 +356,25 @@ public class Server implements Runnable{
             return false;
         }
         return true;
+    }
+
+    public void acabarPartida(){
+        for(int i = 0; i < jugadoresActivos.size(); i++){
+            jugadoresActivos.get(i).alistaJugador(false);
+        }
+        juegoIniciado = false;
+        jugadoresListos = 0;
+    }
+
+    public void volverALobby(Paquete12Window paquete){
+        for(int i = 0; i < jugadoresActivos.size(); i++){
+            if(jugadoresActivos.get(i).getEstaListo()){
+                jugadoresActivos.get(i).alistaJugador(false);
+            }
+        }
+        juegoIniciado = false;
+        jugadoresListos = 0;
+        paquete.enviarData(this);
     }
         
     public int getIndiceJugador(String usuario){

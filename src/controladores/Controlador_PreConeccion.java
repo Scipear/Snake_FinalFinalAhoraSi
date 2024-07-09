@@ -32,7 +32,7 @@ public class Controlador_PreConeccion extends Pantalla{
         System.out.println(server.getDireccionIP());
         cliente = new Cliente(server.getDireccionIP());
         Controlador_Host.inicializar(Controlador_Host.ventana); //Abrir la pantalla del Host Online
-        ocultar(ventana);
+        ventana.dispose();
     }
 
 
@@ -52,7 +52,7 @@ public class Controlador_PreConeccion extends Pantalla{
             cliente = new Cliente(direccionIP);
             Controlador_Cliente.inicializar(Controlador_Cliente.ventana); //Abrir la pantalla del Host Online
             System.out.println("Se abrio el cliente");
-            ocultar(ventana);
+            ventana.dispose();
         }catch(AlertException e){
             e.mostrarAlerta();
         }
@@ -67,7 +67,7 @@ public class Controlador_PreConeccion extends Pantalla{
      */
     public static void eventVolverAlMenu() {
         Controlador_MenuPrincipal.inicializar(Controlador_MenuPrincipal.ventana);
-        ocultar(ventana);
+        ventana.dispose();
     }
 
 }

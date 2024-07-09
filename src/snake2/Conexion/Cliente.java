@@ -9,6 +9,8 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import controladores.Controlador_Cliente;
+import controladores.Controlador_FinalPartida;
+import controladores.Controlador_Host;
 import controladores.Controlador_Login;
 import snake2.AlertException;
 import snake2.Comida;
@@ -26,6 +28,7 @@ import snake2.Contenedor_Paquetes.Paquete05Update;
 import snake2.Contenedor_Paquetes.Paquete06Comida;
 import snake2.Contenedor_Paquetes.Paquete10Effect;
 import snake2.Contenedor_Paquetes.Paquete11Collision;
+import snake2.Contenedor_Paquetes.Paquete12Window;
 import snake2.Front.PantallaJuego;
 
 /**
@@ -192,6 +195,7 @@ public class Cliente implements Runnable{
         case SHOW:
             Paquete03Show mostrar = new Paquete03Show(datos);
             if((cantidadJugadores == mostrar.getCantidad()) && !jugadoresListos){
+                Controlador_Cliente.ventana.dispose();
                 jugadoresListos = true;
                 tablero = new Tablero(jugadores, mostrar.getMapa());
                 tablero.actualizarComida(comidaAux.getPosX(), comidaAux.getPosY(), 4);
@@ -226,6 +230,11 @@ public class Cliente implements Runnable{
             Paquete11Collision colision = new Paquete11Collision(datos);
             actualizarTablero(colision);
             break;
+
+        case WINDOW:
+            Paquete12Window ventana = new Paquete12Window(datos);
+            gestionaVentanas(ventana);
+            break;
         }
 
     }
@@ -239,6 +248,7 @@ public class Cliente implements Runnable{
         Jugador jugador = new Jugador(paquete.getUsuario(), paquete.getNumero(), paquete.getX(), paquete.getY(), paquete.getDireccion(), paquete.getSkin());
         jugadores.add(jugador);
         cantidadJugadores++;
+        System.out.println("Nuevo tamanio" + jugadores.size());
     }
 
     /**
@@ -304,6 +314,34 @@ public class Cliente implements Runnable{
             case 3:
                 jugadores.get(paquete.getIndice()).aumentaPuntaje();
                 pantalla.actualizaPuntaje(jugadores);
+                break;
+        }
+    }
+
+    public void gestionaVentanas(Paquete12Window paquete){
+        switch(paquete.getTipo()){
+            case 1:
+                pantalla.detenerMusica();
+                pantalla.dispose();
+                jugadoresListos = false;
+                cantidadJugadores = 0;
+                jugadores.clear();
+                System.out.println("Tamanio de la lista " + jugadores.size());
+                Controlador_FinalPartida.inicializar(Controlador_FinalPartida.ventana);
+                break;
+            
+            case 2:
+                if(Controlador_Host.modo == 2){
+                Controlador_Host.inicializar(Controlador_Host.ventana);
+                Controlador_Host.mapaSeleccionado = -1;
+                Controlador_Host.skinSeleccionada = -1;
+
+                }else if(Controlador_Cliente.modo == 3){
+                Controlador_Cliente.inicializar(Controlador_Cliente.ventana);
+                Controlador_Cliente.skinSeleccionada = -1;
+
+                }
+                Controlador_FinalPartida.ventana.dispose();
                 break;
         }
     }

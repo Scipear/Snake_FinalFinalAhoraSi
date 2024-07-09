@@ -361,6 +361,23 @@ public class Tablero implements Comunicacion{
         }
     }
 
+    /**
+     * Hace un conteo de cuantos personajes vivos estan en la partida
+     * 
+     * @version 1.2.3
+     */
+    public int personajesVivos(){
+        int cont = 0;
+
+        for(int i = 0; i < personajes.size(); i++){
+            if(personajes.get(i).getEstado()){
+                cont++;
+            }
+        }
+
+        return cont;
+    }
+
     public void sacarPersonaje(int indice){
         if(!personajes.get(indice).getEstado()){
             personajes.remove(indice);
@@ -524,7 +541,7 @@ public class Tablero implements Comunicacion{
 
     @Override
     public void enviarServidor(Paquete paquete) {
-        if(Controlador_PreConeccion.server != null){
+        if(Controlador_Host.modo == 2){
             paquete.enviarData(Controlador_PreConeccion.server);
         }
     }   

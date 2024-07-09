@@ -31,10 +31,11 @@ public class Controlador_Host extends Controlador_Cliente{
             if(Controlador_PreConeccion.server.getJugadoresListos() != Controlador_PreConeccion.server.getJugadoresActivos()-1){
                 throw new AlertException("Debe esperar a que todos los jugadores esten listos para jugar");
             }
+            modo = 2;
             Paquete02Play play = new Paquete02Play(Controlador_Login.nombreUsuario, skinSeleccionada);
             play.enviarData(Controlador_PreConeccion.cliente);
             Controlador_MenuPrincipal.pararMusica();
-            ocultar(ventana);
+            ventana.dispose();
         }catch(AlertException e){
             e.mostrarAlerta();
         }
@@ -56,7 +57,7 @@ public class Controlador_Host extends Controlador_Cliente{
         Controlador_PreConeccion.cliente = null;
         // Controlador_PreConeccion.server = null;
         Controlador_PreConeccion.inicializar(Controlador_PreConeccion.ventana);
-        ocultar(ventana);
+        ventana.dispose();
     }
 
     public static void selec_Mapa1() {

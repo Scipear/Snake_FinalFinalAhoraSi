@@ -1,5 +1,6 @@
 package snake2;
 
+import controladores.Controlador_Host;
 import controladores.Controlador_Lobby;
 import controladores.Controlador_PreConeccion;
 import ost.ReproductorSonidos;
@@ -23,7 +24,7 @@ public class ComidaPicante extends Comida {
     }
 
     public void hacerEfecto(Personaje personaje) {
-        if(Controlador_PreConeccion.server != null || Controlador_Lobby.mapaSeleccionado != -1){
+        if(Controlador_Lobby.modo == 1 || Controlador_Host.modo == 2){
             Game.setDelay(100);
             Tablero.setRapidez(true);
         }

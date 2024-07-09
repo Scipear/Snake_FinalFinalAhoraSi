@@ -5,8 +5,10 @@ import ost.ReproductorSonidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.Timer;
+
+import snake2.Contenedor_Paquetes.Paquete;
+import snake2.Contenedor_Paquetes.Paquete12Window;
 import snake2.Front.PantallaJuego;
 
 /**
@@ -14,10 +16,11 @@ import snake2.Front.PantallaJuego;
  * 
  * @version 1.1.4
  */
-public class Game implements Runnable, ActionListener {
+public class Game implements Runnable, ActionListener, Comunicacion {
     private volatile boolean iniciado = false; // Para controlar el hilo
     private static boolean gameOver; // Si ya acabo la partida
     private static Timer timer; // Permite que la pantalla se actualice constantemente
+    private Paquete12Window window;
     private ReproductorSonidos reproductorSonidos = new ReproductorSonidos();
     private PantallaJuego pantalla; // Pantalla en donde ocurrira la partida
     private Thread thread;
@@ -64,6 +67,7 @@ public class Game implements Runnable, ActionListener {
         tablero = new Tablero(this.jugadores, mapa);
         tablero.generarComida();
         pantalla = new PantallaJuego(tablero, this.jugadores, 0);
+        pantalla.detenerMusica();
         iniciarJuego();
     }
 
@@ -121,16 +125,22 @@ public class Game implements Runnable, ActionListener {
 
             tablero.conteoComidaEspecial();
             pantalla.actualizaMapa();
-            /*
-            if(!jugador.getPersonaje().getEstado()){
+            
+            if(tablero.personajesVivos() == 0){
                 detenerJuego();
                 reproductorSonidos.detener();
                 timer.stop();
                 gameOver = true;
-                pantalla.setVisible(false);
                 pantalla.detenerMusica();
-                Controlador_FinalPartida.mostrar();
-            }*/
+                pantalla.dispose();
+                if(Controlador_Lobby.modo == 1){
+                    Controlador_FinalPartida.inicializar(Controlador_FinalPartida.ventana);
+                }else{
+                    Controlador_PreConeccion.server.acabarPartida();
+                    window = new Paquete12Window(1);
+                    enviarServidor(window);
+                }
+            }
         }
         pantalla.muestraPausa(tablero);
     }
@@ -149,5 +159,10 @@ public class Game implements Runnable, ActionListener {
 
     public Tablero getTablero(){
         return tablero;
+    }
+
+    @Override
+    public void enviarServidor(Paquete paquete) {
+        paquete.enviarData(Controlador_PreConeccion.server);
     }
 }

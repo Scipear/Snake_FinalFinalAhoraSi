@@ -3,6 +3,7 @@ package snake2;
 import java.util.ArrayList;
 import java.util.List;
 
+import controladores.Controlador_Host;
 import controladores.Controlador_PreConeccion;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete05Update;
@@ -114,7 +115,6 @@ public class Personaje implements Comunicacion{
     /**
      * Recorre las partes del cuerpo de la serpiente y evalua sus estados
      * 
-     * @param indice Identificador del jugador al que le pertenece la serpiente
      * @version 1.0.4
      */
     public void movimiento(){
@@ -200,7 +200,6 @@ public class Personaje implements Comunicacion{
     /**
      * Verifica si la serpienta ha chocado contra si misma
      * 
-     * @param indice Para identificar el jugador al que le pertenece la serpiente
      * @version 1.1.2
      */
     public void chocaConCuerpo(){
@@ -259,7 +258,7 @@ public class Personaje implements Comunicacion{
 
     @Override
     public void enviarServidor(Paquete paquete) {
-        if(Controlador_PreConeccion.server != null){
+        if(Controlador_Host.modo == 2){
             actualizar.enviarData(Controlador_PreConeccion.server);
         }
     }
