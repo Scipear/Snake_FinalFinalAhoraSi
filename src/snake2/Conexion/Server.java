@@ -20,7 +20,7 @@ import snake2.Contenedor_Paquetes.Paquete02Play;
 import snake2.Contenedor_Paquetes.Paquete03Show;
 import snake2.Contenedor_Paquetes.Paquete04Player;
 import snake2.Contenedor_Paquetes.Paquete07Move;
-import snake2.Contenedor_Paquetes.Paquete11Collision;
+import snake2.Contenedor_Paquetes.Paquete11Board;
 import snake2.Contenedor_Paquetes.Paquete12Window;
 
 /**
@@ -201,9 +201,9 @@ public class Server implements Runnable{
             actualizarMovimiento(mover); 
             break;
 
-        case COLLISION:
-            Paquete11Collision efecto = new Paquete11Collision(datos);
-            actualizarTablero(efecto);
+        case BOARD:
+            Paquete11Board board = new Paquete11Board(datos);
+            actualizarTablero(board);
             break;
         
         case WINDOW:
@@ -252,6 +252,9 @@ public class Server implements Runnable{
      * @version 1.2
      */
     public void desconectarJugador(Paquete01Desconectar paquete){
+        if(jugadoresActivos.get(getIndiceJugador(paquete.getUsername())).getEstaListo()){
+            jugadoresListos--;
+        }
         jugadoresActivos.remove(getIndiceJugador(paquete.getUsername()));
         if(comprobarJugadores()){
             paquete.enviarData(this);
@@ -335,8 +338,11 @@ public class Server implements Runnable{
      * @param paquete Datos del estado del tablero
      * @version 1.2.2
      */
-    public void actualizarTablero(Paquete11Collision paquete){
-        if(paquete.getEstado() == 1){
+    public void actualizarTablero(Paquete11Board paquete){
+        if(paquete.getEstado() == 0){
+            game.getTablero().getPersonaje(paquete.getIndice()).setEstado(false);
+
+        }else if(paquete.getEstado() == 1){
             game.getTablero().setPausa(false);
 
         }else if(paquete.getEstado() == 2){

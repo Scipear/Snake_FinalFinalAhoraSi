@@ -65,7 +65,8 @@ public class Controlador_FinalPartida extends Pantalla{
             Paquete12Window ventana = new Paquete12Window(2);
             ventana.enviarData(Controlador_PreConeccion.cliente);
 
-        }    
+        }
+        Controlador_MenuPrincipal.iniciarMusica();
         ventana.dispose();
     }
 }

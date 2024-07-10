@@ -8,7 +8,7 @@ import ost.ReproductorSonidos;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete06Comida;
 import snake2.Contenedor_Paquetes.Paquete10Effect;
-import snake2.Contenedor_Paquetes.Paquete11Collision;
+import snake2.Contenedor_Paquetes.Paquete11Board;
 
 /**
  * Clase parte que representa al tablero donde ocurre toda la partida
@@ -16,22 +16,22 @@ import snake2.Contenedor_Paquetes.Paquete11Collision;
  * @version 1.0.1
  */
 public class Tablero implements Comunicacion{
-    private final int ancho;
-    private final int alto;
-    private final int cantidadComidasEspeciales;
-    private static boolean rapidezActivada;
+    private final int ancho; //Ancho del mapa
+    private final int alto; //Alto del mapa
+    private final int cantidadComidasEspeciales; //Cantidad de comidas especiales disponibles en el juego
+    private static boolean rapidezActivada; //Si el efecto de rapidez esta activado en el tablero
     private static ReproductorSonidos ostSFX = new ReproductorSonidos();
     private static String sfxOstRuta;
-    private Paquete06Comida food;
-    private Paquete10Effect effect;
-    private Paquete11Collision collision;
-    private Celda celdas[][];
-    private Comida comidaRegular;
-    private Comida comidaEspecial;
-    private ArrayList<Personaje> personajes;
-    private int tiempoComidaEspecial;
-    private boolean pausa;
-    private int mapa;
+    private ArrayList<Personaje> personajes; //Los personajes que seran parte de la partida
+    private Celda celdas[][]; //Arreglo que representa al tablero
+    private Comida comidaRegular; //La comida regular que aparece en el mapa
+    private Comida comidaEspecial; //La comida especial que aparece en el mapa
+    private Paquete06Comida food; //Paquete para informar a los clientes cuando se ha generado una nueva comida
+    private Paquete10Effect effect; //Paquete para informar a los clientes que una fruta ha sido comida y se generara su efecto
+    private Paquete11Board board; //Paquete para informar a los clientes sobre actualizaciones del estado del tablero
+    private boolean pausa; //Si el juego esta o no en pausa
+    private int mapa; //Tipo de mapa escogido por el jugador
+    private int tiempoComidaEspecial; //Tiempo restante para que aparezca una comida especial
     
     /**
      * Constructor de la clase
@@ -165,8 +165,8 @@ public class Tablero implements Comunicacion{
                 enviarServidor(food);
                 generarComida();
                 jugadores.get(i).aumentaPuntaje();
-                collision = new Paquete11Collision(i, 3);
-                enviarServidor(collision);
+                board = new Paquete11Board(i, 3);
+                enviarServidor(board);
                 return true;
     
             }else if(hayComidaEspecial() && personajes.get(i).getCuerpo(0).getPosX() == comidaEspecial.getPosX() && personajes.get(i).getCuerpo(0).getPosY() == comidaEspecial.getPosY()){
@@ -179,8 +179,8 @@ public class Tablero implements Comunicacion{
                 enviarServidor(food);
                 tiempoComidaEspecial = 60;
                 jugadores.get(i).aumentaPuntaje();
-                collision = new Paquete11Collision(i, 3);
-                enviarServidor(collision);
+                board = new Paquete11Board(i, 3);
+                enviarServidor(board);
                 return true;
             }
         }
@@ -288,8 +288,8 @@ public class Tablero implements Comunicacion{
     public void chocaConPared(int puesto){
         if("Pared".equals(celdas[personajes.get(puesto).getCuerpo(0).getPosY()][personajes.get(puesto).getCuerpo(0).getPosX()].getTipo())){
             personajes.get(puesto).setEstado(false);
-            collision = new Paquete11Collision(puesto, 0);
-            enviarServidor(collision);
+            board = new Paquete11Board(puesto, 0);
+            enviarServidor(board);
         }
     }
 
@@ -305,8 +305,8 @@ public class Tablero implements Comunicacion{
                 for(int j = 0; j < personajes.get(i).getLongitud(); j++){
                     if(personajes.get(puesto).getCuerpo(0).getPosX() == personajes.get(i).getCuerpo(j).getPosX() && personajes.get(puesto).getCuerpo(0).getPosY() == personajes.get(i).getCuerpo(j).getPosY() && personajes.get(i).getEstado()){
                         personajes.get(puesto).setEstado(false);
-                        collision = new Paquete11Collision(puesto, 0);
-                        enviarServidor(collision);
+                        board = new Paquete11Board(puesto, 0);
+                        enviarServidor(board);
                     }
                 }
             }
@@ -366,23 +366,22 @@ public class Tablero implements Comunicacion{
      * 
      * @version 1.2.3
      */
-    public int personajesVivos(){
-        int cont = 0;
-
+    public boolean personajesVivos(){
         for(int i = 0; i < personajes.size(); i++){
             if(personajes.get(i).getEstado()){
-                cont++;
+                return true;
             }
         }
 
-        return cont;
+        return false;
     }
 
-    public void sacarPersonaje(int indice){
-        if(!personajes.get(indice).getEstado()){
-            personajes.remove(indice);
-        }
-    }
+    // public void sacarPersonaje(int indice){
+    //     if(!personajes.get(indice).getEstado()){
+    //         personajes.remove(indice);
+    //     }
+    // }
+
     /**
      * Actualiza la comida en caso de una partida en multijugador
      * 

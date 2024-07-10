@@ -11,18 +11,18 @@ package snake2.Contenedor_Paquetes;
  * @author IVANNA
  * @version 1.2.2
  */
-public class Paquete11Collision extends Paquete{
+public class Paquete11Board extends Paquete{
     private int indice;
     private int estado;
     
-    public Paquete11Collision(byte[] data){        
+    public Paquete11Board(byte[] data){        
         super(11);
         String[] dataArray = leerData(data).split(",");
         this.estado = Integer.parseInt(dataArray[0]);
         this.indice = Integer.parseInt(dataArray[1]);               
     }
 
-    public Paquete11Collision(int indice, int estado){
+    public Paquete11Board(int indice, int estado){
         super(11);
         this.estado = estado;
         this.indice = indice;

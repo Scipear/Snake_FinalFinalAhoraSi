@@ -109,6 +109,11 @@ public class Principal_menu extends JFrame {
         btn_estadis.setText("Puntajes");
         btn_estadis.setBorder(null);
         btn_estadis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_estadis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_estadisActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_estadis, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 120, 56));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Fondo_MenuPrincipal.jpeg"))); // NOI18N
@@ -141,6 +146,10 @@ public class Principal_menu extends JFrame {
         controladores.Controlador_MenuPrincipal.eventCreditos();
     }//GEN-LAST:event_btn_creditsActionPerformed
 
+    private void btn_estadisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estadisActionPerformed
+        controladores.Controlador_MenuPrincipal.eventPuntajes();
+    }//GEN-LAST:event_btn_estadisActionPerformed
+    
     private void btn_conectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conectarActionPerformed
         controladores.Controlador_MenuPrincipal.eventConectarse();
     }//GEN-LAST:event_btn_conectarActionPerformed

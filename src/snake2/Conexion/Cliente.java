@@ -16,6 +16,7 @@ import controladores.Controlador_Host;
 import controladores.Controlador_Login;
 import snake2.AlertException;
 import snake2.Comida;
+import snake2.Estadisticas;
 import snake2.Jugador;
 import snake2.Tablero;
 import snake2.Chat.ChatCliente;
@@ -29,7 +30,7 @@ import snake2.Contenedor_Paquetes.Paquete04Player;
 import snake2.Contenedor_Paquetes.Paquete05Update;
 import snake2.Contenedor_Paquetes.Paquete06Comida;
 import snake2.Contenedor_Paquetes.Paquete10Effect;
-import snake2.Contenedor_Paquetes.Paquete11Collision;
+import snake2.Contenedor_Paquetes.Paquete11Board;
 import snake2.Contenedor_Paquetes.Paquete12Window;
 import snake2.Front.PantallaJuego;
 
@@ -229,9 +230,9 @@ public class Cliente implements Runnable{
             actualizarEntidades(efecto);
             break;
 
-        case COLLISION:
-            Paquete11Collision colision = new Paquete11Collision(datos);
-            actualizarTablero(colision);
+        case BOARD:
+            Paquete11Board board = new Paquete11Board(datos);
+            actualizarTablero(board);
             break;
 
         case WINDOW:
@@ -298,7 +299,7 @@ public class Cliente implements Runnable{
      * @param paquete Datos para la actualzacion
      * @version 1.2.2
      */
-    public void actualizarTablero(Paquete11Collision paquete){
+    public void actualizarTablero(Paquete11Board paquete){
         switch(paquete.getEstado()){
             case 0:
                 jugadores.get(paquete.getIndice()).getPersonaje().setEstado(false);
@@ -330,6 +331,7 @@ public class Cliente implements Runnable{
     public void gestionaVentanas(Paquete12Window paquete){
         switch(paquete.getTipo()){
             case 1:
+                Estadisticas.agregarPuntajes(jugadores);
                 Collections.sort(jugadores);
                 Controlador_FinalPartida.ventana = new Panta_FinalPartida_Online(jugadores);
                 pantalla.detenerMusica();

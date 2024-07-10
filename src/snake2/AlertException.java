@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
  * @version 1.2.1
  */
 public class AlertException extends Exception {
-    private String message;
+    private String message; //Mensaje que sera mostrado en la alerta
 
     /**
      * Constructor de la excepcion

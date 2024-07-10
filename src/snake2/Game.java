@@ -18,15 +18,16 @@ import snake2.Front.PantallaJuego;
  * @version 1.1.4
  */
 public class Game implements Runnable, ActionListener, Comunicacion {
+    private final int delay = 175; //Retraso en milisegundos para saber cada cuanto tiempo se actualizara la pantalla
     private volatile boolean iniciado = false; // Para controlar el hilo
     private static boolean gameOver; // Si ya acabo la partida
     private static Timer timer; // Permite que la pantalla se actualice constantemente
-    private Paquete12Window window;
-    private ReproductorSonidos reproductorSonidos = new ReproductorSonidos();
-    private PantallaJuego pantalla; // Pantalla en donde ocurrira la partida
-    private Thread thread;
-    protected Tablero tablero; // Tablero en donde ocurrira la partida
     private ArrayList<Jugador> jugadores = new ArrayList<>(); // Jugadores que seran parte de la partida
+    private PantallaJuego pantalla; // Pantalla en donde ocurrira la partida
+    private Paquete12Window window; // Paquete para informar a los clientes que la partida acabo
+    private ReproductorSonidos reproductorSonidos = new ReproductorSonidos();
+    private Tablero tablero; // Tablero en donde ocurrira la partida
+    private Thread thread;
     private boolean partidaIniciada; // Si la partida ya ha sido iniciada
     private int mapa; // Guarda el mapa seleccionado por el usuario
     // private int indiceJugadores = -1; Para tener control del indice de cada jugador
@@ -107,7 +108,7 @@ public class Game implements Runnable, ActionListener, Comunicacion {
                 try{
                     Thread.sleep(3000);
                     partidaIniciada = true;
-                    timer = new Timer(175, this);
+                    timer = new Timer(delay, this);
                     timer.start();
                 }catch(InterruptedException e){
                     e.printStackTrace();
@@ -127,7 +128,7 @@ public class Game implements Runnable, ActionListener, Comunicacion {
             tablero.conteoComidaEspecial();
             pantalla.actualizaMapa();
             
-            if(tablero.personajesVivos() == 0){
+            if(!tablero.personajesVivos()){
                 detenerJuego();
                 reproductorSonidos.detener();
                 timer.stop();

@@ -36,7 +36,7 @@ public class ChatCliente extends javax.swing.JFrame implements Runnable {
         Thread hilo = new Thread(this);
         hilo.start();
         this.nick = nick;
-        jLabel1.setText("Tu Nick:"+nick);
+        jLabel1.setText("Tu Nick: "+nick);
         setVisible(true);
        
     }
@@ -173,11 +173,11 @@ public class ChatCliente extends javax.swing.JFrame implements Runnable {
             Socket miSocket = new Socket(serverIP,9999);
             String mensaje = jTextField3.getText();
             String name = jLabel1.getText();
-            ChatDatos  enviar = new ChatDatos(serverIP, name, mensaje);
+            ChatDatos enviar = new ChatDatos(serverIP, name, mensaje);
        
             try {   
                 ObjectOutputStream salidaDeDatos = new ObjectOutputStream(miSocket.getOutputStream());
-                salidaDeDatos.writeObject(enviar);             
+                salidaDeDatos.writeObject(enviar);
                 salidaDeDatos.close();
                     
             } catch (Exception e) {

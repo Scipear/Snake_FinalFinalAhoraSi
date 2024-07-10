@@ -18,17 +18,17 @@ import ost.ReproductorSonidos;
 */
 
 public class PantallaJuego extends Pantalla {
-    private static ReproductorSonidos fondoOst;
     private static final String gameOstRuta = "\\src\\ost\\ARRR.mp3";
-    private boolean estaEnPausa = false;
-    private boolean estaEnJuego;
-    private GraficoTablero mapa; //Grafico que se encarga de dibujar el tablero y todo lo que tiene encima
+    private static ReproductorSonidos fondoOst;
+    private ArrayList<JLabel> recuadrosImagen = new ArrayList<>(); //Lista que guarda la imagen para mostrar el puntaje de los jugadores, cada posicion corresponde a un jugador
+    private ArrayList<JPanel> recuadros = new ArrayList<>(); //Lista para guardar el Label con el puntaje de los jugadores y asi mostrarlo en pantalla
     private Controles controles; //Configuracion del teclado (En esta ventana) para la manipulacion del personaje
+    private GraficoTablero mapa; //Grafico que se encarga de dibujar el tablero y todo lo que tiene encima
+    private JLabel fondoImagen, pausa; 
     private JLayeredPane multiPanel;
     private JPanel fondo;
-    private JLabel fondoImagen, pausa;
-    private ArrayList<JLabel> recuadrosImagen = new ArrayList<>();
-    private ArrayList<JPanel> recuadros = new ArrayList<>();
+    private boolean estaEnPausa = false; //Si el juego esta en pausa o no
+    private boolean estaEnJuego;
 
     /**
      * Constructor
@@ -148,6 +148,10 @@ public class PantallaJuego extends Pantalla {
             recuadros.get(i).add(recuadrosImagen.get(i));
             multiPanel.add(recuadros.get(i), Integer.valueOf(2));
         }
+    }
+
+    public void removerPuntaje(int indice){
+        recuadros.remove(indice);
     }
 
     public boolean getEnJuego(){

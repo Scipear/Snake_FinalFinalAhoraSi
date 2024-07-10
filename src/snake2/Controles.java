@@ -8,7 +8,7 @@ import controladores.Controlador_Host;
 import controladores.Controlador_PreConeccion;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete07Move;
-import snake2.Contenedor_Paquetes.Paquete11Collision;
+import snake2.Contenedor_Paquetes.Paquete11Board;
 
 /**
  * Clase parte del back. Configura los controles para un personaje especifico en la partida
@@ -16,11 +16,11 @@ import snake2.Contenedor_Paquetes.Paquete11Collision;
  * @version 1.0.4
  */
 public class Controles implements KeyListener, Comunicacion{
-    private Paquete11Collision colision;
-    private Paquete07Move mover;
-    private Personaje personaje;
-    private Tablero tablero;
-    private int indice;
+    private Paquete07Move mover; //Paquete para informar al servidor si un cliente ha movido a su personaje
+    private Paquete11Board board; //Paquete para informar al servidor si un cliente ha hecho alguna actualizacion en su tablero
+    private Personaje personaje; //Personaje al que se le asigna los controles
+    private Tablero tablero; //Tablero en donde estara dicho personaje
+    private int indice; //Indice para identificar al jugador y su personaje
 
     public Controles(Tablero tablero, Personaje personaje, int indice){
         this.personaje = personaje;
@@ -31,39 +31,51 @@ public class Controles implements KeyListener, Comunicacion{
     @Override
     public void keyTyped(KeyEvent e){
         String direccion = null;
-        switch(e.getKeyChar()){
-            case 'd':{
-                if(personaje.getCuerpo(0).getDireccion().equals("Abajo") || personaje.getCuerpo(0).getDireccion().equals("Arriba")){
-                    direccion = "Derecha";
+        if(personaje.getEstado()){
+            switch(e.getKeyChar()){
+                case 'd':{
+                    if(personaje.getCuerpo(0).getDireccion().equals("Abajo") || personaje.getCuerpo(0).getDireccion().equals("Arriba")){
+                        direccion = "Derecha";
+                    }
+                    break;
                 }
-                break;
-            }
-            
-            case 's':{
-                if(personaje.getCuerpo(0).getDireccion().equals("Derecha") || personaje.getCuerpo(0).getDireccion().equals("Izquierda")){
-                    direccion = "Abajo";
+                
+                case 's':{
+                    if(personaje.getCuerpo(0).getDireccion().equals("Derecha") || personaje.getCuerpo(0).getDireccion().equals("Izquierda")){
+                        direccion = "Abajo";
+                    }
+                    break;
                 }
-                break;
-            }
-
-            case 'a':{
-                if(personaje.getCuerpo(0).getDireccion().equals("Abajo") || personaje.getCuerpo(0).getDireccion().equals("Arriba")){
-                    direccion = "Izquierda";
+    
+                case 'a':{
+                    if(personaje.getCuerpo(0).getDireccion().equals("Abajo") || personaje.getCuerpo(0).getDireccion().equals("Arriba")){
+                        direccion = "Izquierda";
+                    }
+                    break;
                 }
-                break;
-            }
-
-            case 'w':{
-                if(personaje.getCuerpo(0).getDireccion().equals("Derecha") || personaje.getCuerpo(0).getDireccion().equals("Izquierda")){
-                    direccion = "Arriba";
+    
+                case 'w':{
+                    if(personaje.getCuerpo(0).getDireccion().equals("Derecha") || personaje.getCuerpo(0).getDireccion().equals("Izquierda")){
+                        direccion = "Arriba";
+                    }
+                    break;
                 }
-                break;
+    
+                case 'q':{
+                    personaje.setEstado(false);
+                }
             }
-        }
-        if(direccion != null){
-            personaje.getCuerpo(0).setDireccion(direccion);
-            mover = new Paquete07Move(indice, direccion);
-            enviarServidor(mover);
+    
+            if(direccion != null){
+                personaje.getCuerpo(0).setDireccion(direccion);
+                mover = new Paquete07Move(indice, direccion);
+                enviarServidor(mover);
+            }
+    
+            if(!personaje.getEstado()){
+                board = new Paquete11Board(indice, 0);
+                enviarServidor(board);
+            }
         }
     }
 
@@ -71,42 +83,44 @@ public class Controles implements KeyListener, Comunicacion{
     public void keyPressed(KeyEvent e) {
         int tecla = e.getKeyCode();
         String direccion = null;
-
-        if(tecla == KeyEvent.VK_RIGHT){
-            if(personaje.getCuerpo(0).getDireccion().equals("Abajo") || personaje.getCuerpo(0).getDireccion().equals("Arriba")){
-                direccion = "Derecha";
-            }
-        
-        }else if(tecla == KeyEvent.VK_DOWN){
-            if(personaje.getCuerpo(0).getDireccion().equals("Derecha") || personaje.getCuerpo(0).getDireccion().equals("Izquierda")){
-                direccion = "Abajo";
-            }
-
-        }else if(tecla == KeyEvent.VK_LEFT){
-            if(personaje.getCuerpo(0).getDireccion().equals("Abajo") || personaje.getCuerpo(0).getDireccion().equals("Arriba")){
-                direccion = "Izquierda";
-            }
-
-        }else if(tecla == KeyEvent.VK_UP){
-            if(personaje.getCuerpo(0).getDireccion().equals("Derecha") || personaje.getCuerpo(0).getDireccion().equals("Izquierda")){
-                direccion = "Arriba";
-            }
+        if(personaje.getEstado()){
+            if(tecla == KeyEvent.VK_RIGHT){
+                if(personaje.getCuerpo(0).getDireccion().equals("Abajo") || personaje.getCuerpo(0).getDireccion().equals("Arriba")){
+                    direccion = "Derecha";
+                }
             
-        }else if(tecla == KeyEvent.VK_SPACE){
-            if(tablero.getPausa()){
-                tablero.setPausa(false);
-                colision = new Paquete11Collision(indice, 1);
-
-            }else{
-                tablero.setPausa(true);
-                colision = new Paquete11Collision(indice, 2);
+            }else if(tecla == KeyEvent.VK_DOWN){
+                if(personaje.getCuerpo(0).getDireccion().equals("Derecha") || personaje.getCuerpo(0).getDireccion().equals("Izquierda")){
+                    direccion = "Abajo";
+                }
+    
+            }else if(tecla == KeyEvent.VK_LEFT){
+                if(personaje.getCuerpo(0).getDireccion().equals("Abajo") || personaje.getCuerpo(0).getDireccion().equals("Arriba")){
+                    direccion = "Izquierda";
+                }
+    
+            }else if(tecla == KeyEvent.VK_UP){
+                if(personaje.getCuerpo(0).getDireccion().equals("Derecha") || personaje.getCuerpo(0).getDireccion().equals("Izquierda")){
+                    direccion = "Arriba";
+                }
+                
+            }else if(tecla == KeyEvent.VK_SPACE){
+                if(tablero.getPausa()){
+                    tablero.setPausa(false);
+                    board = new Paquete11Board(indice, 1);
+    
+                }else{
+                    tablero.setPausa(true);
+                    board = new Paquete11Board(indice, 2);
+                }
+                enviarServidor(board);
             }
-            enviarServidor(colision);
-        }
-        if(direccion != null){
-            personaje.getCuerpo(0).setDireccion(direccion);
-            mover = new Paquete07Move(indice, direccion);
-            enviarServidor(mover);
+    
+            if(direccion != null){
+                personaje.getCuerpo(0).setDireccion(direccion);
+                mover = new Paquete07Move(indice, direccion);
+                enviarServidor(mover);
+            }
         }
     }
 

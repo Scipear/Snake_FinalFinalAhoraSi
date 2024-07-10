@@ -12,11 +12,11 @@ import snake2.Personaje;
 public class GraficoPersonaje extends Grafico{
     private Image cabeza[]; /*Arreglo que guarda la imagen de cada direccion a la que puede mirar la cabeza
     de la serpiente*/
-    private Image cuerpo[];/*Arreglo que guarda la imagen de cada direccion a la que puede mirar el cuerpo
-    de la serpiente*/
     private Image cola[];/*Arreglo que guarda la imagen de cada direccion a la que puede mirar la cola
     de la serpiente*/
-    /*Cada posicion de estos arreglos guarda una imagen de una respectiva direccion
+    private Image cuerpo[];/*Arreglo que guarda la imagen de cada direccion a la que puede mirar el cuerpo
+    de la serpiente*/
+    /*Cada posicion de estos arreglos arriba guarda una imagen de una respectiva direccion
     posicion 0: arriba, posicion 1: derecha, posicion 2: abajo, posicion 3: izquierda */
     private Image curva[];/*Arreglo que guarda la imagen cada tipo de curva o doblez de la serpiente
     posicion 0: Cuando la serpiente va de derecha para abajo o de arriba para la izquierda

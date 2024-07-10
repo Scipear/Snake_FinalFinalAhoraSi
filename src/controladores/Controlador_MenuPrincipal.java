@@ -6,6 +6,8 @@ package controladores;
 
 import Gui.*;
 import ost.ReproductorSonidos;
+import snake2.AlertException;
+import snake2.Estadisticas;
 import snake2.Front.Pantalla;
 
 /**
@@ -19,6 +21,7 @@ public class Controlador_MenuPrincipal extends Pantalla {
     public static Principal_menu ventana = new Principal_menu();
     private static final ReproductorSonidos fondoOst = new ReproductorSonidos();
     private static final String menuOstRuta = "\\src\\ost\\Fantasia Ritmica.mp3";
+    private static Estadisticas estadisticas = new Estadisticas(Controlador_Login.nombreUsuario);
 
     //Metodos
     // public static void mostrar() {
@@ -86,6 +89,14 @@ public class Controlador_MenuPrincipal extends Pantalla {
     public static void eventConectarse() {
         Controlador_PreConeccion.inicializar(Controlador_PreConeccion.ventana); //Aqui abre la pantalla del multijugador
         ventana.dispose();
+    }
+
+    public static void eventPuntajes(){
+        try{
+            estadisticas.mostrarPuntajes();
+        }catch(AlertException e){
+            e.mostrarAlerta();
+        }
     }
 
 }

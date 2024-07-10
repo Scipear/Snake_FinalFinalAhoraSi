@@ -7,10 +7,10 @@ package snake2;
  */
 
 public class Cuerpo {
-    private int posX;
-    private int posY;
-    private String tipo;
-    private String direccion;
+    private String direccion; //Direccion a la que esta mirando la parte del cuerpo
+    private String tipo; // Que parte de cuerpo es 
+    private int posX; //Posicion en X
+    private int posY; //Posicion en Y
     
     public Cuerpo(int posX, int posY, String tipo, String direccion){
         this.posX = posX;

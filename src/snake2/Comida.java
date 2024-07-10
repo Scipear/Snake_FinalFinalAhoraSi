@@ -5,9 +5,9 @@ package snake2;
  * @version 1.1
  */
 public class Comida {
-    protected int posX;
-    protected int posY;
-    protected int tiempoVisible;
+    protected int posX; //Posicion en X
+    protected int posY; //Posicion en Y
+    protected int tiempoVisible; //Tiempo en el que la comida especial estara visible
 
     public Comida(int posX, int posY){
         this.posX = posX;

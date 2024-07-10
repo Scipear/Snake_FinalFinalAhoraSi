@@ -7,7 +7,7 @@ import controladores.Controlador_Host;
 import controladores.Controlador_PreConeccion;
 import snake2.Contenedor_Paquetes.Paquete;
 import snake2.Contenedor_Paquetes.Paquete05Update;
-import snake2.Contenedor_Paquetes.Paquete11Collision;
+import snake2.Contenedor_Paquetes.Paquete11Board;
 
 /**
  * Clase que representa a una serpiente del juego
@@ -15,15 +15,15 @@ import snake2.Contenedor_Paquetes.Paquete11Collision;
  * @version 1.0.1
  */
 public class Personaje implements Comunicacion{
-    private Paquete05Update actualizar;
-    private Paquete11Collision collision;
+    private final int velocidad; //Velocidad constante a la que se desplazara la serpiente
     private List<Cuerpo> serpiente = new ArrayList<>(); //Representa todo el cuerpo de la serpiente
-    private int velocidad;
-    private int longitud;
-    private int skin;
-    private int numero;
-    private boolean estado;
-    private boolean estaCongelado;
+    private Paquete05Update actualizar; //Paquete para informar a los clientes sobre la posicion del personaje
+    private Paquete11Board board; //Paquete para informar a los clientes sobre el estado del personaje
+    private boolean estaCongelado; //Si el personaje se encuentra congelado o no
+    private boolean estado; //Si el personaje esta vivo o no
+    private int longitud; //Tamanio de la serpiente
+    private int numero; //Numero para identificar al personaje
+    private int skin; //Skin seleccionada por el jugador
 
     /**
      * Constructor de la clase
@@ -206,8 +206,8 @@ public class Personaje implements Comunicacion{
         for(int i = 1; i < longitud-1; i++){
             if(serpiente.get(0).getPosX() == serpiente.get(i).getPosX() && serpiente.get(0).getPosY() == serpiente.get(i).getPosY()){
                 estado = false;
-                collision = new Paquete11Collision(numero, 0);
-                enviarServidor(collision);
+                board = new Paquete11Board(numero, 0);
+                enviarServidor(board);
             }
         }
     }

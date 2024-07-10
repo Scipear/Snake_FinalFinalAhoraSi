@@ -19,12 +19,12 @@ import snake2.Tablero;
  * @version 1.0.1
  */
 public class GraficoTablero extends Grafico{
+    private final int celdaSize = 28; //Tamanio predeterminado de cada celda (pared o piso)
     private static ArrayList<GraficoPersonaje> graficoPersonaje; //Grafico que contiene las imagenes del personaje
-    private Tablero tablero; //Tablero que sera dibujado
-    private GraficoComida graficoComida;
+    private GraficoComida graficoComida; //Grafico que contiene las imagenes de la comida
     private Image pared;
     private Image piso;
-    private final int celdaSize = 28; //Tamanio predeterminado de cada celda (pared o piso)
+    private Tablero tablero; //Tablero que sera dibujado
 
     /**
      * Constructor de la clase

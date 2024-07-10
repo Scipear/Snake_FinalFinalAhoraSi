@@ -8,10 +8,10 @@ import javax.swing.ImageIcon;
  * @version 1.1
  */
 public class GraficoComida extends Grafico{
-    private Image comidaRegular;
+    private Image comidaCongelada;
     private Image comidaDoble;
     private Image comidaPicante;
-    private Image comidaCongelada;
+    private Image comidaRegular;
     private Image comidaRocosa;
 
     public GraficoComida(){

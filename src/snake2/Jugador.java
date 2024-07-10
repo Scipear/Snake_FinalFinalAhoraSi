@@ -5,11 +5,11 @@ package snake2;
  * @version 1.0.4
  */
 public class Jugador implements Comparable<Jugador>{
-    private Personaje personaje;
-    private int puntaje;
-    private String usuario;
-    private int numero;
-    private boolean host;
+    private Personaje personaje; //Personaje que sera controlado por el jugador
+    private String usuario; //Nombre de usuario ingresado al iniciar el juego
+    private boolean host; //Si el jugador creo un servidor o no
+    private int puntaje; //Puntos obtenidos durante la partida
+    private int numero; //Numero para identificar al jugador
 
     public Jugador(String usuario, int numero){
         this.usuario = usuario;
@@ -50,6 +50,10 @@ public class Jugador implements Comparable<Jugador>{
         if(numero == 0){
             host = true;
         }
+    }
+
+    public void setPuntaje(int puntaje){
+        this.puntaje = puntaje;
     }
 
     public int getPuntaje(){
