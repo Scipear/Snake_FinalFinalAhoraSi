@@ -23,8 +23,8 @@ import java.util.logging.Logger;
  * @version 1.2.1
  */
 public class ChatServer extends javax.swing.JFrame implements Runnable{
-   String name, mensaje, ip;
-   ArrayList<String>ListaDeJugadores = new ArrayList<>();
+   private String name, mensaje, ip;
+   private ArrayList<String>ListaDeJugadores = new ArrayList<>();
     
     public ChatServer() {
         try {

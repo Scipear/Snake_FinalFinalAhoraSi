@@ -41,19 +41,19 @@ import snake2.Front.PantallaJuego;
  */
 public class Cliente implements Runnable{
     private static int cantidadJugadores = 0; // Cantidad de jugadores que estaran en la partida
-    private int numCliente = -1; // Representa si es el primer, segundo, etc cliente en conectarse al servidor
-    private boolean jugadoresListos = false; // Si todos los jugadores estan listos para iniciar la partida
-    private boolean estaConectado = false; // Si el cliente esta conectado al servidor
-    private int puerto; // Puerto del servidor para el intercambio de datos
-    private ChatCliente chatCliente;
-    private InetAddress direccionIP; // Direccion IP del servidor
-    private DatagramSocket socket;
-    private byte[] datos; // Forma en la que los datos se van a intercambiar entre cliente y servidor
-    private Thread thread;
-    private Comida comidaAux; // Comida auxiliar para  hacer que aparezca la primera fruta en la pantalla de los clientes
     private ArrayList<Jugador> jugadores = new ArrayList<>(); // Lista de los jugadores que estaran en la partida
+    private ChatCliente chatCliente;
+    private Comida comidaAux; // Comida auxiliar para  hacer que aparezca la primera fruta en la pantalla de los clientes
+    private DatagramSocket socket;
+    private InetAddress direccionIP; // Direccion IP del servidor
     private PantallaJuego pantalla; // Pantalla que mostrará la partida
     private Tablero tablero; // Tablero en el que ocurrirá la partida
+    private Thread thread;
+    private boolean estaConectado = false; // Si el cliente esta conectado al servidor
+    private boolean jugadoresListos = false; // Si todos los jugadores estan listos para iniciar la partida
+    private byte[] datos; // Forma en la que los datos se van a intercambiar entre cliente y servidor
+    private int numCliente = -1; // Representa si es el primer, segundo, etc cliente en conectarse al servidor
+    private int puerto; // Puerto del servidor para el intercambio de datos
 
     /**
      * Constructor de la clase

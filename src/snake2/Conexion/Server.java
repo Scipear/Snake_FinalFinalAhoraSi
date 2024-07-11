@@ -32,15 +32,15 @@ import snake2.Contenedor_Paquetes.Paquete12Window;
 public class Server implements Runnable{
     private static final int MAX_JUGADORES = 4; // Maximo de clientes que pueden conectarse al servidor
     private static final int puerto = 9999; // Puerto del servidor
+    private ArrayList<JugadorMP> jugadoresActivos = new ArrayList<>(); // Arreglo que guarda los jugadores que se van conectando
+    private ChatServer chatServer;
+    private DatagramSocket socket;
+    private Game game; // La partida que va a ser compartida con los clientes
+    private Thread thread;
     private boolean juegoIniciado = false; // Si el juego ya ha comenzado
     private boolean servidorActivo = false; // Si el servidor se encuentra activo
     private byte[] datos; // Forma en la que los datos se van a intercambiar entre cliente y servidor
-    private ChatServer chatServer;
-    private DatagramSocket socket;
-    private Thread thread;
-    private ArrayList<JugadorMP> jugadoresActivos = new ArrayList<>(); // Arreglo que guarda los jugadores que se van conectando
     private int jugadoresListos; // Cantidad de jugadores que ya estan listos para iniciar la partida
-    private Game game; // La partida que va a ser compartida con los clientes
     private int mapa; // Mapa elegido por el host
  
     /**
@@ -359,7 +359,6 @@ public class Server implements Runnable{
      * @version 1.2
      */
     public boolean comprobarJugadores(){
-        System.out.println(jugadoresActivos.size());
         if(jugadoresActivos.size() == 0){
             cerrarServidor();
             return false;

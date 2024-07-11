@@ -16,9 +16,9 @@ import snake2.Contenedor_Paquetes.Paquete11Board;
  * @version 1.0.1
  */
 public class Tablero implements Comunicacion{
-    private final int ancho; //Ancho del mapa
-    private final int alto; //Alto del mapa
-    private final int cantidadComidasEspeciales; //Cantidad de comidas especiales disponibles en el juego
+    private final int ancho = 22; //Ancho del mapa
+    private final int alto = 22; //Alto del mapa
+    private final int cantidadComidasEspeciales = 4; //Cantidad de comidas especiales disponibles en el juego
     private static boolean rapidezActivada; //Si el efecto de rapidez esta activado en el tablero
     private static ReproductorSonidos ostSFX = new ReproductorSonidos();
     private static String sfxOstRuta;
@@ -40,9 +40,6 @@ public class Tablero implements Comunicacion{
      * @param tipo Mapa elegido por el jugador
      */
     public Tablero(ArrayList<Jugador> jugadores, int tipo){
-        ancho = 22;
-        alto = 22;
-        cantidadComidasEspeciales = 4;
         celdas = new Celda[alto][ancho];
         mapa = tipo;
         pausa = false;  
@@ -50,7 +47,7 @@ public class Tablero implements Comunicacion{
         tiempoComidaEspecial = 60;
         personajes = new ArrayList<>();
         iniciarPersonajes(jugadores);
-        inicializarTablero(tipo);
+        inicializarTablero();
     }
 
     /**
@@ -193,7 +190,7 @@ public class Tablero implements Comunicacion{
      * @param tipo Tipo de mapa que se va a inicializar
      * @version 1.1.4
      */
-    public void inicializarTablero(int tipo){
+    public void inicializarTablero(){
         for(int i = 0; i < alto; i++){
             for(int j = 0; j < ancho; j++){ //Inicializa los valores de cada celda
                 if(i == 0 || i == alto - 1 || j == 0 || j == ancho - 1){ //Si esta en el borde, es una pared
@@ -206,7 +203,7 @@ public class Tablero implements Comunicacion{
             }
         }
 
-        switch(tipo){
+        switch(mapa){
             case 1:{
                 for(int i = 1; i < alto-1; i++){
                     for(int j = 1; j < ancho-1; j++){

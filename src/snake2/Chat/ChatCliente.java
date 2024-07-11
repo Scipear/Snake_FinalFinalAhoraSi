@@ -25,8 +25,8 @@ import javax.swing.JPopupMenu;
 public class ChatCliente extends javax.swing.JFrame implements Runnable {
     //ip de la la maquina que recive el mensaje
    
-    String ip;
-    String nick="";
+    private String ip;
+    private String nick="";
     private static final String[] EMOJIS = {"😀", "😂", "😍", "😎", "😢", "😡"}; // Lista básica de emojis
 
     public ChatCliente(){}
@@ -198,7 +198,7 @@ public class ChatCliente extends javax.swing.JFrame implements Runnable {
            // ip = InetAddress.getLocalHost();
             this.ip=InetAddress.getLocalHost().getHostAddress();
             try {
-               EnviarIpAlServidor(this.ip);  
+               enviarIpAlServidor(this.ip);  
             } catch (IOException ex) {
                 System.out.println("error"+ex.getMessage());
             }
@@ -210,7 +210,7 @@ public class ChatCliente extends javax.swing.JFrame implements Runnable {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         try {
             //desconecta un usuairo si cierra el chat
-            DesconectarUser(ip);
+            desconectarUser(ip);
 
         } catch (IOException ex) {
             Logger.getLogger(ChatCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -290,25 +290,25 @@ public class ChatCliente extends javax.swing.JFrame implements Runnable {
         }  
     }
     
-    void EnviarIpAlServidor(String ip) throws IOException{
+    public void enviarIpAlServidor(String ip) throws IOException{
         ChatDatos dataIp =  new ChatDatos();
           
         //ip del servidor
         String ipServer=jTextField2.getText();
-        dataIp.ip=ip;
-        dataIp.mensaje="online";
+        dataIp.setIp(ip);
+        dataIp.setMensaje("online");
         try (Socket socket = new Socket(ipServer,9999)){
             ObjectOutputStream data = new ObjectOutputStream(socket.getOutputStream()); 
             data.writeObject(dataIp);     
         }
     }
     
-    void DesconectarUser(String ip) throws IOException{
+    public void desconectarUser(String ip) throws IOException{
         ChatDatos dataIp =  new ChatDatos();
         //ip del servidor
         String ipServer=jTextField2.getText();
-        dataIp.ip=ip;
-        dataIp.mensaje="offline";
+        dataIp.setIp(ip);;
+        dataIp.setMensaje("offline");
         try (Socket socket = new Socket(ipServer,9999)) {
             ObjectOutputStream data = new ObjectOutputStream(socket.getOutputStream());
             data.writeObject(dataIp);  

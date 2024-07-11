@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @version 1.2.1
  */
 public class ChatDatos implements Serializable{
-   String ip, name, mensaje; 
+   private String ip, name, mensaje; 
 
     public ChatDatos(String ip, String name, String mensaje) {
         this.ip = ip;
