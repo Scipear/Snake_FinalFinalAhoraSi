@@ -23,7 +23,7 @@ public class Tablero implements Comunicacion{
     private static ReproductorSonidos ostSFX = new ReproductorSonidos();
     private static String sfxOstRuta;
     private ArrayList<Personaje> personajes; //Los personajes que seran parte de la partida
-    private Celda celdas[][]; //Arreglo que representa al tablero
+    private Celda celdas[][]; //Matriz que representa al tablero
     private Comida comidaRegular; //La comida regular que aparece en el mapa
     private Comida comidaEspecial; //La comida especial que aparece en el mapa
     private Paquete06Comida food; //Paquete para informar a los clientes cuando se ha generado una nueva comida
@@ -157,10 +157,7 @@ public class Tablero implements Comunicacion{
                 effect = new Paquete10Effect(2, i, comidaRegular.getPosX(), comidaRegular.getPosY());
                 enviarServidor(effect);
                 comidaEstandarSFX();
-                comidaRegular = null;
-                food = new Paquete06Comida(0, 0, -2);
-                enviarServidor(food);
-                generarComida();
+                borraComidaRegular();
                 jugadores.get(i).aumentaPuntaje();
                 board = new Paquete11Board(i, 3);
                 enviarServidor(board);
@@ -171,10 +168,7 @@ public class Tablero implements Comunicacion{
                 effect = new Paquete10Effect(1, i, comidaEspecial.getPosX(), comidaEspecial.getPosY());
                 enviarServidor(effect);
                 comidaEspecialSFX();
-                comidaEspecial = null;
-                food = new Paquete06Comida(0, 0, -1);
-                enviarServidor(food);
-                tiempoComidaEspecial = 60;
+                borraComidaEspecial();
                 jugadores.get(i).aumentaPuntaje();
                 board = new Paquete11Board(i, 3);
                 enviarServidor(board);
@@ -270,8 +264,6 @@ public class Tablero implements Comunicacion{
 
             if(comidaEspecial.getTiempoVisible() == 0){
                 borraComidaEspecial();
-                food = new Paquete06Comida(0, 0, -1);
-                enviarServidor(food);
             }
 
         }
@@ -310,6 +302,13 @@ public class Tablero implements Comunicacion{
         }
     }
 
+    public void borraComidaRegular(){
+        comidaRegular = null;
+        food = new Paquete06Comida(0, 0, -2);
+        enviarServidor(food);
+        generarComida();
+    }
+
     /**
      * Elimina la comida especial del tablero
      * 
@@ -318,6 +317,8 @@ public class Tablero implements Comunicacion{
     public void borraComidaEspecial(){
         comidaEspecial = null;
         tiempoComidaEspecial = 60;
+        food = new Paquete06Comida(0, 0, -1);
+        enviarServidor(food);
     }
 
     /**
