@@ -157,7 +157,10 @@ public class Tablero implements Comunicacion{
                 effect = new Paquete10Effect(2, i, comidaRegular.getPosX(), comidaRegular.getPosY());
                 enviarServidor(effect);
                 comidaEstandarSFX();
-                borraComidaRegular();
+                comidaRegular = null;
+                food = new Paquete06Comida(0, 0, -2);
+                enviarServidor(food);
+                generarComida();
                 jugadores.get(i).aumentaPuntaje();
                 board = new Paquete11Board(i, 3);
                 enviarServidor(board);
@@ -168,7 +171,10 @@ public class Tablero implements Comunicacion{
                 effect = new Paquete10Effect(1, i, comidaEspecial.getPosX(), comidaEspecial.getPosY());
                 enviarServidor(effect);
                 comidaEspecialSFX();
-                borraComidaEspecial();
+                comidaEspecial = null;
+                food = new Paquete06Comida(0, 0, -1);
+                enviarServidor(food);
+                tiempoComidaEspecial = 60;
                 jugadores.get(i).aumentaPuntaje();
                 board = new Paquete11Board(i, 3);
                 enviarServidor(board);
@@ -264,6 +270,8 @@ public class Tablero implements Comunicacion{
 
             if(comidaEspecial.getTiempoVisible() == 0){
                 borraComidaEspecial();
+                food = new Paquete06Comida(0, 0, -1);
+                enviarServidor(food);
             }
 
         }
@@ -302,13 +310,6 @@ public class Tablero implements Comunicacion{
         }
     }
 
-    public void borraComidaRegular(){
-        comidaRegular = null;
-        food = new Paquete06Comida(0, 0, -2);
-        enviarServidor(food);
-        generarComida();
-    }
-
     /**
      * Elimina la comida especial del tablero
      * 
@@ -317,8 +318,6 @@ public class Tablero implements Comunicacion{
     public void borraComidaEspecial(){
         comidaEspecial = null;
         tiempoComidaEspecial = 60;
-        food = new Paquete06Comida(0, 0, -1);
-        enviarServidor(food);
     }
 
     /**
